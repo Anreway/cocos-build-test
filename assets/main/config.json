@@ -1,0 +1,74 @@
+{
+    "importBase": "import",
+    "nativeBase": "native",
+    "name": "main",
+    "deps": [],
+    "uuids": [
+        "02353759-132f-4238-bf2c-a6fbf0ab8a09",
+        "02353759-132f-4238-bf2c-a6fbf0ab8a09@6c48a",
+        "02353759-132f-4238-bf2c-a6fbf0ab8a09@f9941",
+        "0ae5b81b-cdbe-49d3-a5c7-a8e37757ba94",
+        "0ae5b81b-cdbe-49d3-a5c7-a8e37757ba94@6c48a",
+        "0ae5b81b-cdbe-49d3-a5c7-a8e37757ba94@f9941",
+        "20835ba4-6145-4fbc-a58a-051ce700aa3e",
+        "20835ba4-6145-4fbc-a58a-051ce700aa3e@6c48a",
+        "20835ba4-6145-4fbc-a58a-051ce700aa3e@f9941",
+        "2848ac82-b338-4607-8ffb-a191c4bb9568",
+        "2848ac82-b338-4607-8ffb-a191c4bb9568@6c48a",
+        "2848ac82-b338-4607-8ffb-a191c4bb9568@f9941",
+        "48a4ca85-bf55-4ab0-ab3c-9b3cb1962df4",
+        "48a4ca85-bf55-4ab0-ab3c-9b3cb1962df4@6c48a",
+        "48a4ca85-bf55-4ab0-ab3c-9b3cb1962df4@f9941",
+        "544e49d6-3f05-4fa8-9a9e-091f98fc2ce8",
+        "544e49d6-3f05-4fa8-9a9e-091f98fc2ce8@6c48a",
+        "544e49d6-3f05-4fa8-9a9e-091f98fc2ce8@f9941",
+        "6721c9c9-15d5-4e93-9e54-a8efa8a2891e",
+        "6721c9c9-15d5-4e93-9e54-a8efa8a2891e@6c48a",
+        "6721c9c9-15d5-4e93-9e54-a8efa8a2891e@f9941",
+        "7f9561b5-f289-4e2e-841d-4b0eb7778769",
+        "7f9561b5-f289-4e2e-841d-4b0eb7778769@6c48a",
+        "7f9561b5-f289-4e2e-841d-4b0eb7778769@f9941",
+        "951249e0-9f16-456d-8b85-a6ca954da16b",
+        "951249e0-9f16-456d-8b85-a6ca954da16b@6c48a",
+        "951249e0-9f16-456d-8b85-a6ca954da16b@f9941",
+        "ba21476f-2866-4f81-9c4d-6e359316e448",
+        "bfd166a1-24bc-4da6-bec1-d6da027b9fa3",
+        "bfd166a1-24bc-4da6-bec1-d6da027b9fa3@6c48a",
+        "bfd166a1-24bc-4da6-bec1-d6da027b9fa3@f9941",
+        "cc24ce2f-9ed2-4abb-9682-b4ab8a1fcf37",
+        "cc24ce2f-9ed2-4abb-9682-b4ab8a1fcf37@6c48a",
+        "cc24ce2f-9ed2-4abb-9682-b4ab8a1fcf37@f9941",
+        "dc4c2e3a-73f6-44ca-b020-1db9d94571b5",
+        "fd8ec536-a354-4a17-9c74-4f3883c378c8"
+    ],
+    "paths": {
+        "dc4c2e3a-73f6-44ca-b020-1db9d94571b5": [
+            "db:/assets/Scenes/MainScene",
+            "cc.SceneAsset",
+            1
+        ],
+        "fd8ec536-a354-4a17-9c74-4f3883c378c8": [
+            "db:/internal/default_renderpipeline/builtin-forward",
+            "cc.RenderPipeline",
+            1
+        ],
+        "ba21476f-2866-4f81-9c4d-6e359316e448": [
+            "db:/internal/physics/default-physics-material",
+            "cc.PhysicsMaterial",
+            1
+        ]
+    },
+    "scenes": {
+        "db://assets/Scenes/MainScene.scene": "dc4c2e3a-73f6-44ca-b020-1db9d94571b5"
+    },
+    "packs": {},
+    "versions": {
+        "import": [],
+        "native": []
+    },
+    "redirect": [],
+    "debug": true,
+    "extensionMap": {},
+    "hasPreloadScript": true,
+    "dependencyRelationships": {}
+}
