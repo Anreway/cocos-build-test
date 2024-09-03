@@ -569,11 +569,11 @@ System.register("chunks:///_virtual/UserInfoDisplay.ts", ['./rollupPluginModLoBa
       TelegramWebApp = module.TelegramWebApp;
     }],
     execute: function () {
-      var _dec, _dec2, _dec3, _class, _class2, _descriptor, _descriptor2;
+      var _dec, _dec2, _dec3, _dec4, _class, _class2, _descriptor, _descriptor2, _descriptor3;
       cclegacy._RF.push({}, "55d2bEdrVpIpou6drI10Zei", "UserInfoDisplay", undefined);
       var ccclass = _decorator.ccclass,
         property = _decorator.property;
-      var UserInfoDisplay = exports('UserInfoDisplay', (_dec = ccclass('UserInfoDisplay'), _dec2 = property(Label), _dec3 = property(Sprite), _dec(_class = (_class2 = /*#__PURE__*/function (_Component) {
+      var UserInfoDisplay = exports('UserInfoDisplay', (_dec = ccclass('UserInfoDisplay'), _dec2 = property(Label), _dec3 = property(Label), _dec4 = property(Sprite), _dec(_class = (_class2 = /*#__PURE__*/function (_Component) {
         _inheritsLoose(UserInfoDisplay, _Component);
         function UserInfoDisplay() {
           var _this;
@@ -582,7 +582,8 @@ System.register("chunks:///_virtual/UserInfoDisplay.ts", ['./rollupPluginModLoBa
           }
           _this = _Component.call.apply(_Component, [this].concat(args)) || this;
           _initializerDefineProperty(_this, "userInfoLabel", _descriptor, _assertThisInitialized(_this));
-          _initializerDefineProperty(_this, "userAvatar", _descriptor2, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "avatarUrlLabel", _descriptor2, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "userAvatar", _descriptor3, _assertThisInitialized(_this));
           return _this;
         }
         var _proto = UserInfoDisplay.prototype;
@@ -601,12 +602,12 @@ System.register("chunks:///_virtual/UserInfoDisplay.ts", ['./rollupPluginModLoBa
                 case 3:
                   user = tgWebApp.getTelegramUser();
                   if (user) {
-                    // Обновляем текстовое поле
                     if (this.userInfoLabel) {
                       this.userInfoLabel.string = "ID: " + user.id + "\nUsername: " + user.username;
                     }
-
-                    // Загружаем и устанавливаем аватар
+                    if (this.avatarUrlLabel) {
+                      this.avatarUrlLabel.string = "" + user.photo_url;
+                    }
                     if (user.photo_url && this.userAvatar) {
                       this.loadAvatar(user.photo_url);
                     }
@@ -627,27 +628,19 @@ System.register("chunks:///_virtual/UserInfoDisplay.ts", ['./rollupPluginModLoBa
         _proto.loadAvatar = function loadAvatar(url) {
           var _this2 = this;
           if (!this.userAvatar) return;
-
-          // Создаем новый ImageAsset
           var imgAsset = new ImageAsset();
-
-          // Загружаем изображение через URL
           var img = new Image();
           img.crossOrigin = 'anonymous';
           img.src = url;
           img.onload = function () {
-            // Устанавливаем данные изображения в ImageAsset
             imgAsset.reset(img);
-
-            // Создаем текстуру из ImageAsset
             var texture = new Texture2D();
             texture.image = imgAsset;
-
-            // Создаем SpriteFrame из текстуры
+            texture.setFilters(Texture2D.Filter.LINEAR, Texture2D.Filter.LINEAR);
             var spriteFrame = new SpriteFrame();
             spriteFrame.texture = texture;
-
-            // Устанавливаем SpriteFrame на Sprite
+            _this2.userAvatar.type = Sprite.Type.SIMPLE;
+            _this2.userAvatar.sizeMode = Sprite.SizeMode.RAW;
             _this2.userAvatar.spriteFrame = spriteFrame;
           };
           img.onerror = function () {
@@ -662,7 +655,14 @@ System.register("chunks:///_virtual/UserInfoDisplay.ts", ['./rollupPluginModLoBa
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, "userAvatar", [_dec3], {
+      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, "avatarUrlLabel", [_dec3], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, "userAvatar", [_dec4], {
         configurable: true,
         enumerable: true,
         writable: true,
