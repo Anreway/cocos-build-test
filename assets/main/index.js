@@ -390,10 +390,288 @@ System.register("chunks:///_virtual/debug-view-runtime-control.ts", ['./rollupPl
   };
 });
 
-System.register("chunks:///_virtual/main", ['./debug-view-runtime-control.ts', './ButtonFeedbacks.ts'], function () {
+System.register("chunks:///_virtual/main", ['./debug-view-runtime-control.ts', './ButtonFeedbacks.ts', './UserInfoDisplay.ts', './telegram-web.ts'], function () {
   return {
-    setters: [null, null],
+    setters: [null, null, null, null],
     execute: function () {}
+  };
+});
+
+System.register("chunks:///_virtual/telegram-web.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc'], function (exports) {
+  var _createClass, _asyncToGenerator, _regeneratorRuntime, cclegacy, _decorator, sys;
+  return {
+    setters: [function (module) {
+      _createClass = module.createClass;
+      _asyncToGenerator = module.asyncToGenerator;
+      _regeneratorRuntime = module.regeneratorRuntime;
+    }, function (module) {
+      cclegacy = module.cclegacy;
+      _decorator = module._decorator;
+      sys = module.sys;
+    }],
+    execute: function () {
+      var _dec, _class, _class2;
+      cclegacy._RF.push({}, "f264fjmTxJJEp4hiLyX+sL4", "telegram-web", undefined);
+      var ccclass = _decorator.ccclass,
+        property = _decorator.property;
+      var tgLoadPromise = new Promise(function (resolve, reject) {
+        if (sys.platform === sys.Platform.MOBILE_BROWSER || sys.platform === sys.Platform.DESKTOP_BROWSER) {
+          var script = document.createElement("script");
+          script.src = "https://telegram.org/js/telegram-web-app.js";
+          script.async = true;
+          script.onload = function () {
+            var intervalId = setInterval(function () {
+              if (window.Telegram && window.Telegram.WebApp) {
+                resolve(window.Telegram.WebApp);
+                clearInterval(intervalId);
+              }
+            }, 100);
+          };
+          script.onerror = function () {
+            return reject(new Error("Unable to load TelegramWebApp SDK, please check logs."));
+          };
+          document.head.appendChild(script);
+        }
+      });
+      var TelegramWebApp = exports('TelegramWebApp', (_dec = ccclass('TelegramWebApp'), _dec(_class = (_class2 = /*#__PURE__*/function () {
+        function TelegramWebApp() {
+          this._tgWebAppJS = null;
+        }
+        var _proto = TelegramWebApp.prototype;
+        _proto.init = /*#__PURE__*/function () {
+          var _init = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+            return _regeneratorRuntime().wrap(function _callee$(_context) {
+              while (1) switch (_context.prev = _context.next) {
+                case 0:
+                  _context.next = 2;
+                  return tgLoadPromise;
+                case 2:
+                  this._tgWebAppJS = _context.sent;
+                  if (!this._tgWebAppJS) {
+                    _context.next = 7;
+                    break;
+                  }
+                  return _context.abrupt("return", Promise.resolve({
+                    success: true
+                  }));
+                case 7:
+                  return _context.abrupt("return", Promise.resolve({
+                    success: false
+                  }));
+                case 8:
+                case "end":
+                  return _context.stop();
+              }
+            }, _callee, this);
+          }));
+          function init() {
+            return _init.apply(this, arguments);
+          }
+          return init;
+        }();
+        _proto.openTelegramLink = function openTelegramLink(url) {
+          if (!this._tgWebAppJS) {
+            console.error("telegram web app is not inited!");
+            return;
+          }
+          this._tgWebAppJS.openTelegramLink(url);
+        };
+        _proto.share = function share(url, text) {
+          var shareUrl = 'https://t.me/share/url?url=' + url + '&' + new URLSearchParams({
+            text: text || ''
+          }).toString();
+          this.openTelegramLink(shareUrl);
+        };
+        _proto.shareToStory = function shareToStory(media_url, shareText, widget_link_url, widget_link_name) {
+          if (!this._tgWebAppJS) {
+            console.error("telegram web app is not inited!");
+            return;
+          }
+          var widget_link = {
+            text: shareText,
+            widget_link: {
+              url: widget_link_url,
+              name: widget_link_name
+            }
+          };
+          this._tgWebAppJS.shareToStory(media_url, widget_link);
+        };
+        _proto.getTelegramWebApp = function getTelegramWebApp() {
+          return this._tgWebAppJS;
+        };
+        _proto.getTelegramWebAppInitData = function getTelegramWebAppInitData() {
+          if (!this._tgWebAppJS) {
+            console.error("telegram web app is not inited!");
+            return null;
+          }
+          return this._tgWebAppJS.initDataUnsafe;
+        };
+        _proto.getTelegramUser = function getTelegramUser() {
+          if (!this._tgWebAppJS) {
+            console.error("telegram web app is not inited!");
+            return null;
+          }
+          return this._tgWebAppJS.initDataUnsafe.user;
+        };
+        _proto.getTelegramInitData = function getTelegramInitData() {
+          if (!this._tgWebAppJS) {
+            console.error("telegram web app is not inited!");
+            return null;
+          }
+          return this._tgWebAppJS.initData;
+        };
+        _proto.openInvoice = function openInvoice(url, callback) {
+          if (!this._tgWebAppJS) {
+            console.error("telegram web app is not inited!");
+            return null;
+          }
+          this._tgWebAppJS.openInvoice(url, callback);
+        };
+        _proto.alert = function alert(message) {
+          this._tgWebAppJS.showAlert(message);
+        };
+        _createClass(TelegramWebApp, null, [{
+          key: "Instance",
+          get: function get() {
+            if (!TelegramWebApp._instance) {
+              TelegramWebApp._instance = new TelegramWebApp();
+            }
+            return TelegramWebApp._instance;
+          }
+        }]);
+        return TelegramWebApp;
+      }(), _class2._instance = void 0, _class2)) || _class));
+      cclegacy._RF.pop();
+    }
+  };
+});
+
+System.register("chunks:///_virtual/UserInfoDisplay.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc', './telegram-web.ts'], function (exports) {
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _asyncToGenerator, _regeneratorRuntime, cclegacy, _decorator, Label, Sprite, ImageAsset, Texture2D, SpriteFrame, Component, TelegramWebApp;
+  return {
+    setters: [function (module) {
+      _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
+      _inheritsLoose = module.inheritsLoose;
+      _initializerDefineProperty = module.initializerDefineProperty;
+      _assertThisInitialized = module.assertThisInitialized;
+      _asyncToGenerator = module.asyncToGenerator;
+      _regeneratorRuntime = module.regeneratorRuntime;
+    }, function (module) {
+      cclegacy = module.cclegacy;
+      _decorator = module._decorator;
+      Label = module.Label;
+      Sprite = module.Sprite;
+      ImageAsset = module.ImageAsset;
+      Texture2D = module.Texture2D;
+      SpriteFrame = module.SpriteFrame;
+      Component = module.Component;
+    }, function (module) {
+      TelegramWebApp = module.TelegramWebApp;
+    }],
+    execute: function () {
+      var _dec, _dec2, _dec3, _class, _class2, _descriptor, _descriptor2;
+      cclegacy._RF.push({}, "55d2bEdrVpIpou6drI10Zei", "UserInfoDisplay", undefined);
+      var ccclass = _decorator.ccclass,
+        property = _decorator.property;
+      var UserInfoDisplay = exports('UserInfoDisplay', (_dec = ccclass('UserInfoDisplay'), _dec2 = property(Label), _dec3 = property(Sprite), _dec(_class = (_class2 = /*#__PURE__*/function (_Component) {
+        _inheritsLoose(UserInfoDisplay, _Component);
+        function UserInfoDisplay() {
+          var _this;
+          for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+          }
+          _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+          _initializerDefineProperty(_this, "userInfoLabel", _descriptor, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "userAvatar", _descriptor2, _assertThisInitialized(_this));
+          return _this;
+        }
+        var _proto = UserInfoDisplay.prototype;
+        _proto.start = function start() {
+          this.updateUserInfo();
+        };
+        _proto.updateUserInfo = /*#__PURE__*/function () {
+          var _updateUserInfo = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+            var tgWebApp, user;
+            return _regeneratorRuntime().wrap(function _callee$(_context) {
+              while (1) switch (_context.prev = _context.next) {
+                case 0:
+                  tgWebApp = TelegramWebApp.Instance;
+                  _context.next = 3;
+                  return tgWebApp.init();
+                case 3:
+                  user = tgWebApp.getTelegramUser();
+                  if (user) {
+                    // Обновляем текстовое поле
+                    if (this.userInfoLabel) {
+                      this.userInfoLabel.string = "ID: " + user.id + "\nUsername: " + user.username;
+                    }
+
+                    // Загружаем и устанавливаем аватар
+                    if (user.photo_url && this.userAvatar) {
+                      this.loadAvatar(user.photo_url);
+                    }
+                  } else {
+                    console.error("User data is not available.");
+                  }
+                case 5:
+                case "end":
+                  return _context.stop();
+              }
+            }, _callee, this);
+          }));
+          function updateUserInfo() {
+            return _updateUserInfo.apply(this, arguments);
+          }
+          return updateUserInfo;
+        }();
+        _proto.loadAvatar = function loadAvatar(url) {
+          var _this2 = this;
+          if (!this.userAvatar) return;
+
+          // Создаем новый ImageAsset
+          var imgAsset = new ImageAsset();
+
+          // Загружаем изображение через URL
+          var img = new Image();
+          img.crossOrigin = 'anonymous';
+          img.src = url;
+          img.onload = function () {
+            // Устанавливаем данные изображения в ImageAsset
+            imgAsset.reset(img);
+
+            // Создаем текстуру из ImageAsset
+            var texture = new Texture2D();
+            texture.image = imgAsset;
+
+            // Создаем SpriteFrame из текстуры
+            var spriteFrame = new SpriteFrame();
+            spriteFrame.texture = texture;
+
+            // Устанавливаем SpriteFrame на Sprite
+            _this2.userAvatar.spriteFrame = spriteFrame;
+          };
+          img.onerror = function () {
+            console.error("Failed to load avatar image.");
+          };
+        };
+        return UserInfoDisplay;
+      }(Component), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "userInfoLabel", [_dec2], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, "userAvatar", [_dec3], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      })), _class2)) || _class));
+      cclegacy._RF.pop();
+    }
   };
 });
 
