@@ -1,5 +1,5 @@
 System.register("chunks:///_virtual/ButtonFeedbacks.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc'], function (exports) {
-  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, CCFloat, Vec3, Node, tween, Component;
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, CCFloat, Node, tween, Vec3, Component;
   return {
     setters: [function (module) {
       _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
@@ -10,9 +10,9 @@ System.register("chunks:///_virtual/ButtonFeedbacks.ts", ['./rollupPluginModLoBa
       cclegacy = module.cclegacy;
       _decorator = module._decorator;
       CCFloat = module.CCFloat;
-      Vec3 = module.Vec3;
       Node = module.Node;
       tween = module.tween;
+      Vec3 = module.Vec3;
       Component = module.Component;
     }],
     execute: function () {
@@ -117,29 +117,40 @@ System.register("chunks:///_virtual/ButtonFeedbacks.ts", ['./rollupPluginModLoBa
 });
 
 System.register("chunks:///_virtual/CopyInviteLink.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc', './telegram-web.ts'], function (exports) {
-  var _inheritsLoose, _asyncToGenerator, _regeneratorRuntime, cclegacy, _decorator, Node, Component, TelegramWebApp;
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _asyncToGenerator, _regeneratorRuntime, cclegacy, _decorator, native, Node, Component, TelegramWebApp;
   return {
     setters: [function (module) {
+      _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
       _inheritsLoose = module.inheritsLoose;
+      _initializerDefineProperty = module.initializerDefineProperty;
+      _assertThisInitialized = module.assertThisInitialized;
       _asyncToGenerator = module.asyncToGenerator;
       _regeneratorRuntime = module.regeneratorRuntime;
     }, function (module) {
       cclegacy = module.cclegacy;
       _decorator = module._decorator;
+      native = module.native;
       Node = module.Node;
       Component = module.Component;
     }, function (module) {
       TelegramWebApp = module.TelegramWebApp;
     }],
     execute: function () {
-      var _dec, _class;
+      var _dec, _dec2, _class, _class2, _descriptor;
       cclegacy._RF.push({}, "a8b26xTwgZDvoZJ4iBk2gKa", "CopyInviteLink", undefined);
       var ccclass = _decorator.ccclass,
         property = _decorator.property;
-      var CopyInviteLink = exports('CopyInviteLink', (_dec = ccclass('CopyInviteLink'), _dec(_class = /*#__PURE__*/function (_Component) {
+      var copyTextToClipboard = native.copyTextToClipboard;
+      var CopyInviteLink = exports('CopyInviteLink', (_dec = ccclass('CopyInviteLink'), _dec2 = property(String), _dec(_class = (_class2 = /*#__PURE__*/function (_Component) {
         _inheritsLoose(CopyInviteLink, _Component);
         function CopyInviteLink() {
-          return _Component.apply(this, arguments) || this;
+          var _this;
+          for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+          }
+          _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+          _initializerDefineProperty(_this, "baseLinkToShare", _descriptor, _assertThisInitialized(_this));
+          return _this;
         }
         var _proto = CopyInviteLink.prototype;
         _proto.start = function start() {
@@ -147,7 +158,7 @@ System.register("chunks:///_virtual/CopyInviteLink.ts", ['./rollupPluginModLoBab
         };
         _proto.onClick = /*#__PURE__*/function () {
           var _onClick = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-            var tgWebApp;
+            var tgWebApp, user, urlForCopy;
             return _regeneratorRuntime().wrap(function _callee$(_context) {
               while (1) switch (_context.prev = _context.next) {
                 case 0:
@@ -155,13 +166,14 @@ System.register("chunks:///_virtual/CopyInviteLink.ts", ['./rollupPluginModLoBab
                   _context.next = 3;
                   return tgWebApp.init();
                 case 3:
-                  tgWebApp.getTelegramUser();
-                  tgWebApp.share("ssilka tut s referalkoi", "Hi! Join me in the Hamster Hotel Mining game, pack your bags, accumulate a $SEM token for your future hotel!");
-                case 5:
+                  user = tgWebApp.getTelegramUser();
+                  urlForCopy = this.baseLinkToShare + user.id.toString();
+                  copyTextToClipboard(urlForCopy);
+                case 6:
                 case "end":
                   return _context.stop();
               }
-            }, _callee);
+            }, _callee, this);
           }));
           function onClick() {
             return _onClick.apply(this, arguments);
@@ -169,14 +181,21 @@ System.register("chunks:///_virtual/CopyInviteLink.ts", ['./rollupPluginModLoBab
           return onClick;
         }();
         return CopyInviteLink;
-      }(Component)) || _class));
+      }(Component), _descriptor = _applyDecoratedDescriptor(_class2.prototype, "baseLinkToShare", [_dec2], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return "https://t.me/hamsmining_bot/start?startapp=";
+        }
+      }), _class2)) || _class));
       cclegacy._RF.pop();
     }
   };
 });
 
 System.register("chunks:///_virtual/debug-view-runtime-control.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc'], function (exports) {
-  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, Node, Color, Canvas, UITransform, instantiate, Label, RichText, Toggle, Button, director, Component;
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, Node, Canvas, UITransform, instantiate, Label, Color, RichText, Toggle, Button, director, Component;
   return {
     setters: [function (module) {
       _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
@@ -187,11 +206,11 @@ System.register("chunks:///_virtual/debug-view-runtime-control.ts", ['./rollupPl
       cclegacy = module.cclegacy;
       _decorator = module._decorator;
       Node = module.Node;
-      Color = module.Color;
       Canvas = module.Canvas;
       UITransform = module.UITransform;
       instantiate = module.instantiate;
       Label = module.Label;
+      Color = module.Color;
       RichText = module.RichText;
       Toggle = module.Toggle;
       Button = module.Button;
@@ -447,10 +466,86 @@ System.register("chunks:///_virtual/debug-view-runtime-control.ts", ['./rollupPl
   };
 });
 
-System.register("chunks:///_virtual/main", ['./debug-view-runtime-control.ts', './ButtonFeedbacks.ts', './CopyInviteLink.ts', './SlidePopup.ts', './UserInfoDisplay.ts', './telegram-web.ts'], function () {
+System.register("chunks:///_virtual/main", ['./debug-view-runtime-control.ts', './ButtonFeedbacks.ts', './CopyInviteLink.ts', './ShareInviteLink.ts', './SlidePopup.ts', './UserInfoDisplay.ts', './telegram-web.ts'], function () {
   return {
-    setters: [null, null, null, null, null, null],
+    setters: [null, null, null, null, null, null, null],
     execute: function () {}
+  };
+});
+
+System.register("chunks:///_virtual/ShareInviteLink.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc', './telegram-web.ts'], function (exports) {
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _asyncToGenerator, _regeneratorRuntime, cclegacy, _decorator, Node, Component, TelegramWebApp;
+  return {
+    setters: [function (module) {
+      _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
+      _inheritsLoose = module.inheritsLoose;
+      _initializerDefineProperty = module.initializerDefineProperty;
+      _assertThisInitialized = module.assertThisInitialized;
+      _asyncToGenerator = module.asyncToGenerator;
+      _regeneratorRuntime = module.regeneratorRuntime;
+    }, function (module) {
+      cclegacy = module.cclegacy;
+      _decorator = module._decorator;
+      Node = module.Node;
+      Component = module.Component;
+    }, function (module) {
+      TelegramWebApp = module.TelegramWebApp;
+    }],
+    execute: function () {
+      var _dec, _dec2, _class, _class2, _descriptor;
+      cclegacy._RF.push({}, "9e4eduNVylGtrlb2HE465Qx", "ShareInviteLink", undefined);
+      var ccclass = _decorator.ccclass,
+        property = _decorator.property;
+      var ShareInviteLink = exports('ShareInviteLink', (_dec = ccclass('ShareInviteLink'), _dec2 = property(String), _dec(_class = (_class2 = /*#__PURE__*/function (_Component) {
+        _inheritsLoose(ShareInviteLink, _Component);
+        function ShareInviteLink() {
+          var _this;
+          for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+          }
+          _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+          _initializerDefineProperty(_this, "baseLinkToShare", _descriptor, _assertThisInitialized(_this));
+          return _this;
+        }
+        var _proto = ShareInviteLink.prototype;
+        _proto.start = function start() {
+          this.node.on(Node.EventType.TOUCH_END, this.onClick, this);
+        };
+        _proto.onClick = /*#__PURE__*/function () {
+          var _onClick = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+            var tgWebApp, user, urlForShare;
+            return _regeneratorRuntime().wrap(function _callee$(_context) {
+              while (1) switch (_context.prev = _context.next) {
+                case 0:
+                  tgWebApp = TelegramWebApp.Instance;
+                  _context.next = 3;
+                  return tgWebApp.init();
+                case 3:
+                  user = tgWebApp.getTelegramUser();
+                  urlForShare = this.baseLinkToShare + user.id.toString();
+                  tgWebApp.share(urlForShare, "Hi! \nJoin me in the Hamster Hotel Mining game! \nPack your bags and accumulate a $SEM token for your future hotel!");
+                case 6:
+                case "end":
+                  return _context.stop();
+              }
+            }, _callee, this);
+          }));
+          function onClick() {
+            return _onClick.apply(this, arguments);
+          }
+          return onClick;
+        }();
+        return ShareInviteLink;
+      }(Component), _descriptor = _applyDecoratedDescriptor(_class2.prototype, "baseLinkToShare", [_dec2], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return "https://t.me/hamsmining_bot/start?startapp=";
+        }
+      }), _class2)) || _class));
+      cclegacy._RF.pop();
+    }
   };
 });
 
