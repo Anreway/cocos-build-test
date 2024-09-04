@@ -168,12 +168,21 @@ System.register("chunks:///_virtual/CopyInviteLink.ts", ['./rollupPluginModLoBab
                 case 3:
                   user = tgWebApp.getTelegramUser();
                   urlForCopy = this.baseLinkToShare + user.id.toString();
-                  copyTextToClipboard(urlForCopy);
-                case 6:
+                  _context.prev = 5;
+                  _context.next = 8;
+                  return navigator.clipboard.writeText(urlForCopy);
+                case 8:
+                  _context.next = 13;
+                  break;
+                case 10:
+                  _context.prev = 10;
+                  _context.t0 = _context["catch"](5);
+                  console.error('Cant copy text with: ', _context.t0);
+                case 13:
                 case "end":
                   return _context.stop();
               }
-            }, _callee, this);
+            }, _callee, this, [[5, 10]]);
           }));
           function onClick() {
             return _onClick.apply(this, arguments);
@@ -186,7 +195,7 @@ System.register("chunks:///_virtual/CopyInviteLink.ts", ['./rollupPluginModLoBab
         enumerable: true,
         writable: true,
         initializer: function initializer() {
-          return "https://t.me/hamsmining_bot/start?startapp=";
+          return 'https://t.me/hamsmining_bot/start?startapp=';
         }
       }), _class2)) || _class));
       cclegacy._RF.pop();
@@ -523,7 +532,7 @@ System.register("chunks:///_virtual/ShareInviteLink.ts", ['./rollupPluginModLoBa
                 case 3:
                   user = tgWebApp.getTelegramUser();
                   urlForShare = this.baseLinkToShare + user.id.toString();
-                  tgWebApp.share(urlForShare, "Hi! \nJoin me in the Hamster Hotel Mining game! \nPack your bags and accumulate a $SEM token for your future hotel!");
+                  tgWebApp.share(urlForShare, 'Hi! \nJoin me in the Hamster Hotel Mining game! \nPack your bags and accumulate a $SEM token for your future hotel!');
                 case 6:
                 case "end":
                   return _context.stop();
@@ -541,7 +550,7 @@ System.register("chunks:///_virtual/ShareInviteLink.ts", ['./rollupPluginModLoBa
         enumerable: true,
         writable: true,
         initializer: function initializer() {
-          return "https://t.me/hamsmining_bot/start?startapp=";
+          return 'https://t.me/hamsmining_bot/start?startapp=';
         }
       }), _class2)) || _class));
       cclegacy._RF.pop();
