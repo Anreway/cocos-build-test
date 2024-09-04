@@ -156,7 +156,7 @@ System.register("chunks:///_virtual/CopyInviteLink.ts", ['./rollupPluginModLoBab
                   return tgWebApp.init();
                 case 3:
                   tgWebApp.getTelegramUser();
-                  tgWebApp.share("ssilka tut s referalkoi", "Hi! Join me in the Hamster Hotel Mining game, pack your bags, accumulate a SAS token for your future hotel!");
+                  tgWebApp.share("ssilka tut s referalkoi", "Hi! Join me in the Hamster Hotel Mining game, pack your bags, accumulate a $SEM token for your future hotel!");
                 case 5:
                 case "end":
                   return _context.stop();
