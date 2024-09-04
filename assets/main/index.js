@@ -147,7 +147,7 @@ System.register("chunks:///_virtual/CopyInviteLink.ts", ['./rollupPluginModLoBab
         };
         _proto.onClick = /*#__PURE__*/function () {
           var _onClick = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-            var tgWebApp, user;
+            var tgWebApp;
             return _regeneratorRuntime().wrap(function _callee$(_context) {
               while (1) switch (_context.prev = _context.next) {
                 case 0:
@@ -155,8 +155,8 @@ System.register("chunks:///_virtual/CopyInviteLink.ts", ['./rollupPluginModLoBab
                   _context.next = 3;
                   return tgWebApp.init();
                 case 3:
-                  user = tgWebApp.getTelegramUser();
-                  tgWebApp.share("ssilka tut s referalkoi", "my tag is: " + ("" + user.username) + " and my id is:" + ("" + user.id));
+                  tgWebApp.getTelegramUser();
+                  tgWebApp.share("ssilka tut s referalkoi", "Hi! Join me in the Hamster Hotel Mining game, pack your bags, accumulate a SAS token for your future hotel!");
                 case 5:
                 case "end":
                   return _context.stop();
