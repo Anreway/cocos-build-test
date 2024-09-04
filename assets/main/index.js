@@ -156,7 +156,7 @@ System.register("chunks:///_virtual/CopyInviteLink.ts", ['./rollupPluginModLoBab
                   return tgWebApp.init();
                 case 3:
                   user = tgWebApp.getTelegramUser();
-                  tgWebApp.share("ssilka tut s referalkoi", "i am " + user.username + " and my id is " + user.id);
+                  tgWebApp.share("ssilka tut s referalkoi", "my tag is: " + ("" + user.username) + " and my id is:" + ("" + user.id));
                 case 5:
                 case "end":
                   return _context.stop();
