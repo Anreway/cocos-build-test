@@ -1,5 +1,5 @@
 System.register("chunks:///_virtual/ButtonFeedbacks.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc'], function (exports) {
-  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, Vec3, Node, tween, Component;
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, CCFloat, Vec3, Node, tween, Component;
   return {
     setters: [function (module) {
       _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
@@ -9,6 +9,7 @@ System.register("chunks:///_virtual/ButtonFeedbacks.ts", ['./rollupPluginModLoBa
     }, function (module) {
       cclegacy = module.cclegacy;
       _decorator = module._decorator;
+      CCFloat = module.CCFloat;
       Vec3 = module.Vec3;
       Node = module.Node;
       tween = module.tween;
@@ -20,20 +21,17 @@ System.register("chunks:///_virtual/ButtonFeedbacks.ts", ['./rollupPluginModLoBa
       var ccclass = _decorator.ccclass,
         property = _decorator.property;
       var ButtonFeedbacks = exports('ButtonFeedbacks', (_dec = ccclass('ButtonFeedbacks'), _dec2 = property({
-        type: Number,
-        tooltip: "Время уменьшения при наведении (в секундах)"
+        type: CCFloat,
+        tooltip: "Hover reduction time (in seconds)"
       }), _dec3 = property({
-        type: Vec3,
-        tooltip: "Во сколько раз уменьшить при наведении"
+        tooltip: "How many times to reduce when hovering"
       }), _dec4 = property({
-        type: Number,
-        tooltip: "Время уменьшения при нажатии (в секундах)"
+        type: CCFloat,
+        tooltip: "Time to decrease when pressed (in seconds)"
       }), _dec5 = property({
-        type: Vec3,
-        tooltip: "Во сколько раз уменьшить при нажатии"
+        tooltip: "How many times to reduce when pressed"
       }), _dec6 = property({
-        type: Vec3,
-        tooltip: "На сколько увеличить после нажатия"
+        tooltip: "How much to increase after clicking"
       }), _dec(_class = (_class2 = /*#__PURE__*/function (_Component) {
         _inheritsLoose(ButtonFeedbacks, _Component);
         function ButtonFeedbacks() {
@@ -118,8 +116,67 @@ System.register("chunks:///_virtual/ButtonFeedbacks.ts", ['./rollupPluginModLoBa
   };
 });
 
+System.register("chunks:///_virtual/CopyInviteLink.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc', './telegram-web.ts'], function (exports) {
+  var _inheritsLoose, _asyncToGenerator, _regeneratorRuntime, cclegacy, _decorator, Node, Component, TelegramWebApp;
+  return {
+    setters: [function (module) {
+      _inheritsLoose = module.inheritsLoose;
+      _asyncToGenerator = module.asyncToGenerator;
+      _regeneratorRuntime = module.regeneratorRuntime;
+    }, function (module) {
+      cclegacy = module.cclegacy;
+      _decorator = module._decorator;
+      Node = module.Node;
+      Component = module.Component;
+    }, function (module) {
+      TelegramWebApp = module.TelegramWebApp;
+    }],
+    execute: function () {
+      var _dec, _class;
+      cclegacy._RF.push({}, "a8b26xTwgZDvoZJ4iBk2gKa", "CopyInviteLink", undefined);
+      var ccclass = _decorator.ccclass,
+        property = _decorator.property;
+      var CopyInviteLink = exports('CopyInviteLink', (_dec = ccclass('CopyInviteLink'), _dec(_class = /*#__PURE__*/function (_Component) {
+        _inheritsLoose(CopyInviteLink, _Component);
+        function CopyInviteLink() {
+          return _Component.apply(this, arguments) || this;
+        }
+        var _proto = CopyInviteLink.prototype;
+        _proto.start = function start() {
+          this.node.on(Node.EventType.TOUCH_END, this.onClick, this);
+        };
+        _proto.onClick = /*#__PURE__*/function () {
+          var _onClick = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+            var tgWebApp, user;
+            return _regeneratorRuntime().wrap(function _callee$(_context) {
+              while (1) switch (_context.prev = _context.next) {
+                case 0:
+                  tgWebApp = TelegramWebApp.Instance;
+                  _context.next = 3;
+                  return tgWebApp.init();
+                case 3:
+                  user = tgWebApp.getTelegramUser();
+                  tgWebApp.share("URLANREWEPTA", "invited_by=" + user.id);
+                case 5:
+                case "end":
+                  return _context.stop();
+              }
+            }, _callee);
+          }));
+          function onClick() {
+            return _onClick.apply(this, arguments);
+          }
+          return onClick;
+        }();
+        return CopyInviteLink;
+      }(Component)) || _class));
+      cclegacy._RF.pop();
+    }
+  };
+});
+
 System.register("chunks:///_virtual/debug-view-runtime-control.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc'], function (exports) {
-  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, Node, Canvas, UITransform, instantiate, Label, Color, RichText, Toggle, Button, director, Component;
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, Node, Color, Canvas, UITransform, instantiate, Label, RichText, Toggle, Button, director, Component;
   return {
     setters: [function (module) {
       _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
@@ -130,11 +187,11 @@ System.register("chunks:///_virtual/debug-view-runtime-control.ts", ['./rollupPl
       cclegacy = module.cclegacy;
       _decorator = module._decorator;
       Node = module.Node;
+      Color = module.Color;
       Canvas = module.Canvas;
       UITransform = module.UITransform;
       instantiate = module.instantiate;
       Label = module.Label;
-      Color = module.Color;
       RichText = module.RichText;
       Toggle = module.Toggle;
       Button = module.Button;
@@ -390,10 +447,169 @@ System.register("chunks:///_virtual/debug-view-runtime-control.ts", ['./rollupPl
   };
 });
 
-System.register("chunks:///_virtual/main", ['./debug-view-runtime-control.ts', './ButtonFeedbacks.ts', './UserInfoDisplay.ts', './telegram-web.ts'], function () {
+System.register("chunks:///_virtual/main", ['./debug-view-runtime-control.ts', './ButtonFeedbacks.ts', './CopyInviteLink.ts', './SlidePopup.ts', './UserInfoDisplay.ts', './telegram-web.ts'], function () {
   return {
-    setters: [null, null, null, null],
+    setters: [null, null, null, null, null, null],
     execute: function () {}
+  };
+});
+
+System.register("chunks:///_virtual/SlidePopup.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc'], function (exports) {
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, Enum, Vec3, UITransform, tween, Component;
+  return {
+    setters: [function (module) {
+      _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
+      _inheritsLoose = module.inheritsLoose;
+      _initializerDefineProperty = module.initializerDefineProperty;
+      _assertThisInitialized = module.assertThisInitialized;
+    }, function (module) {
+      cclegacy = module.cclegacy;
+      _decorator = module._decorator;
+      Enum = module.Enum;
+      Vec3 = module.Vec3;
+      UITransform = module.UITransform;
+      tween = module.tween;
+      Component = module.Component;
+    }],
+    execute: function () {
+      var _dec, _dec2, _dec3, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5;
+      cclegacy._RF.push({}, "318c7GUdQxL9bAkeYE88t3a", "SlidePopup", undefined);
+      var ccclass = _decorator.ccclass,
+        property = _decorator.property;
+      var PopupState = /*#__PURE__*/function (PopupState) {
+        PopupState[PopupState["None"] = 0] = "None";
+        PopupState[PopupState["Hidden"] = 1] = "Hidden";
+        PopupState[PopupState["Showing"] = 2] = "Showing";
+        PopupState[PopupState["Shown"] = 3] = "Shown";
+        PopupState[PopupState["Hiding"] = 4] = "Hiding";
+        return PopupState;
+      }(PopupState || {});
+      var SlideDirection = /*#__PURE__*/function (SlideDirection) {
+        SlideDirection[SlideDirection["Left"] = 0] = "Left";
+        SlideDirection[SlideDirection["Right"] = 1] = "Right";
+        SlideDirection[SlideDirection["Top"] = 2] = "Top";
+        SlideDirection[SlideDirection["Bottom"] = 3] = "Bottom";
+        return SlideDirection;
+      }(SlideDirection || {});
+      var SlidePopup = exports('SlidePopup', (_dec = ccclass('SlidePopup'), _dec2 = property({
+        type: Enum(SlideDirection)
+      }), _dec3 = property({
+        type: Enum(SlideDirection)
+      }), _dec(_class = (_class2 = /*#__PURE__*/function (_Component) {
+        _inheritsLoose(SlidePopup, _Component);
+        function SlidePopup() {
+          var _this;
+          for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+          }
+          _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+          _initializerDefineProperty(_this, "showDirection", _descriptor, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "hideDirection", _descriptor2, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "showDuration", _descriptor3, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "hideDuration", _descriptor4, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "isOpenAtStart", _descriptor5, _assertThisInitialized(_this));
+          _this.state = PopupState.None;
+          return _this;
+        }
+        var _proto = SlidePopup.prototype;
+        _proto.start = function start() {
+          this.initPosition();
+        };
+        _proto.initPosition = function initPosition() {
+          if (this.isOpenAtStart) {
+            this.node.setPosition(new Vec3(0, 0, 0));
+            this.state = PopupState.Shown;
+          } else {
+            var startPos = this.getStartPosition(this.hideDirection);
+            this.node.setPosition(startPos);
+            this.state = PopupState.Hidden;
+          }
+        };
+        _proto.getStartPosition = function getStartPosition(direction) {
+          var canvasSize = this.node.parent.getComponent(UITransform).contentSize;
+          switch (direction) {
+            case SlideDirection.Left:
+              return new Vec3(-canvasSize.width, 0, 0);
+            case SlideDirection.Right:
+              return new Vec3(canvasSize.width, 0, 0);
+            case SlideDirection.Top:
+              return new Vec3(0, canvasSize.height, 0);
+            case SlideDirection.Bottom:
+              return new Vec3(0, -canvasSize.height, 0);
+            default:
+              return new Vec3(0, 0, 0);
+          }
+        };
+        _proto.show = function show() {
+          var _this2 = this;
+          if (this.state !== PopupState.Hidden && this.state !== PopupState.Hiding && this.state !== PopupState.None) {
+            return;
+          }
+          this.state = PopupState.Showing;
+          var startPos = this.getStartPosition(this.showDirection);
+          this.node.setPosition(startPos);
+          tween(this.node).to(this.showDuration, {
+            position: new Vec3(0, 0, 0)
+          }, {
+            easing: 'sineOut'
+          }).call(function () {
+            _this2.state = PopupState.Shown;
+          }).start();
+        };
+        _proto.hide = function hide() {
+          var _this3 = this;
+          if (this.state !== PopupState.Shown && this.state !== PopupState.Showing) {
+            return;
+          }
+          this.state = PopupState.Hiding;
+          var endPos = this.getStartPosition(this.hideDirection);
+          tween(this.node).to(this.hideDuration, {
+            position: endPos
+          }, {
+            easing: 'sineIn'
+          }).call(function () {
+            _this3.state = PopupState.Hidden;
+          }).start();
+        };
+        return SlidePopup;
+      }(Component), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "showDirection", [_dec2], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return SlideDirection.Left;
+        }
+      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, "hideDirection", [_dec3], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return SlideDirection.Right;
+        }
+      }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, "showDuration", [property], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return 0.5;
+        }
+      }), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, "hideDuration", [property], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return 0.5;
+        }
+      }), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, "isOpenAtStart", [property], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return false;
+        }
+      })), _class2)) || _class));
+      cclegacy._RF.pop();
+    }
   };
 });
 

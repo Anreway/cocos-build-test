@@ -61,9 +61,9 @@
     "screen": {
         "exactFitScreen": true,
         "designResolution": {
-            "width": 800,
+            "width": 900,
             "height": 1600,
-            "policy": 4
+            "policy": 2
         },
         "orientation": "portrait"
     },
