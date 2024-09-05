@@ -1166,7 +1166,7 @@ System.register("chunks:///_virtual/TaskItem.ts", ['./rollupPluginModLoBabelHelp
                   _context8.next = 2;
                   return this.delay(200);
                 case 2:
-                  return _context8.abrupt("return", false);
+                  return _context8.abrupt("return", true);
                 case 3:
                 case "end":
                   return _context8.stop();
@@ -1354,7 +1354,7 @@ System.register("chunks:///_virtual/TasksScrollViewer.ts", ['./rollupPluginModLo
           //only for test
           this.testTasks = [{
             taskType: TaskType.Other,
-            isCompleted: true,
+            isCompleted: false,
             taskId: "task_001",
             taskName: "Watch the video",
             reward: 100,
@@ -1368,7 +1368,7 @@ System.register("chunks:///_virtual/TasksScrollViewer.ts", ['./rollupPluginModLo
             channelLink: "https://t.me/hamster_hotel"
           }, {
             taskType: TaskType.MoneyCount,
-            isCompleted: false,
+            isCompleted: true,
             taskId: "task_003",
             taskName: "Collect 5000 $SEM",
             reward: 500,
