@@ -602,10 +602,97 @@ System.register("chunks:///_virtual/FriendsScrollViewer.ts", ['./rollupPluginMod
   };
 });
 
-System.register("chunks:///_virtual/main", ['./debug-view-runtime-control.ts', './ButtonFeedbacks.ts', './CopyInviteLink.ts', './FriendItem.ts', './FriendsScrollViewer.ts', './ShareInviteLink.ts', './SlidePopup.ts', './TaskItem.ts', './TasksScrollViewer.ts', './UserInfoDisplay.ts', './telegram-web.ts'], function () {
+System.register("chunks:///_virtual/main", ['./debug-view-runtime-control.ts', './ButtonFeedbacks.ts', './CopyInviteLink.ts', './FriendItem.ts', './FriendsScrollViewer.ts', './PopupManager.ts', './ShareInviteLink.ts', './SlidePopup.ts', './TaskItem.ts', './TasksScrollViewer.ts', './UserInfoDisplay.ts', './telegram-web.ts'], function () {
   return {
-    setters: [null, null, null, null, null, null, null, null, null, null, null],
+    setters: [null, null, null, null, null, null, null, null, null, null, null, null],
     execute: function () {}
+  };
+});
+
+System.register("chunks:///_virtual/PopupManager.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc', './SlidePopup.ts'], function (exports) {
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, Node, UITransform, Component, SlidePopup;
+  return {
+    setters: [function (module) {
+      _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
+      _inheritsLoose = module.inheritsLoose;
+      _initializerDefineProperty = module.initializerDefineProperty;
+      _assertThisInitialized = module.assertThisInitialized;
+    }, function (module) {
+      cclegacy = module.cclegacy;
+      _decorator = module._decorator;
+      Node = module.Node;
+      UITransform = module.UITransform;
+      Component = module.Component;
+    }, function (module) {
+      SlidePopup = module.SlidePopup;
+    }],
+    execute: function () {
+      var _dec, _dec2, _class, _class2, _descriptor, _class3;
+      cclegacy._RF.push({}, "56c44+jaTFNdKqXolyNCJjK", "PopupManager", undefined);
+      var ccclass = _decorator.ccclass,
+        property = _decorator.property;
+      var PopupManager = exports('PopupManager', (_dec = ccclass('PopupManager'), _dec2 = property([Node]), _dec(_class = (_class2 = (_class3 = /*#__PURE__*/function (_Component) {
+        _inheritsLoose(PopupManager, _Component);
+        function PopupManager() {
+          var _this;
+          for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+          }
+          _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+          _initializerDefineProperty(_this, "popups", _descriptor, _assertThisInitialized(_this));
+          return _this;
+        }
+        var _proto = PopupManager.prototype;
+        _proto.onLoad = function onLoad() {
+          if (PopupManager.instance) {
+            this.destroy();
+            return;
+          }
+          PopupManager.instance = this;
+          this.node.addComponent(UITransform);
+        };
+        PopupManager.getInstance = function getInstance() {
+          return PopupManager.instance;
+        };
+        _proto.showPopup = function showPopup(index) {
+          if (index < 0 || index >= this.popups.length) {
+            console.warn('Popup index out of bounds');
+            return;
+          }
+          var popupComponent = this.popups[index].getComponent(SlidePopup);
+          if (popupComponent) {
+            popupComponent.show();
+          } else {
+            console.warn('SlidePopup component not found on node:', this.popups[index].name);
+          }
+        };
+        _proto.hidePopup = function hidePopup(index) {
+          if (index < 0 || index >= this.popups.length) {
+            console.warn('Popup index out of bounds');
+            return;
+          }
+          var popupComponent = this.popups[index].getComponent(SlidePopup);
+          if (popupComponent) {
+            popupComponent.hide();
+          } else {
+            console.warn('SlidePopup component not found on node:', this.popups[index].name);
+          }
+        };
+        _proto.switchPopup = function switchPopup(currentIndex, nextIndex) {
+          this.hidePopup(currentIndex);
+          this.showPopup(nextIndex);
+        };
+        return PopupManager;
+      }(Component), _class3.instance = void 0, _class3), _descriptor = _applyDecoratedDescriptor(_class2.prototype, "popups", [_dec2], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return [];
+        }
+      }), _class2)) || _class));
+      cclegacy._RF.pop();
+    }
   };
 });
 
@@ -844,8 +931,8 @@ System.register("chunks:///_virtual/SlidePopup.ts", ['./rollupPluginModLoBabelHe
   };
 });
 
-System.register("chunks:///_virtual/TaskItem.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc', './telegram-web.ts', './ButtonFeedbacks.ts'], function (exports) {
-  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _asyncToGenerator, _regeneratorRuntime, cclegacy, _decorator, Label, Button, Sprite, SpriteFrame, Component, TelegramWebApp, ButtonFeedbacks;
+System.register("chunks:///_virtual/TaskItem.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc', './telegram-web.ts', './ButtonFeedbacks.ts', './PopupManager.ts'], function (exports) {
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _asyncToGenerator, _regeneratorRuntime, cclegacy, _decorator, Label, Button, Sprite, SpriteFrame, Component, TelegramWebApp, ButtonFeedbacks, PopupManager;
   return {
     setters: [function (module) {
       _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
@@ -866,6 +953,8 @@ System.register("chunks:///_virtual/TaskItem.ts", ['./rollupPluginModLoBabelHelp
       TelegramWebApp = module.TelegramWebApp;
     }, function (module) {
       ButtonFeedbacks = module.ButtonFeedbacks;
+    }, function (module) {
+      PopupManager = module.PopupManager;
     }],
     execute: function () {
       var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _dec10, _dec11, _dec12, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11;
@@ -1146,7 +1235,7 @@ System.register("chunks:///_virtual/TaskItem.ts", ['./rollupPluginModLoBabelHelp
                   _context7.next = 2;
                   return this.delay(200);
                 case 2:
-                  return _context7.abrupt("return", true);
+                  return _context7.abrupt("return", false);
                 case 3:
                 case "end":
                   return _context7.stop();
@@ -1166,7 +1255,7 @@ System.register("chunks:///_virtual/TaskItem.ts", ['./rollupPluginModLoBabelHelp
                   _context8.next = 2;
                   return this.delay(200);
                 case 2:
-                  return _context8.abrupt("return", true);
+                  return _context8.abrupt("return", false);
                 case 3:
                 case "end":
                   return _context8.stop();
@@ -1218,10 +1307,10 @@ System.register("chunks:///_virtual/TaskItem.ts", ['./rollupPluginModLoBabelHelp
           return goSubscribeComplete;
         }();
         _proto.goMoneyComplete = function goMoneyComplete() {
-          // go to main screen
+          PopupManager.getInstance().hidePopup(0);
         };
         _proto.goFriendsComplete = function goFriendsComplete() {
-          // go to friends screen
+          PopupManager.getInstance().switchPopup(0, 3);
         };
         return TaskItem;
       }(Component), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "nameLabel", [_dec2], {
@@ -1363,7 +1452,7 @@ System.register("chunks:///_virtual/TasksScrollViewer.ts", ['./rollupPluginModLo
             channelLink: "https://t.me/hamster_hotel"
           }, {
             taskType: TaskType.MoneyCount,
-            isCompleted: true,
+            isCompleted: false,
             taskId: "task_003",
             taskName: "Collect 5000 $SEM",
             reward: 500,
