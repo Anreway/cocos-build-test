@@ -1180,16 +1180,11 @@ System.register("chunks:///_virtual/TaskItem.ts", ['./rollupPluginModLoBabelHelp
         }();
         _proto.goOtherComplete = /*#__PURE__*/function () {
           var _goOtherComplete = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee9() {
-            var tgWebApp;
             return _regeneratorRuntime().wrap(function _callee9$(_context9) {
               while (1) switch (_context9.prev = _context9.next) {
                 case 0:
-                  tgWebApp = TelegramWebApp.Instance;
-                  _context9.next = 3;
-                  return tgWebApp.init();
-                case 3:
-                  tgWebApp.openTelegramLink(this.myTaskData.channelLink);
-                case 4:
+                  window.open(this.myTaskData.channelLink, "_blank");
+                case 1:
                 case "end":
                   return _context9.stop();
               }
