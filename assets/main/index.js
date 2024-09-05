@@ -602,9 +602,9 @@ System.register("chunks:///_virtual/FriendsScrollViewer.ts", ['./rollupPluginMod
   };
 });
 
-System.register("chunks:///_virtual/main", ['./debug-view-runtime-control.ts', './ButtonFeedbacks.ts', './CopyInviteLink.ts', './FriendItem.ts', './FriendsScrollViewer.ts', './ShareInviteLink.ts', './SlidePopup.ts', './UserInfoDisplay.ts', './telegram-web.ts'], function () {
+System.register("chunks:///_virtual/main", ['./debug-view-runtime-control.ts', './ButtonFeedbacks.ts', './CopyInviteLink.ts', './FriendItem.ts', './FriendsScrollViewer.ts', './ShareInviteLink.ts', './SlidePopup.ts', './TaskItem.ts', './TasksScrollViewer.ts', './UserInfoDisplay.ts', './telegram-web.ts'], function () {
   return {
-    setters: [null, null, null, null, null, null, null, null, null],
+    setters: [null, null, null, null, null, null, null, null, null, null, null],
     execute: function () {}
   };
 });
@@ -837,6 +837,575 @@ System.register("chunks:///_virtual/SlidePopup.ts", ['./rollupPluginModLoBabelHe
         writable: true,
         initializer: function initializer() {
           return false;
+        }
+      })), _class2)) || _class));
+      cclegacy._RF.pop();
+    }
+  };
+});
+
+System.register("chunks:///_virtual/TaskItem.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc', './telegram-web.ts', './ButtonFeedbacks.ts'], function (exports) {
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _asyncToGenerator, _regeneratorRuntime, cclegacy, _decorator, Label, Button, Sprite, SpriteFrame, Component, TelegramWebApp, ButtonFeedbacks;
+  return {
+    setters: [function (module) {
+      _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
+      _inheritsLoose = module.inheritsLoose;
+      _initializerDefineProperty = module.initializerDefineProperty;
+      _assertThisInitialized = module.assertThisInitialized;
+      _asyncToGenerator = module.asyncToGenerator;
+      _regeneratorRuntime = module.regeneratorRuntime;
+    }, function (module) {
+      cclegacy = module.cclegacy;
+      _decorator = module._decorator;
+      Label = module.Label;
+      Button = module.Button;
+      Sprite = module.Sprite;
+      SpriteFrame = module.SpriteFrame;
+      Component = module.Component;
+    }, function (module) {
+      TelegramWebApp = module.TelegramWebApp;
+    }, function (module) {
+      ButtonFeedbacks = module.ButtonFeedbacks;
+    }],
+    execute: function () {
+      var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _dec10, _dec11, _dec12, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11;
+      cclegacy._RF.push({}, "16834gY+L5A5rZb5lxvMF3Q", "TaskItem", undefined);
+      var ccclass = _decorator.ccclass,
+        property = _decorator.property;
+      var TaskType = exports('TaskType', /*#__PURE__*/function (TaskType) {
+        TaskType["Other"] = "Other";
+        TaskType["Subscribe"] = "Subscribe";
+        TaskType["MoneyCount"] = "MoneyCount";
+        TaskType["FriendsCount"] = "FriendsCount";
+        return TaskType;
+      }({}));
+      var TaskItem = exports('TaskItem', (_dec = ccclass('TaskItem'), _dec2 = property(Label), _dec3 = property(Label), _dec4 = property(Button), _dec5 = property(Sprite), _dec6 = property(SpriteFrame), _dec7 = property(SpriteFrame), _dec8 = property(Sprite), _dec9 = property(SpriteFrame), _dec10 = property(SpriteFrame), _dec11 = property(SpriteFrame), _dec12 = property(SpriteFrame), _dec(_class = (_class2 = /*#__PURE__*/function (_Component) {
+        _inheritsLoose(TaskItem, _Component);
+        function TaskItem() {
+          var _this;
+          for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+          }
+          _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+          _initializerDefineProperty(_this, "nameLabel", _descriptor, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "rewardLabel", _descriptor2, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "goButton", _descriptor3, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "buttonIconSprite", _descriptor4, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "isCompletedIcon", _descriptor5, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "isNotCompletedIcon", _descriptor6, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "iconSprite", _descriptor7, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "subscribeIcon", _descriptor8, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "moneyIcon", _descriptor9, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "friendsIcon", _descriptor10, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "otherIcon", _descriptor11, _assertThisInitialized(_this));
+          _this.myTaskData = void 0;
+          return _this;
+        }
+        var _proto = TaskItem.prototype;
+        _proto.init = function init(task) {
+          this.myTaskData = task;
+          this.updateMe();
+        };
+        _proto.updateTaskData = function updateTaskData(newTaskData) {
+          this.myTaskData = newTaskData;
+          this.updateMe();
+        };
+        _proto.updateMe = function updateMe() {
+          if (this.nameLabel) {
+            this.nameLabel.string = this.myTaskData.taskName;
+          }
+          if (this.rewardLabel) {
+            this.rewardLabel.string = "+" + this.myTaskData.reward.toString();
+          }
+          if (this.iconSprite && this.otherIcon && this.subscribeIcon && this.moneyIcon && this.friendsIcon) {
+            switch (this.myTaskData.taskType) {
+              case TaskType.Other:
+                this.iconSprite.spriteFrame = this.otherIcon;
+                break;
+              case TaskType.Subscribe:
+                this.iconSprite.spriteFrame = this.subscribeIcon;
+                break;
+              case TaskType.MoneyCount:
+                this.iconSprite.spriteFrame = this.moneyIcon;
+                break;
+              case TaskType.FriendsCount:
+                this.iconSprite.spriteFrame = this.friendsIcon;
+                break;
+              default:
+                console.log("Unknown task type");
+                break;
+            }
+          }
+          if (this.goButton && this.buttonIconSprite) {
+            if (this.myTaskData.isCompleted) {
+              if (this.isCompletedIcon) {
+                this.buttonIconSprite.spriteFrame = this.isCompletedIcon;
+              }
+              if (this.goButton.getComponent(ButtonFeedbacks)) {
+                this.goButton.getComponent(ButtonFeedbacks).enabled = false;
+              }
+              this.goButton.interactable = false;
+            } else {
+              if (this.isNotCompletedIcon) {
+                this.buttonIconSprite.spriteFrame = this.isNotCompletedIcon;
+              }
+              if (this.goButton.getComponent(ButtonFeedbacks)) {
+                this.goButton.getComponent(ButtonFeedbacks).enabled = true;
+              }
+              this.goButton.interactable = true;
+            }
+            this.goButton.node.off('click');
+            this.goButton.node.on('click', this.onTaskButtonClicked, this);
+          }
+        };
+        _proto.onTaskButtonClicked = /*#__PURE__*/function () {
+          var _onTaskButtonClicked = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+            var isNowCompleted;
+            return _regeneratorRuntime().wrap(function _callee$(_context) {
+              while (1) switch (_context.prev = _context.next) {
+                case 0:
+                  if (!this.myTaskData.isCompleted) {
+                    _context.next = 2;
+                    break;
+                  }
+                  return _context.abrupt("return");
+                case 2:
+                  _context.next = 4;
+                  return this.checkTaskIsComplitedNow();
+                case 4:
+                  isNowCompleted = _context.sent;
+                  if (isNowCompleted) {
+                    this.myTaskData.isCompleted = true;
+                    this.updateTaskData(this.myTaskData);
+                  } else {
+                    this.goToCompleteTask();
+                  }
+                case 6:
+                case "end":
+                  return _context.stop();
+              }
+            }, _callee, this);
+          }));
+          function onTaskButtonClicked() {
+            return _onTaskButtonClicked.apply(this, arguments);
+          }
+          return onTaskButtonClicked;
+        }();
+        _proto.checkTaskIsComplitedNow = /*#__PURE__*/function () {
+          var _checkTaskIsComplitedNow = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+            var isNowCompleted;
+            return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+              while (1) switch (_context2.prev = _context2.next) {
+                case 0:
+                  isNowCompleted = false;
+                  _context2.t0 = this.myTaskData.taskType;
+                  _context2.next = _context2.t0 === TaskType.Other ? 4 : _context2.t0 === TaskType.Subscribe ? 8 : _context2.t0 === TaskType.MoneyCount ? 12 : _context2.t0 === TaskType.FriendsCount ? 16 : 20;
+                  break;
+                case 4:
+                  _context2.next = 6;
+                  return this.checkOtherIsComplited();
+                case 6:
+                  isNowCompleted = _context2.sent;
+                  return _context2.abrupt("break", 22);
+                case 8:
+                  _context2.next = 10;
+                  return this.checkSubscribeIsComplited();
+                case 10:
+                  isNowCompleted = _context2.sent;
+                  return _context2.abrupt("break", 22);
+                case 12:
+                  _context2.next = 14;
+                  return this.checkMoneyIsComplited();
+                case 14:
+                  isNowCompleted = _context2.sent;
+                  return _context2.abrupt("break", 22);
+                case 16:
+                  _context2.next = 18;
+                  return this.checkFriendsIsComplited();
+                case 18:
+                  isNowCompleted = _context2.sent;
+                  return _context2.abrupt("break", 22);
+                case 20:
+                  console.log("Unknown task type");
+                  return _context2.abrupt("break", 22);
+                case 22:
+                  return _context2.abrupt("return", isNowCompleted);
+                case 23:
+                case "end":
+                  return _context2.stop();
+              }
+            }, _callee2, this);
+          }));
+          function checkTaskIsComplitedNow() {
+            return _checkTaskIsComplitedNow.apply(this, arguments);
+          }
+          return checkTaskIsComplitedNow;
+        }();
+        _proto.goToCompleteTask = /*#__PURE__*/function () {
+          var _goToCompleteTask = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+            return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+              while (1) switch (_context3.prev = _context3.next) {
+                case 0:
+                  _context3.t0 = this.myTaskData.taskType;
+                  _context3.next = _context3.t0 === TaskType.Other ? 3 : _context3.t0 === TaskType.Subscribe ? 6 : _context3.t0 === TaskType.MoneyCount ? 9 : _context3.t0 === TaskType.FriendsCount ? 11 : 13;
+                  break;
+                case 3:
+                  _context3.next = 5;
+                  return this.goOtherComplete();
+                case 5:
+                  return _context3.abrupt("break", 15);
+                case 6:
+                  _context3.next = 8;
+                  return this.goSubscribeComplete();
+                case 8:
+                  return _context3.abrupt("break", 15);
+                case 9:
+                  this.goMoneyComplete();
+                  return _context3.abrupt("break", 15);
+                case 11:
+                  this.goFriendsComplete();
+                  return _context3.abrupt("break", 15);
+                case 13:
+                  console.log("Unknown task type");
+                  return _context3.abrupt("break", 15);
+                case 15:
+                case "end":
+                  return _context3.stop();
+              }
+            }, _callee3, this);
+          }));
+          function goToCompleteTask() {
+            return _goToCompleteTask.apply(this, arguments);
+          }
+          return goToCompleteTask;
+        }();
+        _proto.delay = /*#__PURE__*/function () {
+          var _delay = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(ms) {
+            return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+              while (1) switch (_context4.prev = _context4.next) {
+                case 0:
+                  return _context4.abrupt("return", new Promise(function (resolve) {
+                    return setTimeout(resolve, ms);
+                  }));
+                case 1:
+                case "end":
+                  return _context4.stop();
+              }
+            }, _callee4);
+          }));
+          function delay(_x) {
+            return _delay.apply(this, arguments);
+          }
+          return delay;
+        }();
+        _proto.checkOtherIsComplited = /*#__PURE__*/function () {
+          var _checkOtherIsComplited = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
+            return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+              while (1) switch (_context5.prev = _context5.next) {
+                case 0:
+                  _context5.next = 2;
+                  return this.delay(200);
+                case 2:
+                  return _context5.abrupt("return", true);
+                case 3:
+                case "end":
+                  return _context5.stop();
+              }
+            }, _callee5, this);
+          }));
+          function checkOtherIsComplited() {
+            return _checkOtherIsComplited.apply(this, arguments);
+          }
+          return checkOtherIsComplited;
+        }();
+        _proto.checkSubscribeIsComplited = /*#__PURE__*/function () {
+          var _checkSubscribeIsComplited = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
+            return _regeneratorRuntime().wrap(function _callee6$(_context6) {
+              while (1) switch (_context6.prev = _context6.next) {
+                case 0:
+                  _context6.next = 2;
+                  return this.delay(200);
+                case 2:
+                  return _context6.abrupt("return", false);
+                case 3:
+                case "end":
+                  return _context6.stop();
+              }
+            }, _callee6, this);
+          }));
+          function checkSubscribeIsComplited() {
+            return _checkSubscribeIsComplited.apply(this, arguments);
+          }
+          return checkSubscribeIsComplited;
+        }();
+        _proto.checkMoneyIsComplited = /*#__PURE__*/function () {
+          var _checkMoneyIsComplited = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
+            return _regeneratorRuntime().wrap(function _callee7$(_context7) {
+              while (1) switch (_context7.prev = _context7.next) {
+                case 0:
+                  _context7.next = 2;
+                  return this.delay(200);
+                case 2:
+                  return _context7.abrupt("return", true);
+                case 3:
+                case "end":
+                  return _context7.stop();
+              }
+            }, _callee7, this);
+          }));
+          function checkMoneyIsComplited() {
+            return _checkMoneyIsComplited.apply(this, arguments);
+          }
+          return checkMoneyIsComplited;
+        }();
+        _proto.checkFriendsIsComplited = /*#__PURE__*/function () {
+          var _checkFriendsIsComplited = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee8() {
+            return _regeneratorRuntime().wrap(function _callee8$(_context8) {
+              while (1) switch (_context8.prev = _context8.next) {
+                case 0:
+                  _context8.next = 2;
+                  return this.delay(200);
+                case 2:
+                  return _context8.abrupt("return", false);
+                case 3:
+                case "end":
+                  return _context8.stop();
+              }
+            }, _callee8, this);
+          }));
+          function checkFriendsIsComplited() {
+            return _checkFriendsIsComplited.apply(this, arguments);
+          }
+          return checkFriendsIsComplited;
+        }();
+        _proto.goOtherComplete = /*#__PURE__*/function () {
+          var _goOtherComplete = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee9() {
+            var tgWebApp;
+            return _regeneratorRuntime().wrap(function _callee9$(_context9) {
+              while (1) switch (_context9.prev = _context9.next) {
+                case 0:
+                  tgWebApp = TelegramWebApp.Instance;
+                  _context9.next = 3;
+                  return tgWebApp.init();
+                case 3:
+                  tgWebApp.openTelegramLink(this.myTaskData.channelLink);
+                case 4:
+                case "end":
+                  return _context9.stop();
+              }
+            }, _callee9, this);
+          }));
+          function goOtherComplete() {
+            return _goOtherComplete.apply(this, arguments);
+          }
+          return goOtherComplete;
+        }();
+        _proto.goSubscribeComplete = /*#__PURE__*/function () {
+          var _goSubscribeComplete = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee10() {
+            var tgWebApp;
+            return _regeneratorRuntime().wrap(function _callee10$(_context10) {
+              while (1) switch (_context10.prev = _context10.next) {
+                case 0:
+                  tgWebApp = TelegramWebApp.Instance;
+                  _context10.next = 3;
+                  return tgWebApp.init();
+                case 3:
+                  tgWebApp.openTelegramLink(this.myTaskData.channelLink);
+                case 4:
+                case "end":
+                  return _context10.stop();
+              }
+            }, _callee10, this);
+          }));
+          function goSubscribeComplete() {
+            return _goSubscribeComplete.apply(this, arguments);
+          }
+          return goSubscribeComplete;
+        }();
+        _proto.goMoneyComplete = function goMoneyComplete() {
+          // go to main screen
+        };
+        _proto.goFriendsComplete = function goFriendsComplete() {
+          // go to friends screen
+        };
+        return TaskItem;
+      }(Component), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "nameLabel", [_dec2], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, "rewardLabel", [_dec3], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, "goButton", [_dec4], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, "buttonIconSprite", [_dec5], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, "isCompletedIcon", [_dec6], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, "isNotCompletedIcon", [_dec7], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor7 = _applyDecoratedDescriptor(_class2.prototype, "iconSprite", [_dec8], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor8 = _applyDecoratedDescriptor(_class2.prototype, "subscribeIcon", [_dec9], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor9 = _applyDecoratedDescriptor(_class2.prototype, "moneyIcon", [_dec10], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor10 = _applyDecoratedDescriptor(_class2.prototype, "friendsIcon", [_dec11], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor11 = _applyDecoratedDescriptor(_class2.prototype, "otherIcon", [_dec12], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      })), _class2)) || _class));
+      cclegacy._RF.pop();
+    }
+  };
+});
+
+System.register("chunks:///_virtual/TasksScrollViewer.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc', './TaskItem.ts'], function (exports) {
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, Prefab, Node, instantiate, Component, TaskType, TaskItem;
+  return {
+    setters: [function (module) {
+      _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
+      _inheritsLoose = module.inheritsLoose;
+      _initializerDefineProperty = module.initializerDefineProperty;
+      _assertThisInitialized = module.assertThisInitialized;
+    }, function (module) {
+      cclegacy = module.cclegacy;
+      _decorator = module._decorator;
+      Prefab = module.Prefab;
+      Node = module.Node;
+      instantiate = module.instantiate;
+      Component = module.Component;
+    }, function (module) {
+      TaskType = module.TaskType;
+      TaskItem = module.TaskItem;
+    }],
+    execute: function () {
+      var _dec, _dec2, _dec3, _class, _class2, _descriptor, _descriptor2;
+      cclegacy._RF.push({}, "def37DDs75PEqSD9znf/bye", "TasksScrollViewer", undefined);
+      var ccclass = _decorator.ccclass,
+        property = _decorator.property;
+      var TasksScrollViewer = exports('TasksScrollViewer', (_dec = ccclass('TasksScrollViewer'), _dec2 = property(Prefab), _dec3 = property(Node), _dec(_class = (_class2 = /*#__PURE__*/function (_Component) {
+        _inheritsLoose(TasksScrollViewer, _Component);
+        function TasksScrollViewer() {
+          var _this;
+          for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+          }
+          _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+          _initializerDefineProperty(_this, "taskItemPrefab", _descriptor, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "contentNode", _descriptor2, _assertThisInitialized(_this));
+          _this.testTasks = [];
+          return _this;
+        }
+        var _proto = TasksScrollViewer.prototype;
+        _proto.start = function start() {
+          //only for test
+          this.testTasks = [{
+            taskType: TaskType.Other,
+            isCompleted: true,
+            taskId: "task_001",
+            taskName: "Watch the video",
+            reward: 100,
+            channelLink: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+          }, {
+            taskType: TaskType.Subscribe,
+            isCompleted: false,
+            taskId: "task_002",
+            taskName: "Subscribe to channel",
+            reward: 200,
+            channelLink: "https://t.me/hamster_hotel"
+          }, {
+            taskType: TaskType.MoneyCount,
+            isCompleted: false,
+            taskId: "task_003",
+            taskName: "Collect 5000 $SEM",
+            reward: 500,
+            moneyCount: 5000
+          }, {
+            taskType: TaskType.FriendsCount,
+            isCompleted: false,
+            taskId: "task_004",
+            taskName: "Invite 5 friends",
+            reward: 500,
+            friendsCount: 5
+          }];
+          this.init(this.testTasks);
+        };
+        _proto.init = function init(tasks) {
+          if (this.taskItemPrefab && this.contentNode) {
+            for (var i = 0; i < tasks.length; i++) {
+              var newTaskItemPrefab = instantiate(this.taskItemPrefab);
+              this.contentNode.addChild(newTaskItemPrefab);
+              newTaskItemPrefab.getComponent(TaskItem).init(tasks[i]);
+            }
+          }
+        };
+        return TasksScrollViewer;
+      }(Component), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "taskItemPrefab", [_dec2], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, "contentNode", [_dec3], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
         }
       })), _class2)) || _class));
       cclegacy._RF.pop();
