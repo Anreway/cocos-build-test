@@ -475,9 +475,136 @@ System.register("chunks:///_virtual/debug-view-runtime-control.ts", ['./rollupPl
   };
 });
 
-System.register("chunks:///_virtual/main", ['./debug-view-runtime-control.ts', './ButtonFeedbacks.ts', './CopyInviteLink.ts', './ShareInviteLink.ts', './SlidePopup.ts', './UserInfoDisplay.ts', './telegram-web.ts'], function () {
+System.register("chunks:///_virtual/FriendItem.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc'], function (exports) {
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, Label, Component;
   return {
-    setters: [null, null, null, null, null, null, null],
+    setters: [function (module) {
+      _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
+      _inheritsLoose = module.inheritsLoose;
+      _initializerDefineProperty = module.initializerDefineProperty;
+      _assertThisInitialized = module.assertThisInitialized;
+    }, function (module) {
+      cclegacy = module.cclegacy;
+      _decorator = module._decorator;
+      Label = module.Label;
+      Component = module.Component;
+    }],
+    execute: function () {
+      var _dec, _dec2, _class, _class2, _descriptor;
+      cclegacy._RF.push({}, "25199AKiYNHBZj7N6FH0cx9", "FriendItem", undefined);
+      var ccclass = _decorator.ccclass,
+        property = _decorator.property;
+      var FriendItem = exports('FriendItem', (_dec = ccclass('FriendItem'), _dec2 = property(Label), _dec(_class = (_class2 = /*#__PURE__*/function (_Component) {
+        _inheritsLoose(FriendItem, _Component);
+        function FriendItem() {
+          var _this;
+          for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+          }
+          _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+          _initializerDefineProperty(_this, "friendNameLabel", _descriptor, _assertThisInitialized(_this));
+          return _this;
+        }
+        var _proto = FriendItem.prototype;
+        _proto.init = function init(friendName) {
+          this.friendNameLabel.string = friendName;
+        };
+        return FriendItem;
+      }(Component), _descriptor = _applyDecoratedDescriptor(_class2.prototype, "friendNameLabel", [_dec2], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _class2)) || _class));
+      cclegacy._RF.pop();
+    }
+  };
+});
+
+System.register("chunks:///_virtual/FriendsScrollViewer.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc', './FriendItem.ts'], function (exports) {
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, Prefab, Node, instantiate, Component, FriendItem;
+  return {
+    setters: [function (module) {
+      _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
+      _inheritsLoose = module.inheritsLoose;
+      _initializerDefineProperty = module.initializerDefineProperty;
+      _assertThisInitialized = module.assertThisInitialized;
+    }, function (module) {
+      cclegacy = module.cclegacy;
+      _decorator = module._decorator;
+      Prefab = module.Prefab;
+      Node = module.Node;
+      instantiate = module.instantiate;
+      Component = module.Component;
+    }, function (module) {
+      FriendItem = module.FriendItem;
+    }],
+    execute: function () {
+      var _dec, _dec2, _dec3, _class, _class2, _descriptor, _descriptor2, _descriptor3;
+      cclegacy._RF.push({}, "a5f41y+2rdCbbTmgHQq3rA+", "FriendsScrollViewer", undefined);
+      var ccclass = _decorator.ccclass,
+        property = _decorator.property;
+      var FriendsScrollViewer = exports('FriendsScrollViewer', (_dec = ccclass('FriendsScrollViewer'), _dec2 = property(Prefab), _dec3 = property(Node), _dec(_class = (_class2 = /*#__PURE__*/function (_Component) {
+        _inheritsLoose(FriendsScrollViewer, _Component);
+        function FriendsScrollViewer() {
+          var _this;
+          for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+          }
+          _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+          _initializerDefineProperty(_this, "numberOfFriends", _descriptor, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "friendItemPrefab", _descriptor2, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "contentNode", _descriptor3, _assertThisInitialized(_this));
+          return _this;
+        }
+        var _proto = FriendsScrollViewer.prototype;
+        _proto.start = function start() {
+          //get all friends and init
+          this.init();
+        };
+        _proto.init = function init( /*/initing data/*/
+        ) {
+          if (this.friendItemPrefab && this.contentNode) {
+            for (var i = 0; i < this.numberOfFriends; i++) {
+              var newFriendItemPrefab = instantiate(this.friendItemPrefab);
+              this.contentNode.addChild(newFriendItemPrefab);
+              newFriendItemPrefab.getComponent(FriendItem).init("friend num " + i.toString());
+            }
+          }
+        };
+        return FriendsScrollViewer;
+      }(Component), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "numberOfFriends", [property], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return 5;
+        }
+      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, "friendItemPrefab", [_dec2], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, "contentNode", [_dec3], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      })), _class2)) || _class));
+      cclegacy._RF.pop();
+    }
+  };
+});
+
+System.register("chunks:///_virtual/main", ['./debug-view-runtime-control.ts', './ButtonFeedbacks.ts', './CopyInviteLink.ts', './FriendItem.ts', './FriendsScrollViewer.ts', './ShareInviteLink.ts', './SlidePopup.ts', './UserInfoDisplay.ts', './telegram-web.ts'], function () {
+  return {
+    setters: [null, null, null, null, null, null, null, null, null],
     execute: function () {}
   };
 });
