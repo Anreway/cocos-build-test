@@ -1106,7 +1106,7 @@ System.register("chunks:///_virtual/TaskItem.ts", ['./rollupPluginModLoBabelHelp
                   _context5.next = 2;
                   return this.delay(200);
                 case 2:
-                  return _context5.abrupt("return", true);
+                  return _context5.abrupt("return", false);
                 case 3:
                 case "end":
                   return _context5.stop();
