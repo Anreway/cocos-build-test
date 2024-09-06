@@ -1548,17 +1548,18 @@ System.register("chunks:///_virtual/telegram-web.ts", ['./rollupPluginModLoBabel
                 case 2:
                   this._tgWebAppJS = _context.sent;
                   if (!this._tgWebAppJS) {
-                    _context.next = 7;
+                    _context.next = 8;
                     break;
                   }
+                  this.expand();
                   return _context.abrupt("return", Promise.resolve({
                     success: true
                   }));
-                case 7:
+                case 8:
                   return _context.abrupt("return", Promise.resolve({
                     success: false
                   }));
-                case 8:
+                case 9:
                 case "end":
                   return _context.stop();
               }
@@ -1595,6 +1596,15 @@ System.register("chunks:///_virtual/telegram-web.ts", ['./rollupPluginModLoBabel
             }
           };
           this._tgWebAppJS.shareToStory(media_url, widget_link);
+        };
+        _proto.expand = function expand() {
+          if (!this._tgWebAppJS) {
+            console.error("telegram web app is not inited!");
+            return null;
+          }
+          if (!this._tgWebAppJS.isExpanded) {
+            this._tgWebAppJS.expand();
+          }
         };
         _proto.getTelegramWebApp = function getTelegramWebApp() {
           return this._tgWebAppJS;
