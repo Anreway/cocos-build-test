@@ -1269,11 +1269,16 @@ System.register("chunks:///_virtual/TaskItem.ts", ['./rollupPluginModLoBabelHelp
         }();
         _proto.goOtherComplete = /*#__PURE__*/function () {
           var _goOtherComplete = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee9() {
+            var tgWebApp;
             return _regeneratorRuntime().wrap(function _callee9$(_context9) {
               while (1) switch (_context9.prev = _context9.next) {
                 case 0:
-                  window.open(this.myTaskData.channelLink, "_blank");
-                case 1:
+                  tgWebApp = TelegramWebApp.Instance;
+                  _context9.next = 3;
+                  return tgWebApp.init();
+                case 3:
+                  tgWebApp.openLink(this.myTaskData.channelLink);
+                case 4:
                 case "end":
                   return _context9.stop();
               }
@@ -1570,6 +1575,13 @@ System.register("chunks:///_virtual/telegram-web.ts", ['./rollupPluginModLoBabel
           }
           return init;
         }();
+        _proto.openLink = function openLink(url) {
+          if (!this._tgWebAppJS) {
+            console.error("telegram web app is not inited!");
+            return;
+          }
+          this._tgWebAppJS.openLink(url);
+        };
         _proto.openTelegramLink = function openTelegramLink(url) {
           if (!this._tgWebAppJS) {
             console.error("telegram web app is not inited!");
