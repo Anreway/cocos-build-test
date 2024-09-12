@@ -16,7 +16,7 @@ System.register("chunks:///_virtual/ButtonFeedbacks.ts", ['./rollupPluginModLoBa
       Component = module.Component;
     }],
     execute: function () {
-      var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5;
+      var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7;
       cclegacy._RF.push({}, "90d4ckbniJCCayv4Wlpw/dh", "ButtonFeedbacks", undefined);
       var ccclass = _decorator.ccclass,
         property = _decorator.property;
@@ -40,11 +40,13 @@ System.register("chunks:///_virtual/ButtonFeedbacks.ts", ['./rollupPluginModLoBa
             args[_key] = arguments[_key];
           }
           _this = _Component.call.apply(_Component, [this].concat(args)) || this;
-          _initializerDefineProperty(_this, "hoverDuration", _descriptor, _assertThisInitialized(_this));
-          _initializerDefineProperty(_this, "hoverScale", _descriptor2, _assertThisInitialized(_this));
-          _initializerDefineProperty(_this, "clickDuration", _descriptor3, _assertThisInitialized(_this));
-          _initializerDefineProperty(_this, "clickScale", _descriptor4, _assertThisInitialized(_this));
-          _initializerDefineProperty(_this, "clickScaleUp", _descriptor5, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "useHoverTween", _descriptor, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "useClickTween", _descriptor2, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "hoverDuration", _descriptor3, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "hoverScale", _descriptor4, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "clickDuration", _descriptor5, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "clickScale", _descriptor6, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "clickScaleUp", _descriptor7, _assertThisInitialized(_this));
           _this.originalScale = new Vec3();
           return _this;
         }
@@ -56,54 +58,71 @@ System.register("chunks:///_virtual/ButtonFeedbacks.ts", ['./rollupPluginModLoBa
           this.node.on(Node.EventType.TOUCH_END, this.onClick, this);
         };
         _proto.onMouseEnter = function onMouseEnter() {
+          if (!this.useHoverTween) return;
           tween(this.node).to(this.hoverDuration, {
             scale: this.hoverScale
           }).start();
         };
         _proto.onMouseLeave = function onMouseLeave() {
+          if (!this.useHoverTween) return;
           tween(this.node).to(this.hoverDuration, {
             scale: this.originalScale
           }).start();
         };
         _proto.onClick = function onClick() {
+          if (!this.useClickTween) return;
           tween(this.node).to(this.clickDuration, {
             scale: this.clickScale
-          }).to(this.clickDuration, {
+          }).to(this.clickDuration / 2, {
             scale: this.clickScaleUp
           }).to(this.clickDuration, {
             scale: this.originalScale
           }).start();
         };
         return ButtonFeedbacks;
-      }(Component), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "hoverDuration", [_dec2], {
+      }(Component), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "useHoverTween", [property], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return true;
+        }
+      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, "useClickTween", [property], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return true;
+        }
+      }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, "hoverDuration", [_dec2], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return 0.2;
         }
-      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, "hoverScale", [_dec3], {
+      }), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, "hoverScale", [_dec3], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return new Vec3(0.95, 0.95, 0.95);
         }
-      }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, "clickDuration", [_dec4], {
+      }), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, "clickDuration", [_dec4], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return 0.1;
         }
-      }), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, "clickScale", [_dec5], {
+      }), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, "clickScale", [_dec5], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return new Vec3(0.9, 0.9, 0.9);
         }
-      }), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, "clickScaleUp", [_dec6], {
+      }), _descriptor7 = _applyDecoratedDescriptor(_class2.prototype, "clickScaleUp", [_dec6], {
         configurable: true,
         enumerable: true,
         writable: true,
@@ -602,10 +621,465 @@ System.register("chunks:///_virtual/FriendsScrollViewer.ts", ['./rollupPluginMod
   };
 });
 
-System.register("chunks:///_virtual/main", ['./debug-view-runtime-control.ts', './ButtonFeedbacks.ts', './CopyInviteLink.ts', './FriendItem.ts', './FriendsScrollViewer.ts', './PopupManager.ts', './ShareInviteLink.ts', './SlidePopup.ts', './TaskItem.ts', './TasksScrollViewer.ts', './UserInfoDisplay.ts', './telegram-web.ts'], function () {
+System.register("chunks:///_virtual/LoadingHider.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc'], function (exports) {
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, Node, Color, Mask, Sprite, tween, Component;
   return {
-    setters: [null, null, null, null, null, null, null, null, null, null, null, null],
+    setters: [function (module) {
+      _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
+      _inheritsLoose = module.inheritsLoose;
+      _initializerDefineProperty = module.initializerDefineProperty;
+      _assertThisInitialized = module.assertThisInitialized;
+    }, function (module) {
+      cclegacy = module.cclegacy;
+      _decorator = module._decorator;
+      Node = module.Node;
+      Color = module.Color;
+      Mask = module.Mask;
+      Sprite = module.Sprite;
+      tween = module.tween;
+      Component = module.Component;
+    }],
+    execute: function () {
+      var _dec, _dec2, _dec3, _dec4, _dec5, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6;
+      cclegacy._RF.push({}, "b1f4eUqnYlAk7UbYrN3mV8t", "LoadingHider", undefined);
+      var ccclass = _decorator.ccclass,
+        property = _decorator.property;
+      var LoadingHider = exports('LoadingHider', (_dec = ccclass('LoadingHider'), _dec2 = property(Node), _dec3 = property({
+        type: Color
+      }), _dec4 = property({
+        type: Color
+      }), _dec5 = property(Mask), _dec(_class = (_class2 = /*#__PURE__*/function (_Component) {
+        _inheritsLoose(LoadingHider, _Component);
+        function LoadingHider() {
+          var _this;
+          for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+          }
+          _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+          _initializerDefineProperty(_this, "myNode", _descriptor, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "hideDuration", _descriptor2, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "disactivateOnHide", _descriptor3, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "shownColor", _descriptor4, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "hidenColor", _descriptor5, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "maskToUse", _descriptor6, _assertThisInitialized(_this));
+          return _this;
+        }
+        var _proto = LoadingHider.prototype;
+        _proto.show = function show() {
+          if (this.myNode) {
+            this.myNode.active = true;
+            var sprite = this.myNode.getComponent(Sprite);
+            if (!sprite) return;
+            if (this.maskToUse) {
+              this.maskToUse.enabled = true;
+            }
+            sprite.color = this.shownColor;
+          }
+        };
+        _proto.hide = function hide() {
+          var _this2 = this;
+          if (this.myNode) {
+            var sprite = this.myNode.getComponent(Sprite);
+            if (!sprite) return;
+            if (this.maskToUse) {
+              this.maskToUse.enabled = false;
+            }
+            var initialColor = sprite.color.clone();
+            var targetColor = this.hidenColor;
+            tween(sprite).to(this.hideDuration, {
+              color: targetColor
+            }, {
+              onUpdate: function onUpdate() {
+                sprite.color = new Color(initialColor.r, initialColor.g, initialColor.b, sprite.color.a);
+              }
+            }).call(function () {
+              if (_this2.disactivateOnHide) {
+                _this2.myNode.active = false;
+              }
+            }).start();
+          }
+        };
+        return LoadingHider;
+      }(Component), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "myNode", [_dec2], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, "hideDuration", [property], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return 0.5;
+        }
+      }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, "disactivateOnHide", [property], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return false;
+        }
+      }), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, "shownColor", [_dec3], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return new Color(255, 255, 255);
+        }
+      }), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, "hidenColor", [_dec4], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return new Color(255, 255, 255, 0);
+        }
+      }), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, "maskToUse", [_dec5], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      })), _class2)) || _class));
+      cclegacy._RF.pop();
+    }
+  };
+});
+
+System.register("chunks:///_virtual/main", ['./debug-view-runtime-control.ts', './ButtonFeedbacks.ts', './CopyInviteLink.ts', './FriendItem.ts', './FriendsScrollViewer.ts', './LoadingHider.ts', './MainMiningLabels.ts', './MiningCollectController.ts', './PopupManager.ts', './RotatableUITransform.ts', './ServerCommunicator.ts', './ShareInviteLink.ts', './SlidePopup.ts', './SuitcaseItemsController.ts', './TaskItem.ts', './TasksScrollViewer.ts', './TestGetLabel.ts', './TimerLabel.ts', './UserDataManager.ts', './UserInfoDisplay.ts', './telegram-web.ts'], function () {
+  return {
+    setters: [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
     execute: function () {}
+  };
+});
+
+System.register("chunks:///_virtual/MainMiningLabels.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc', './UserDataManager.ts'], function (exports) {
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _asyncToGenerator, _regeneratorRuntime, cclegacy, _decorator, Label, Component, UserDataManager;
+  return {
+    setters: [function (module) {
+      _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
+      _inheritsLoose = module.inheritsLoose;
+      _initializerDefineProperty = module.initializerDefineProperty;
+      _assertThisInitialized = module.assertThisInitialized;
+      _asyncToGenerator = module.asyncToGenerator;
+      _regeneratorRuntime = module.regeneratorRuntime;
+    }, function (module) {
+      cclegacy = module.cclegacy;
+      _decorator = module._decorator;
+      Label = module.Label;
+      Component = module.Component;
+    }, function (module) {
+      UserDataManager = module.UserDataManager;
+    }],
+    execute: function () {
+      var _dec, _dec2, _dec3, _class, _class2, _descriptor, _descriptor2, _descriptor3;
+      cclegacy._RF.push({}, "c0333NBcHZDeKGnxjD6X+Hw", "MainMiningLabels", undefined);
+      var ccclass = _decorator.ccclass,
+        property = _decorator.property;
+      var MainMiningLabels = exports('MainMiningLabels', (_dec = ccclass('MainMiningLabels'), _dec2 = property(Label), _dec3 = property(Label), _dec(_class = (_class2 = /*#__PURE__*/function (_Component) {
+        _inheritsLoose(MainMiningLabels, _Component);
+        function MainMiningLabels() {
+          var _this;
+          for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+          }
+          _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+          _initializerDefineProperty(_this, "balanceLabel", _descriptor, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "balancePrefix", _descriptor2, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "currentMinedLabel", _descriptor3, _assertThisInitialized(_this));
+          _this.isMiningActive = false;
+          _this.endDate = null;
+          _this.timeDifference = 0;
+          return _this;
+        }
+        var _proto = MainMiningLabels.prototype;
+        _proto.start = function start() {
+          this.updateBalanceLabel();
+        };
+        _proto.update = function update(dt) {
+          if (UserDataManager.instance.isInited) {
+            this.updateCurrentMinedLabel();
+          }
+        };
+        _proto.updateCurrentMinedLabel = function updateCurrentMinedLabel() {
+          var startDateStr = UserDataManager.instance.getUserMiningStartDate();
+          if (!startDateStr) {
+            this.currentMinedLabel.string = "00.00";
+            return;
+          }
+          var startDate = new Date(startDateStr.replace(/-/g, "/"));
+          var DurationMs = UserDataManager.instance.getUserCurrentDuration() * 60 * 60 * 1000;
+          this.timeDifference = UserDataManager.instance.getTimeDifference();
+          if (!this.timeDifference) {
+            console.error("can't get sync time from userDataManager");
+            return;
+          }
+          this.endDate = new Date(startDate.getTime() + DurationMs);
+          var currentTime = new Date(new Date().getTime() + this.timeDifference);
+          var timeLeft = this.endDate.getTime() - currentTime.getTime();
+
+          //console.log(timeLeft/(1000*60*60)) -- выводит что осталось 10 часов. Но с
+
+          if (timeLeft <= 0) {
+            this.currentMinedLabel.string = (UserDataManager.instance.getUserCurrentSpeed() * UserDataManager.instance.getUserCurrentDuration()).toFixed(2);
+            this.isMiningActive = false;
+          } else {
+            var timePassedMs = currentTime.getTime() - startDate.getTime();
+            var timePassedHours = timePassedMs / (1000 * 60 * 60);
+            var minedAmount = timePassedHours * UserDataManager.instance.getUserCurrentSpeed();
+            this.currentMinedLabel.string = minedAmount.toFixed(2);
+            this.isMiningActive = true;
+          }
+        };
+        _proto.updateBalanceLabel = /*#__PURE__*/function () {
+          var _updateBalanceLabel = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+            return _regeneratorRuntime().wrap(function _callee$(_context) {
+              while (1) switch (_context.prev = _context.next) {
+                case 0:
+                  if (UserDataManager.instance.isInited) {
+                    _context.next = 5;
+                    break;
+                  }
+                  _context.next = 3;
+                  return new Promise(function (resolve) {
+                    return setTimeout(resolve, 100);
+                  });
+                case 3:
+                  _context.next = 0;
+                  break;
+                case 5:
+                  this.balanceLabel.string = this.balancePrefix + UserDataManager.instance.getUserBalance().toFixed(2);
+                case 6:
+                case "end":
+                  return _context.stop();
+              }
+            }, _callee, this);
+          }));
+          function updateBalanceLabel() {
+            return _updateBalanceLabel.apply(this, arguments);
+          }
+          return updateBalanceLabel;
+        }();
+        return MainMiningLabels;
+      }(Component), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "balanceLabel", [_dec2], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, "balancePrefix", [property], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return 'Balance ($SEM): ';
+        }
+      }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, "currentMinedLabel", [_dec3], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      })), _class2)) || _class));
+      cclegacy._RF.pop();
+    }
+  };
+});
+
+System.register("chunks:///_virtual/MiningCollectController.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc', './TimerLabel.ts', './UserDataManager.ts', './ServerCommunicator.ts', './ButtonFeedbacks.ts'], function (exports) {
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _asyncToGenerator, _regeneratorRuntime, cclegacy, _decorator, Label, Node, Color, Sprite, Component, TimerLabel, UserDataManager, ServerCommunicator, ButtonFeedbacks;
+  return {
+    setters: [function (module) {
+      _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
+      _inheritsLoose = module.inheritsLoose;
+      _initializerDefineProperty = module.initializerDefineProperty;
+      _assertThisInitialized = module.assertThisInitialized;
+      _asyncToGenerator = module.asyncToGenerator;
+      _regeneratorRuntime = module.regeneratorRuntime;
+    }, function (module) {
+      cclegacy = module.cclegacy;
+      _decorator = module._decorator;
+      Label = module.Label;
+      Node = module.Node;
+      Color = module.Color;
+      Sprite = module.Sprite;
+      Component = module.Component;
+    }, function (module) {
+      TimerLabel = module.TimerLabel;
+    }, function (module) {
+      UserDataManager = module.UserDataManager;
+    }, function (module) {
+      ServerCommunicator = module.ServerCommunicator;
+    }, function (module) {
+      ButtonFeedbacks = module.ButtonFeedbacks;
+    }],
+    execute: function () {
+      var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6;
+      cclegacy._RF.push({}, "08082H0P39LmrySN28jrFBO", "MiningCollectController", undefined);
+      var ccclass = _decorator.ccclass,
+        property = _decorator.property;
+      var MiningCollectController = exports('MiningCollectController', (_dec = ccclass('MiningCollectController'), _dec2 = property(TimerLabel), _dec3 = property(Label), _dec4 = property(Node), _dec5 = property({
+        type: Color
+      }), _dec6 = property({
+        type: Color
+      }), _dec(_class = (_class2 = /*#__PURE__*/function (_Component) {
+        _inheritsLoose(MiningCollectController, _Component);
+        function MiningCollectController() {
+          var _this;
+          for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+          }
+          _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+          _initializerDefineProperty(_this, "miningTimer", _descriptor, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "miningSpeedLabel", _descriptor2, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "collectMiningNode", _descriptor3, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "miningSpeedPostfix", _descriptor4, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "readyForCollectNodeColor", _descriptor5, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "notReadyForCollectNodeColor", _descriptor6, _assertThisInitialized(_this));
+          return _this;
+        }
+        var _proto = MiningCollectController.prototype;
+        _proto.start = function start() {
+          this.init();
+        };
+        _proto.update = function update(dt) {
+          if (UserDataManager.instance.isInited) {
+            this.updateCollectNode();
+          }
+        };
+        _proto.init = /*#__PURE__*/function () {
+          var _init = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+            var startDateStr, duration;
+            return _regeneratorRuntime().wrap(function _callee$(_context) {
+              while (1) switch (_context.prev = _context.next) {
+                case 0:
+                  if (UserDataManager.instance.isInited) {
+                    _context.next = 5;
+                    break;
+                  }
+                  _context.next = 3;
+                  return new Promise(function (resolve) {
+                    return setTimeout(resolve, 100);
+                  });
+                case 3:
+                  _context.next = 0;
+                  break;
+                case 5:
+                  if (this.miningSpeedLabel) {
+                    this.miningSpeedLabel.string = UserDataManager.instance.getUserCurrentSpeed().toString() + this.miningSpeedPostfix;
+                  }
+                  if (this.miningTimer) {
+                    startDateStr = UserDataManager.instance.getUserMiningStartDate();
+                    duration = UserDataManager.instance.getUserCurrentDuration();
+                    this.miningTimer.init(startDateStr, duration);
+                  }
+                  if (this.collectMiningNode) {
+                    this.collectMiningNode.on(Node.EventType.TOUCH_END, this.onClickCollectMiningNode, this);
+                  }
+                case 8:
+                case "end":
+                  return _context.stop();
+              }
+            }, _callee, this);
+          }));
+          function init() {
+            return _init.apply(this, arguments);
+          }
+          return init;
+        }();
+        _proto.onClickCollectMiningNode = function onClickCollectMiningNode() {
+          if (!this.miningTimer.isTimerActive) {
+            this.tryCollectMinedToServer();
+          }
+        };
+        _proto.tryCollectMinedToServer = /*#__PURE__*/function () {
+          var _tryCollectMinedToServer = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+            var userId, response, isCollected;
+            return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+              while (1) switch (_context2.prev = _context2.next) {
+                case 0:
+                  userId = UserDataManager.instance.getUserId();
+                  _context2.next = 3;
+                  return ServerCommunicator.instance.sendGetRequest('collect_mining?user_id=' + userId);
+                case 3:
+                  response = _context2.sent;
+                  isCollected = response;
+                  if (isCollected) {
+                    UserDataManager.instance.forceUpdateUserInfo();
+                  } else {
+                    console.log('cant collect mined sem!');
+                  }
+                case 6:
+                case "end":
+                  return _context2.stop();
+              }
+            }, _callee2);
+          }));
+          function tryCollectMinedToServer() {
+            return _tryCollectMinedToServer.apply(this, arguments);
+          }
+          return tryCollectMinedToServer;
+        }();
+        _proto.updateMe = function updateMe() {};
+        _proto.updateCollectNode = function updateCollectNode() {
+          if (this.collectMiningNode) {
+            if (this.miningTimer.isTimerActive) {
+              this.collectMiningNode.getComponent(Sprite).color = this.notReadyForCollectNodeColor;
+              this.collectMiningNode.getComponent(ButtonFeedbacks).useClickTween = false;
+            } else {
+              this.collectMiningNode.getComponent(Sprite).color = this.readyForCollectNodeColor;
+              this.collectMiningNode.getComponent(ButtonFeedbacks).useClickTween = true;
+            }
+          }
+        };
+        return MiningCollectController;
+      }(Component), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "miningTimer", [_dec2], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: null
+      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, "miningSpeedLabel", [_dec3], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, "collectMiningNode", [_dec4], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, "miningSpeedPostfix", [property], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return ' sem/h';
+        }
+      }), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, "readyForCollectNodeColor", [_dec5], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return new Color(255, 255, 255);
+        }
+      }), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, "notReadyForCollectNodeColor", [_dec6], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return new Color(255, 255, 255);
+        }
+      })), _class2)) || _class));
+      cclegacy._RF.pop();
+    }
   };
 });
 
@@ -691,6 +1165,205 @@ System.register("chunks:///_virtual/PopupManager.ts", ['./rollupPluginModLoBabel
           return [];
         }
       }), _class2)) || _class));
+      cclegacy._RF.pop();
+    }
+  };
+});
+
+System.register("chunks:///_virtual/RotatableUITransform.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc'], function (exports) {
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, Enum, UITransform, Vec3, Component;
+  return {
+    setters: [function (module) {
+      _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
+      _inheritsLoose = module.inheritsLoose;
+      _initializerDefineProperty = module.initializerDefineProperty;
+      _assertThisInitialized = module.assertThisInitialized;
+    }, function (module) {
+      cclegacy = module.cclegacy;
+      _decorator = module._decorator;
+      Enum = module.Enum;
+      UITransform = module.UITransform;
+      Vec3 = module.Vec3;
+      Component = module.Component;
+    }],
+    execute: function () {
+      var _dec, _dec2, _dec3, _class, _class2, _descriptor, _descriptor2;
+      cclegacy._RF.push({}, "61c438tzKROxpZLE413yspT", "RotatableUITransform", undefined);
+      var ccclass = _decorator.ccclass,
+        property = _decorator.property;
+      var RotationDirection = /*#__PURE__*/function (RotationDirection) {
+        RotationDirection[RotationDirection["CLOCKWISE"] = 1] = "CLOCKWISE";
+        RotationDirection[RotationDirection["COUNTERCLOCKWISE"] = -1] = "COUNTERCLOCKWISE";
+        return RotationDirection;
+      }(RotationDirection || {});
+      var RotatableUITransform = exports('RotatableUITransform', (_dec = ccclass('RotateUITransform'), _dec2 = property({
+        type: Enum(RotationDirection),
+        tooltip: "Pick side for rotating"
+      }), _dec3 = property({
+        tooltip: "Speed of rotating"
+      }), _dec(_class = (_class2 = /*#__PURE__*/function (_Component) {
+        _inheritsLoose(RotatableUITransform, _Component);
+        function RotatableUITransform() {
+          var _this;
+          for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+          }
+          _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+          _initializerDefineProperty(_this, "direction", _descriptor, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "rotationSpeed", _descriptor2, _assertThisInitialized(_this));
+          _this._uiTransform = null;
+          return _this;
+        }
+        var _proto = RotatableUITransform.prototype;
+        _proto.start = function start() {
+          this._uiTransform = this.node.getComponent(UITransform);
+        };
+        _proto.update = function update(deltaTime) {
+          if (this._uiTransform) {
+            var angle = this.rotationSpeed * deltaTime * this.direction;
+            var currentRotation = this.node.eulerAngles;
+            var newRotation = new Vec3(currentRotation.x, currentRotation.y, currentRotation.z + angle);
+            this.node.eulerAngles = newRotation;
+          }
+        };
+        return RotatableUITransform;
+      }(Component), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "direction", [_dec2], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return RotationDirection.CLOCKWISE;
+        }
+      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, "rotationSpeed", [_dec3], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return 100;
+        }
+      })), _class2)) || _class));
+      cclegacy._RF.pop();
+    }
+  };
+});
+
+System.register("chunks:///_virtual/ServerCommunicator.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc'], function (exports) {
+  var _inheritsLoose, _createClass, _asyncToGenerator, _regeneratorRuntime, cclegacy, _decorator, Component;
+  return {
+    setters: [function (module) {
+      _inheritsLoose = module.inheritsLoose;
+      _createClass = module.createClass;
+      _asyncToGenerator = module.asyncToGenerator;
+      _regeneratorRuntime = module.regeneratorRuntime;
+    }, function (module) {
+      cclegacy = module.cclegacy;
+      _decorator = module._decorator;
+      Component = module.Component;
+    }],
+    execute: function () {
+      var _dec, _class, _class2;
+      cclegacy._RF.push({}, "accd3tgHFxBdLuM/Z0TKM6d", "ServerCommunicator", undefined);
+      var ccclass = _decorator.ccclass,
+        property = _decorator.property;
+      var ServerCommunicator = exports('ServerCommunicator', (_dec = ccclass('ServerCommunicator'), _dec(_class = (_class2 = /*#__PURE__*/function (_Component) {
+        _inheritsLoose(ServerCommunicator, _Component);
+        function ServerCommunicator() {
+          return _Component.apply(this, arguments) || this;
+        }
+        var _proto = ServerCommunicator.prototype;
+        _proto.onLoad = function onLoad() {
+          if (ServerCommunicator._instance) {
+            console.warn("ServerCommunicator instance already exists!");
+            this.destroy();
+            return;
+          }
+          ServerCommunicator._instance = this;
+        };
+        _proto.sendGetRequest = /*#__PURE__*/function () {
+          var _sendGetRequest = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(endpoint) {
+            var url, response;
+            return _regeneratorRuntime().wrap(function _callee$(_context) {
+              while (1) switch (_context.prev = _context.next) {
+                case 0:
+                  url = "https://hmshtlser.online/" + endpoint;
+                  _context.next = 3;
+                  return fetch(url, {
+                    method: "GET",
+                    headers: {
+                      "Content-Type": "application/json"
+                    }
+                  });
+                case 3:
+                  response = _context.sent;
+                  if (response.ok) {
+                    _context.next = 6;
+                    break;
+                  }
+                  throw new Error("HTTP error! status: " + response.status);
+                case 6:
+                  _context.next = 8;
+                  return response.json();
+                case 8:
+                  return _context.abrupt("return", _context.sent);
+                case 9:
+                case "end":
+                  return _context.stop();
+              }
+            }, _callee);
+          }));
+          function sendGetRequest(_x) {
+            return _sendGetRequest.apply(this, arguments);
+          }
+          return sendGetRequest;
+        }();
+        _proto.sendPostRequest = /*#__PURE__*/function () {
+          var _sendPostRequest = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(endpoint) {
+            var url, response;
+            return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+              while (1) switch (_context2.prev = _context2.next) {
+                case 0:
+                  url = "https://hmshtlser.online/" + endpoint;
+                  _context2.next = 3;
+                  return fetch(url, {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json"
+                    }
+                  });
+                case 3:
+                  response = _context2.sent;
+                  if (response.ok) {
+                    _context2.next = 6;
+                    break;
+                  }
+                  throw new Error("HTTP error! status: " + response.status);
+                case 6:
+                  _context2.next = 8;
+                  return response.json();
+                case 8:
+                  return _context2.abrupt("return", _context2.sent);
+                case 9:
+                case "end":
+                  return _context2.stop();
+              }
+            }, _callee2);
+          }));
+          function sendPostRequest(_x2) {
+            return _sendPostRequest.apply(this, arguments);
+          }
+          return sendPostRequest;
+        }();
+        _createClass(ServerCommunicator, null, [{
+          key: "instance",
+          get: function get() {
+            if (!this._instance) {
+              console.error("ServerCommunicator instance is not initialized!");
+            }
+            return this._instance;
+          }
+        }]);
+        return ServerCommunicator;
+      }(Component), _class2._instance = void 0, _class2)) || _class));
       cclegacy._RF.pop();
     }
   };
@@ -931,6 +1604,783 @@ System.register("chunks:///_virtual/SlidePopup.ts", ['./rollupPluginModLoBabelHe
   };
 });
 
+System.register("chunks:///_virtual/SuitcaseItemsController.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc', './TimerLabel.ts', './ServerCommunicator.ts', './LoadingHider.ts', './UserDataManager.ts'], function (exports) {
+  var _applyDecoratedDescriptor, _initializerDefineProperty, _inheritsLoose, _assertThisInitialized, _asyncToGenerator, _regeneratorRuntime, _createForOfIteratorHelperLoose, cclegacy, _decorator, Sprite, Node, Color, UITransform, Component, TimerLabel, ServerCommunicator, LoadingHider, UserDataManager;
+  return {
+    setters: [function (module) {
+      _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
+      _initializerDefineProperty = module.initializerDefineProperty;
+      _inheritsLoose = module.inheritsLoose;
+      _assertThisInitialized = module.assertThisInitialized;
+      _asyncToGenerator = module.asyncToGenerator;
+      _regeneratorRuntime = module.regeneratorRuntime;
+      _createForOfIteratorHelperLoose = module.createForOfIteratorHelperLoose;
+    }, function (module) {
+      cclegacy = module.cclegacy;
+      _decorator = module._decorator;
+      Sprite = module.Sprite;
+      Node = module.Node;
+      Color = module.Color;
+      UITransform = module.UITransform;
+      Component = module.Component;
+    }, function (module) {
+      TimerLabel = module.TimerLabel;
+    }, function (module) {
+      ServerCommunicator = module.ServerCommunicator;
+    }, function (module) {
+      LoadingHider = module.LoadingHider;
+    }, function (module) {
+      UserDataManager = module.UserDataManager;
+    }],
+    execute: function () {
+      var _dec, _dec2, _class, _class2, _descriptor, _descriptor2, _dec3, _dec4, _class4, _class5, _descriptor3, _dec5, _dec6, _dec7, _class7, _class8, _descriptor4, _descriptor5, _descriptor6, _dec8, _dec9, _class10, _class11, _descriptor7, _dec10, _dec11, _dec12, _dec13, _dec14, _dec15, _dec16, _dec17, _dec18, _class13, _class14, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _descriptor13, _descriptor14, _descriptor15;
+      cclegacy._RF.push({}, "1d664p+YMFEKo1NWdMTWkdy", "SuitcaseItemsController", undefined);
+      var ccclass = _decorator.ccclass,
+        property = _decorator.property;
+      var SuitcaseItemData = (_dec = ccclass('SuitcaseItemData'), _dec2 = property(Sprite), _dec(_class = (_class2 = function SuitcaseItemData() {
+        _initializerDefineProperty(this, "itemName", _descriptor, this);
+        _initializerDefineProperty(this, "itemSprite", _descriptor2, this);
+      }, (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "itemName", [property], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return '';
+        }
+      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, "itemSprite", [_dec2], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      })), _class2)) || _class);
+      var SuitcaseItems = (_dec3 = ccclass('SuitcaseItems'), _dec4 = property([SuitcaseItemData]), _dec3(_class4 = (_class5 = function SuitcaseItems() {
+        _initializerDefineProperty(this, "itemDatas", _descriptor3, this);
+      }, _descriptor3 = _applyDecoratedDescriptor(_class5.prototype, "itemDatas", [_dec4], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return [];
+        }
+      }), _class5)) || _class4);
+      var SuitcaseData = (_dec5 = ccclass('SuitcaseData'), _dec6 = property(Node), _dec7 = property(SuitcaseItems), _dec5(_class7 = (_class8 = function SuitcaseData() {
+        _initializerDefineProperty(this, "suitcaseId", _descriptor4, this);
+        _initializerDefineProperty(this, "suitcaseNode", _descriptor5, this);
+        _initializerDefineProperty(this, "items", _descriptor6, this);
+      }, (_descriptor4 = _applyDecoratedDescriptor(_class8.prototype, "suitcaseId", [property], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return 0;
+        }
+      }), _descriptor5 = _applyDecoratedDescriptor(_class8.prototype, "suitcaseNode", [_dec6], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor6 = _applyDecoratedDescriptor(_class8.prototype, "items", [_dec7], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return new SuitcaseItems();
+        }
+      })), _class8)) || _class7);
+      var Suitcases = (_dec8 = ccclass('Suitcases'), _dec9 = property([SuitcaseData]), _dec8(_class10 = (_class11 = function Suitcases() {
+        _initializerDefineProperty(this, "suitcasesDatas", _descriptor7, this);
+      }, _descriptor7 = _applyDecoratedDescriptor(_class11.prototype, "suitcasesDatas", [_dec9], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return [];
+        }
+      }), _class11)) || _class10);
+      var SuitcaseItemsController = exports('SuitcaseItemsController', (_dec10 = ccclass('SuitcaseItemsController'), _dec11 = property(Suitcases), _dec12 = property({
+        type: Color
+      }), _dec13 = property({
+        type: Color
+      }), _dec14 = property(Sprite), _dec15 = property(TimerLabel), _dec16 = property(LoadingHider), _dec17 = property(LoadingHider), _dec18 = property(Node), _dec10(_class13 = (_class14 = /*#__PURE__*/function (_Component) {
+        _inheritsLoose(SuitcaseItemsController, _Component);
+        function SuitcaseItemsController() {
+          var _this;
+          for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+          }
+          _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+          _initializerDefineProperty(_this, "suitcases", _descriptor8, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "notCollectedColor", _descriptor9, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "collectedColor", _descriptor10, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "currentMiningItemSprite", _descriptor11, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "miningItemTimerLabel", _descriptor12, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "loadingHiderSuitcase", _descriptor13, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "loadingHiderCurrentItem", _descriptor14, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "allSuitcasesPackedNode", _descriptor15, _assertThisInitialized(_this));
+          _this.currentAllItems = [];
+          _this.currentMiningItems = [];
+          _this.currentItems = [];
+          _this.currentSuitcases = [];
+          _this._currentMiningItem = void 0;
+          _this._currentUserMiningSuitcaseItemInfo = void 0;
+          return _this;
+        }
+        var _proto = SuitcaseItemsController.prototype;
+        _proto.start = function start() {
+          this.init();
+        };
+        _proto.init = /*#__PURE__*/function () {
+          var _init = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+            return _regeneratorRuntime().wrap(function _callee$(_context) {
+              while (1) switch (_context.prev = _context.next) {
+                case 0:
+                  if (UserDataManager.instance.isInited) {
+                    _context.next = 5;
+                    break;
+                  }
+                  _context.next = 3;
+                  return new Promise(function (resolve) {
+                    return setTimeout(resolve, 100);
+                  });
+                case 3:
+                  _context.next = 0;
+                  break;
+                case 5:
+                  _context.next = 7;
+                  return this.setCurrentSuitcase();
+                case 7:
+                  _context.next = 9;
+                  return this.setItemsColors();
+                case 9:
+                  this.currentMiningItemSprite.node.on(Node.EventType.TOUCH_END, this.onClickCurrentMiningItemSprite, this);
+                case 10:
+                case "end":
+                  return _context.stop();
+              }
+            }, _callee, this);
+          }));
+          function init() {
+            return _init.apply(this, arguments);
+          }
+          return init;
+        }();
+        _proto.onClickCurrentMiningItemSprite = /*#__PURE__*/function () {
+          var _onClickCurrentMiningItemSprite = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+            return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+              while (1) switch (_context2.prev = _context2.next) {
+                case 0:
+                  if (!(!this._currentMiningItem && !this._currentUserMiningSuitcaseItemInfo)) {
+                    _context2.next = 3;
+                    break;
+                  }
+                  console.log('Nothing In Mining');
+                  return _context2.abrupt("return");
+                case 3:
+                  if (!this.miningItemTimerLabel.isTimerActive) {
+                    this.tryCollectCurrentMiningItem();
+                  }
+                case 4:
+                case "end":
+                  return _context2.stop();
+              }
+            }, _callee2, this);
+          }));
+          function onClickCurrentMiningItemSprite() {
+            return _onClickCurrentMiningItemSprite.apply(this, arguments);
+          }
+          return onClickCurrentMiningItemSprite;
+        }();
+        _proto.tryCollectCurrentMiningItem = /*#__PURE__*/function () {
+          var _tryCollectCurrentMiningItem = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+            return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+              while (1) switch (_context3.prev = _context3.next) {
+                case 0:
+                  _context3.next = 2;
+                  return this.collectMinedItem();
+                case 2:
+                  _context3.next = 4;
+                  return this.setCurrentSuitcase(true);
+                case 4:
+                  _context3.next = 6;
+                  return this.setItemsColors(true);
+                case 6:
+                case "end":
+                  return _context3.stop();
+              }
+            }, _callee3, this);
+          }));
+          function tryCollectCurrentMiningItem() {
+            return _tryCollectCurrentMiningItem.apply(this, arguments);
+          }
+          return tryCollectCurrentMiningItem;
+        }();
+        _proto.setCurrentSuitcase = /*#__PURE__*/function () {
+          var _setCurrentSuitcase = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(withForceUpdate) {
+            var currentSuitcaseIndex;
+            return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+              while (1) switch (_context4.prev = _context4.next) {
+                case 0:
+                  if (withForceUpdate === void 0) {
+                    withForceUpdate = false;
+                  }
+                  if (this.loadingHiderSuitcase) {
+                    this.loadingHiderSuitcase.show();
+                  }
+                  if (this.loadingHiderCurrentItem) {
+                    this.loadingHiderCurrentItem.show();
+                  }
+                  if (this.suitcases && this.suitcases.suitcasesDatas.length > 0) {
+                    this.suitcases.suitcasesDatas.forEach(function (value) {
+                      if (value.suitcaseNode) {
+                        value.suitcaseNode.active = false;
+                      } else {
+                        console.error("suitcaseNode not inited with ID: " + value.suitcaseId);
+                      }
+                    });
+                  } else {
+                    console.error("Array suitcasesDatas empty.");
+                  }
+                  _context4.next = 6;
+                  return this.getCurrentSuitcaseIndex(withForceUpdate);
+                case 6:
+                  currentSuitcaseIndex = _context4.sent;
+                  if (currentSuitcaseIndex) {
+                    _context4.next = 12;
+                    break;
+                  }
+                  console.log("ALL SUITCASES FILLED!");
+                  if (this.allSuitcasesPackedNode) {
+                    this.allSuitcasesPackedNode.active = true;
+                  }
+                  if (this.loadingHiderCurrentItem) {
+                    this.loadingHiderCurrentItem.node.active = false;
+                  }
+                  return _context4.abrupt("return");
+                case 12:
+                  if (currentSuitcaseIndex !== null && currentSuitcaseIndex >= 0 && this.suitcases.suitcasesDatas[currentSuitcaseIndex]) {
+                    if (this.suitcases.suitcasesDatas[currentSuitcaseIndex].suitcaseNode) {
+                      this.suitcases.suitcasesDatas[currentSuitcaseIndex].suitcaseNode.active = true;
+                      console.log('Suitcase inited');
+                    } else {
+                      console.error("suitcaseNode not inited with ID: " + this.suitcases.suitcasesDatas[currentSuitcaseIndex].suitcaseId);
+                    }
+                  } else {
+                    console.log('Not founded');
+                  }
+                case 13:
+                case "end":
+                  return _context4.stop();
+              }
+            }, _callee4, this);
+          }));
+          function setCurrentSuitcase(_x) {
+            return _setCurrentSuitcase.apply(this, arguments);
+          }
+          return setCurrentSuitcase;
+        }();
+        _proto.setItemsColors = /*#__PURE__*/function () {
+          var _setItemsColors = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5(withForceUpdate) {
+            var _this2 = this;
+            var currentSuitcaseIndex, allItems, currentUserSuitcaseItems, currentMiningUserItems, _loop, _ret, _iterator, _step;
+            return _regeneratorRuntime().wrap(function _callee5$(_context6) {
+              while (1) switch (_context6.prev = _context6.next) {
+                case 0:
+                  if (withForceUpdate === void 0) {
+                    withForceUpdate = false;
+                  }
+                  _context6.next = 3;
+                  return this.getCurrentSuitcaseIndex(withForceUpdate);
+                case 3:
+                  currentSuitcaseIndex = _context6.sent;
+                  if (currentSuitcaseIndex) {
+                    _context6.next = 9;
+                    break;
+                  }
+                  console.log("ALL SUITCASES FILLED!");
+                  if (this.allSuitcasesPackedNode) {
+                    this.allSuitcasesPackedNode.active = true;
+                  }
+                  if (this.loadingHiderCurrentItem) {
+                    this.loadingHiderCurrentItem.node.active = false;
+                  }
+                  return _context6.abrupt("return");
+                case 9:
+                  if (currentSuitcaseIndex !== null && currentSuitcaseIndex >= 0) {
+                    this.suitcases.suitcasesDatas[currentSuitcaseIndex].items.itemDatas.forEach(function (value) {
+                      if (value.itemSprite) {
+                        value.itemSprite.color = _this2.notCollectedColor;
+                      } else {
+                        console.error("itemSprite not inited for: " + value.itemName);
+                      }
+                    });
+                  } else {
+                    console.log("Not founded");
+                  }
+                  _context6.next = 12;
+                  return this.getAllItems(withForceUpdate);
+                case 12:
+                  allItems = _context6.sent;
+                  _context6.next = 15;
+                  return this.getCurrentUserSuitcaseItems(withForceUpdate);
+                case 15:
+                  currentUserSuitcaseItems = _context6.sent;
+                  _context6.next = 18;
+                  return this.getCurrentMiningUserSuitcaseItems(withForceUpdate);
+                case 18:
+                  currentMiningUserItems = _context6.sent;
+                  _loop = /*#__PURE__*/_regeneratorRuntime().mark(function _loop() {
+                    var value, suitcaseItemDataName, suitcaseItemInfo, suitcaseUserItemInfo, currentUserMiningItem;
+                    return _regeneratorRuntime().wrap(function _loop$(_context5) {
+                      while (1) switch (_context5.prev = _context5.next) {
+                        case 0:
+                          value = _step.value;
+                          suitcaseItemDataName = value.itemName;
+                          if (suitcaseItemDataName) {
+                            _context5.next = 5;
+                            break;
+                          }
+                          console.error('Not founded suitcaseItemDataName');
+                          return _context5.abrupt("return", {
+                            v: void 0
+                          });
+                        case 5:
+                          if (!(allItems.length === 0)) {
+                            _context5.next = 7;
+                            break;
+                          }
+                          return _context5.abrupt("return", {
+                            v: void 0
+                          });
+                        case 7:
+                          suitcaseItemInfo = allItems.find(function (item) {
+                            return item.name === suitcaseItemDataName;
+                          });
+                          if (suitcaseItemInfo) {
+                            _context5.next = 11;
+                            break;
+                          }
+                          console.warn('Not founded suitcaseItemInfo');
+                          return _context5.abrupt("return", 0);
+                        case 11:
+                          if (!(currentUserSuitcaseItems.length === 0)) {
+                            _context5.next = 13;
+                            break;
+                          }
+                          return _context5.abrupt("return", {
+                            v: void 0
+                          });
+                        case 13:
+                          suitcaseUserItemInfo = currentUserSuitcaseItems.find(function (item) {
+                            return item.itemId === suitcaseItemInfo.id;
+                          });
+                          if (suitcaseUserItemInfo) {
+                            _context5.next = 17;
+                            break;
+                          }
+                          console.error('Not founded suitcaseUserItemInfo');
+                          return _context5.abrupt("return", {
+                            v: void 0
+                          });
+                        case 17:
+                          if (!(currentMiningUserItems.length === 0)) {
+                            _context5.next = 19;
+                            break;
+                          }
+                          return _context5.abrupt("return", {
+                            v: void 0
+                          });
+                        case 19:
+                          currentUserMiningItem = currentMiningUserItems.find(function (item) {
+                            return item.itemId === suitcaseItemInfo.id;
+                          });
+                          if (currentUserMiningItem) {
+                            _context5.next = 23;
+                            break;
+                          }
+                          console.log('Not founded currentUserMiningItem');
+                          return _context5.abrupt("return", 0);
+                        case 23:
+                          if (suitcaseUserItemInfo.status == 'collected') {
+                            value.itemSprite.color = _this2.collectedColor;
+                          } else if (suitcaseUserItemInfo.status == 'mining') {
+                            _this2.updateCurrentMiningItem(value.itemSprite.spriteFrame, suitcaseItemInfo, currentUserMiningItem);
+                            _this2._currentUserMiningSuitcaseItemInfo = currentUserMiningItem;
+                            _this2._currentMiningItem = suitcaseItemInfo;
+                          }
+                          if (_this2.loadingHiderSuitcase) {
+                            _this2.loadingHiderSuitcase.hide();
+                          }
+                        case 25:
+                        case "end":
+                          return _context5.stop();
+                      }
+                    }, _loop);
+                  });
+                  _iterator = _createForOfIteratorHelperLoose(this.suitcases.suitcasesDatas[currentSuitcaseIndex].items.itemDatas);
+                case 21:
+                  if ((_step = _iterator()).done) {
+                    _context6.next = 30;
+                    break;
+                  }
+                  return _context6.delegateYield(_loop(), "t0", 23);
+                case 23:
+                  _ret = _context6.t0;
+                  if (!(_ret === 0)) {
+                    _context6.next = 26;
+                    break;
+                  }
+                  return _context6.abrupt("continue", 28);
+                case 26:
+                  if (!_ret) {
+                    _context6.next = 28;
+                    break;
+                  }
+                  return _context6.abrupt("return", _ret.v);
+                case 28:
+                  _context6.next = 21;
+                  break;
+                case 30:
+                case "end":
+                  return _context6.stop();
+              }
+            }, _callee5, this);
+          }));
+          function setItemsColors(_x2) {
+            return _setItemsColors.apply(this, arguments);
+          }
+          return setItemsColors;
+        }();
+        _proto.updateCurrentMiningItem = function updateCurrentMiningItem(spriteFrame, suitcaseItemInfo, userMiningItem) {
+          if (!spriteFrame || !suitcaseItemInfo || !userMiningItem) {
+            console.error('Not found spriteFrame or suitcaseItemInfo or userMiningItem');
+            return;
+          }
+          if (this.currentMiningItemSprite) {
+            this.currentMiningItemSprite.spriteFrame = spriteFrame;
+            var node = this.currentMiningItemSprite.node;
+            var sprite = this.currentMiningItemSprite;
+            sprite.sizeMode = Sprite.SizeMode.RAW;
+            var originalWidth = spriteFrame.width;
+            var originalHeight = spriteFrame.height;
+            var nodeTransform = node.getComponent(UITransform);
+            var parentTransform = node.parent.getComponent(UITransform);
+            var maxWidth = parentTransform.width;
+            var maxHeight = parentTransform.height;
+            var scaleX = maxWidth / originalWidth;
+            var scaleY = maxHeight / originalHeight;
+            var scale = Math.min(scaleX, scaleY);
+            nodeTransform.width = originalWidth * scale;
+            nodeTransform.height = originalHeight * scale;
+          }
+          if (this.miningItemTimerLabel) {
+            this.miningItemTimerLabel.init(userMiningItem.dataStartMiningItem, suitcaseItemInfo.collectionDuration);
+          }
+          if (this.loadingHiderCurrentItem) {
+            this.loadingHiderCurrentItem.hide();
+          }
+        };
+        _proto.getAllItems = /*#__PURE__*/function () {
+          var _getAllItems = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6(forceUpdate) {
+            var response, allItems;
+            return _regeneratorRuntime().wrap(function _callee6$(_context7) {
+              while (1) switch (_context7.prev = _context7.next) {
+                case 0:
+                  if (forceUpdate === void 0) {
+                    forceUpdate = false;
+                  }
+                  if (!(this.currentAllItems.length <= 0 || forceUpdate)) {
+                    _context7.next = 14;
+                    break;
+                  }
+                  _context7.prev = 2;
+                  _context7.next = 5;
+                  return ServerCommunicator.instance.sendGetRequest('get_all_items');
+                case 5:
+                  response = _context7.sent;
+                  allItems = response;
+                  this.currentAllItems = [];
+                  this.currentAllItems = allItems.map(function (item) {
+                    return {
+                      id: item[0],
+                      name: item[1],
+                      collectionDuration: item[2],
+                      price: item[3],
+                      chance: item[4],
+                      suitcaseTypeId: item[5]
+                    };
+                  });
+                  _context7.next = 14;
+                  break;
+                case 11:
+                  _context7.prev = 11;
+                  _context7.t0 = _context7["catch"](2);
+                  console.error('Error fetching items:', _context7.t0);
+                case 14:
+                  return _context7.abrupt("return", this.currentAllItems);
+                case 15:
+                case "end":
+                  return _context7.stop();
+              }
+            }, _callee6, this, [[2, 11]]);
+          }));
+          function getAllItems(_x3) {
+            return _getAllItems.apply(this, arguments);
+          }
+          return getAllItems;
+        }();
+        _proto.getCurrentUserSuitcaseItems = /*#__PURE__*/function () {
+          var _getCurrentUserSuitcaseItems = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7(forceUpdate) {
+            var userId, response, items;
+            return _regeneratorRuntime().wrap(function _callee7$(_context8) {
+              while (1) switch (_context8.prev = _context8.next) {
+                case 0:
+                  if (forceUpdate === void 0) {
+                    forceUpdate = false;
+                  }
+                  if (!(this.currentItems.length <= 0 || forceUpdate)) {
+                    _context8.next = 15;
+                    break;
+                  }
+                  _context8.prev = 2;
+                  userId = UserDataManager.instance.getUserId();
+                  _context8.next = 6;
+                  return ServerCommunicator.instance.sendGetRequest('get_user_suitcase_items?user_id=' + userId);
+                case 6:
+                  response = _context8.sent;
+                  items = response;
+                  this.currentItems = [];
+                  this.currentItems = items.map(function (item) {
+                    return {
+                      id: item[0],
+                      userId: item[1],
+                      suitcaseId: item[2],
+                      itemId: item[3],
+                      status: item[4]
+                    };
+                  });
+                  _context8.next = 15;
+                  break;
+                case 12:
+                  _context8.prev = 12;
+                  _context8.t0 = _context8["catch"](2);
+                  console.error('Error fetching items:', _context8.t0);
+                case 15:
+                  return _context8.abrupt("return", this.currentItems);
+                case 16:
+                case "end":
+                  return _context8.stop();
+              }
+            }, _callee7, this, [[2, 12]]);
+          }));
+          function getCurrentUserSuitcaseItems(_x4) {
+            return _getCurrentUserSuitcaseItems.apply(this, arguments);
+          }
+          return getCurrentUserSuitcaseItems;
+        }();
+        _proto.getCurrentMiningUserSuitcaseItems = /*#__PURE__*/function () {
+          var _getCurrentMiningUserSuitcaseItems = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee8(forceUpdate) {
+            var userId, response, miningItemsRawArrays, miningItems;
+            return _regeneratorRuntime().wrap(function _callee8$(_context9) {
+              while (1) switch (_context9.prev = _context9.next) {
+                case 0:
+                  if (forceUpdate === void 0) {
+                    forceUpdate = false;
+                  }
+                  if (!(this.currentMiningItems.length <= 0 || forceUpdate)) {
+                    _context9.next = 19;
+                    break;
+                  }
+                  _context9.prev = 2;
+                  userId = UserDataManager.instance.getUserId();
+                  _context9.next = 6;
+                  return ServerCommunicator.instance.sendGetRequest('get_all_user_mining_items?user_id=' + userId);
+                case 6:
+                  response = _context9.sent;
+                  miningItemsRawArrays = response;
+                  if (!(miningItemsRawArrays.length <= 0)) {
+                    _context9.next = 11;
+                    break;
+                  }
+                  console.log('ALL ITEMS COLLECTED!');
+                  return _context9.abrupt("return");
+                case 11:
+                  miningItems = response;
+                  this.currentMiningItems = [];
+                  this.currentMiningItems = miningItems.map(function (item) {
+                    return {
+                      id: item[0],
+                      dataStartMiningItem: item[1],
+                      userId: item[2],
+                      itemId: item[3],
+                      isFinished: item[4]
+                    };
+                  });
+                  _context9.next = 19;
+                  break;
+                case 16:
+                  _context9.prev = 16;
+                  _context9.t0 = _context9["catch"](2);
+                  console.error('Error fetching items:', _context9.t0);
+                case 19:
+                  return _context9.abrupt("return", this.currentMiningItems);
+                case 20:
+                case "end":
+                  return _context9.stop();
+              }
+            }, _callee8, this, [[2, 16]]);
+          }));
+          function getCurrentMiningUserSuitcaseItems(_x5) {
+            return _getCurrentMiningUserSuitcaseItems.apply(this, arguments);
+          }
+          return getCurrentMiningUserSuitcaseItems;
+        }();
+        _proto.getCurrentSuitcaseIndex = /*#__PURE__*/function () {
+          var _getCurrentSuitcaseIndex = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee9(forceUpdate) {
+            var userId, response, userSuitcases, incompleteSuitcase;
+            return _regeneratorRuntime().wrap(function _callee9$(_context10) {
+              while (1) switch (_context10.prev = _context10.next) {
+                case 0:
+                  if (forceUpdate === void 0) {
+                    forceUpdate = false;
+                  }
+                  if (!(this.currentSuitcases.length <= 0 || forceUpdate)) {
+                    _context10.next = 16;
+                    break;
+                  }
+                  _context10.prev = 2;
+                  userId = UserDataManager.instance.getUserId();
+                  _context10.next = 6;
+                  return ServerCommunicator.instance.sendGetRequest('get_all_user_suitcases?user_id=' + userId);
+                case 6:
+                  response = _context10.sent;
+                  userSuitcases = response;
+                  this.currentSuitcases = [];
+                  this.currentSuitcases = userSuitcases.map(function (item) {
+                    return {
+                      id: item[0],
+                      userId: item[1],
+                      suitcaseTypeId: item[2],
+                      isComplete: item[3]
+                    };
+                  });
+                  _context10.next = 16;
+                  break;
+                case 12:
+                  _context10.prev = 12;
+                  _context10.t0 = _context10["catch"](2);
+                  console.error('Error fetching items:', _context10.t0);
+                  return _context10.abrupt("return", null);
+                case 16:
+                  incompleteSuitcase = this.currentSuitcases.find(function (suitcase) {
+                    return suitcase.isComplete === 0;
+                  });
+                  return _context10.abrupt("return", incompleteSuitcase ? incompleteSuitcase.suitcaseTypeId - 1 : null);
+                case 18:
+                case "end":
+                  return _context10.stop();
+              }
+            }, _callee9, this, [[2, 12]]);
+          }));
+          function getCurrentSuitcaseIndex(_x6) {
+            return _getCurrentSuitcaseIndex.apply(this, arguments);
+          }
+          return getCurrentSuitcaseIndex;
+        }();
+        _proto.collectMinedItem = /*#__PURE__*/function () {
+          var _collectMinedItem = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee10() {
+            var userId;
+            return _regeneratorRuntime().wrap(function _callee10$(_context11) {
+              while (1) switch (_context11.prev = _context11.next) {
+                case 0:
+                  _context11.prev = 0;
+                  userId = UserDataManager.instance.getUserId();
+                  _context11.next = 4;
+                  return ServerCommunicator.instance.sendGetRequest('collect_mined_item?user_id=' + userId);
+                case 4:
+                  return _context11.abrupt("return", true);
+                case 7:
+                  _context11.prev = 7;
+                  _context11.t0 = _context11["catch"](0);
+                  console.error('Error  collecting items:', _context11.t0);
+                  return _context11.abrupt("return", null);
+                case 11:
+                case "end":
+                  return _context11.stop();
+              }
+            }, _callee10, null, [[0, 7]]);
+          }));
+          function collectMinedItem() {
+            return _collectMinedItem.apply(this, arguments);
+          }
+          return collectMinedItem;
+        }();
+        return SuitcaseItemsController;
+      }(Component), (_descriptor8 = _applyDecoratedDescriptor(_class14.prototype, "suitcases", [_dec11], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return new Suitcases();
+        }
+      }), _descriptor9 = _applyDecoratedDescriptor(_class14.prototype, "notCollectedColor", [_dec12], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return new Color(255, 255, 255);
+        }
+      }), _descriptor10 = _applyDecoratedDescriptor(_class14.prototype, "collectedColor", [_dec13], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return new Color(0, 255, 0);
+        }
+      }), _descriptor11 = _applyDecoratedDescriptor(_class14.prototype, "currentMiningItemSprite", [_dec14], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor12 = _applyDecoratedDescriptor(_class14.prototype, "miningItemTimerLabel", [_dec15], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor13 = _applyDecoratedDescriptor(_class14.prototype, "loadingHiderSuitcase", [_dec16], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor14 = _applyDecoratedDescriptor(_class14.prototype, "loadingHiderCurrentItem", [_dec17], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor15 = _applyDecoratedDescriptor(_class14.prototype, "allSuitcasesPackedNode", [_dec18], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      })), _class14)) || _class13));
+      cclegacy._RF.pop();
+    }
+  };
+});
+
 System.register("chunks:///_virtual/TaskItem.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc', './telegram-web.ts', './ButtonFeedbacks.ts', './PopupManager.ts'], function (exports) {
   var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _asyncToGenerator, _regeneratorRuntime, cclegacy, _decorator, Label, Button, Sprite, SpriteFrame, Component, TelegramWebApp, ButtonFeedbacks, PopupManager;
   return {
@@ -963,6 +2413,7 @@ System.register("chunks:///_virtual/TaskItem.ts", ['./rollupPluginModLoBabelHelp
         property = _decorator.property;
       var TaskType = exports('TaskType', /*#__PURE__*/function (TaskType) {
         TaskType["Other"] = "Other";
+        TaskType["GoTo"] = "GoTo";
         TaskType["Subscribe"] = "Subscribe";
         TaskType["MoneyCount"] = "MoneyCount";
         TaskType["FriendsCount"] = "FriendsCount";
@@ -1008,6 +2459,7 @@ System.register("chunks:///_virtual/TaskItem.ts", ['./rollupPluginModLoBabelHelp
           }
           if (this.iconSprite && this.otherIcon && this.subscribeIcon && this.moneyIcon && this.friendsIcon) {
             switch (this.myTaskData.taskType) {
+              case TaskType.GoTo:
               case TaskType.Other:
                 this.iconSprite.spriteFrame = this.otherIcon;
                 break;
@@ -1088,7 +2540,7 @@ System.register("chunks:///_virtual/TaskItem.ts", ['./rollupPluginModLoBabelHelp
                 case 0:
                   isNowCompleted = false;
                   _context2.t0 = this.myTaskData.taskType;
-                  _context2.next = _context2.t0 === TaskType.Other ? 4 : _context2.t0 === TaskType.Subscribe ? 8 : _context2.t0 === TaskType.MoneyCount ? 12 : _context2.t0 === TaskType.FriendsCount ? 16 : 20;
+                  _context2.next = _context2.t0 === TaskType.GoTo ? 4 : _context2.t0 === TaskType.Other ? 4 : _context2.t0 === TaskType.Subscribe ? 8 : _context2.t0 === TaskType.MoneyCount ? 12 : _context2.t0 === TaskType.FriendsCount ? 16 : 20;
                   break;
                 case 4:
                   _context2.next = 6;
@@ -1136,7 +2588,7 @@ System.register("chunks:///_virtual/TaskItem.ts", ['./rollupPluginModLoBabelHelp
               while (1) switch (_context3.prev = _context3.next) {
                 case 0:
                   _context3.t0 = this.myTaskData.taskType;
-                  _context3.next = _context3.t0 === TaskType.Other ? 3 : _context3.t0 === TaskType.Subscribe ? 6 : _context3.t0 === TaskType.MoneyCount ? 9 : _context3.t0 === TaskType.FriendsCount ? 11 : 13;
+                  _context3.next = _context3.t0 === TaskType.GoTo ? 3 : _context3.t0 === TaskType.Other ? 3 : _context3.t0 === TaskType.Subscribe ? 6 : _context3.t0 === TaskType.MoneyCount ? 9 : _context3.t0 === TaskType.FriendsCount ? 11 : 13;
                   break;
                 case 3:
                   _context3.next = 5;
@@ -1167,8 +2619,11 @@ System.register("chunks:///_virtual/TaskItem.ts", ['./rollupPluginModLoBabelHelp
             return _goToCompleteTask.apply(this, arguments);
           }
           return goToCompleteTask;
-        }();
-        _proto.delay = /*#__PURE__*/function () {
+        }() //for test only
+        ;
+
+        _proto.delay = /*#__PURE__*/
+        function () {
           var _delay = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(ms) {
             return _regeneratorRuntime().wrap(function _callee4$(_context4) {
               while (1) switch (_context4.prev = _context4.next) {
@@ -1663,6 +3118,584 @@ System.register("chunks:///_virtual/telegram-web.ts", ['./rollupPluginModLoBabel
         }]);
         return TelegramWebApp;
       }(), _class2._instance = void 0, _class2)) || _class));
+      cclegacy._RF.pop();
+    }
+  };
+});
+
+System.register("chunks:///_virtual/TestGetLabel.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc', './ServerCommunicator.ts'], function (exports) {
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _asyncToGenerator, _regeneratorRuntime, cclegacy, _decorator, Label, Component, ServerCommunicator;
+  return {
+    setters: [function (module) {
+      _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
+      _inheritsLoose = module.inheritsLoose;
+      _initializerDefineProperty = module.initializerDefineProperty;
+      _assertThisInitialized = module.assertThisInitialized;
+      _asyncToGenerator = module.asyncToGenerator;
+      _regeneratorRuntime = module.regeneratorRuntime;
+    }, function (module) {
+      cclegacy = module.cclegacy;
+      _decorator = module._decorator;
+      Label = module.Label;
+      Component = module.Component;
+    }, function (module) {
+      ServerCommunicator = module.ServerCommunicator;
+    }],
+    execute: function () {
+      var _dec, _dec2, _dec3, _class, _class2, _descriptor, _descriptor2;
+      cclegacy._RF.push({}, "7357eDSAhRC5p0V45vZrS5g", "TestGetLabel", undefined);
+      var ccclass = _decorator.ccclass,
+        property = _decorator.property;
+      var TestGetLabel = exports('TestGetLabel', (_dec = ccclass('TestGetLabel'), _dec2 = property(ServerCommunicator), _dec3 = property(Label), _dec(_class = (_class2 = /*#__PURE__*/function (_Component) {
+        _inheritsLoose(TestGetLabel, _Component);
+        function TestGetLabel() {
+          var _this;
+          for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+          }
+          _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+          _initializerDefineProperty(_this, "serverCommunicator", _descriptor, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "label", _descriptor2, _assertThisInitialized(_this));
+          _this.currentAllItems = [];
+          return _this;
+        }
+        var _proto = TestGetLabel.prototype;
+        _proto.start = function start() {
+          this.getMetod();
+        };
+        _proto.getMetod = /*#__PURE__*/function () {
+          var _getMetod = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+            var response, allItems;
+            return _regeneratorRuntime().wrap(function _callee$(_context) {
+              while (1) switch (_context.prev = _context.next) {
+                case 0:
+                  _context.prev = 0;
+                  _context.next = 3;
+                  return this.serverCommunicator.sendGetRequest('get_all_items');
+                case 3:
+                  response = _context.sent;
+                  allItems = response;
+                  this.currentAllItems = allItems.map(function (item) {
+                    return {
+                      id: item[0],
+                      name: item[1],
+                      collectionDuration: item[2],
+                      price: item[3],
+                      chance: item[4],
+                      suitcaseTypeId: item[5]
+                    };
+                  });
+                  _context.next = 11;
+                  break;
+                case 8:
+                  _context.prev = 8;
+                  _context.t0 = _context["catch"](0);
+                  console.error('Error fetching items:', _context.t0);
+                case 11:
+                  this.label.string = this.currentAllItems[1].name;
+                case 12:
+                case "end":
+                  return _context.stop();
+              }
+            }, _callee, this, [[0, 8]]);
+          }));
+          function getMetod() {
+            return _getMetod.apply(this, arguments);
+          }
+          return getMetod;
+        }();
+        return TestGetLabel;
+      }(Component), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "serverCommunicator", [_dec2], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, "label", [_dec3], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      })), _class2)) || _class));
+      cclegacy._RF.pop();
+    }
+  };
+});
+
+System.register("chunks:///_virtual/TimerLabel.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc', './UserDataManager.ts'], function (exports) {
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _asyncToGenerator, _regeneratorRuntime, cclegacy, _decorator, Label, Component, UserDataManager;
+  return {
+    setters: [function (module) {
+      _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
+      _inheritsLoose = module.inheritsLoose;
+      _initializerDefineProperty = module.initializerDefineProperty;
+      _assertThisInitialized = module.assertThisInitialized;
+      _asyncToGenerator = module.asyncToGenerator;
+      _regeneratorRuntime = module.regeneratorRuntime;
+    }, function (module) {
+      cclegacy = module.cclegacy;
+      _decorator = module._decorator;
+      Label = module.Label;
+      Component = module.Component;
+    }, function (module) {
+      UserDataManager = module.UserDataManager;
+    }],
+    execute: function () {
+      var _dec, _dec2, _class, _class2, _descriptor;
+      cclegacy._RF.push({}, "0f0bdgZInxLC7IsnEFjdw6T", "TimerLabel", undefined);
+      var ccclass = _decorator.ccclass,
+        property = _decorator.property;
+      var TimerLabel = exports('TimerLabel', (_dec = ccclass('TimerLabel'), _dec2 = property(Label), _dec(_class = (_class2 = /*#__PURE__*/function (_Component) {
+        _inheritsLoose(TimerLabel, _Component);
+        function TimerLabel() {
+          var _this;
+          for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+          }
+          _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+          _initializerDefineProperty(_this, "myLabel", _descriptor, _assertThisInitialized(_this));
+          _this.endDate = null;
+          _this.isTimerActive = false;
+          _this.timeDifference = 0;
+          return _this;
+        }
+        var _proto = TimerLabel.prototype;
+        _proto.start = function start() {
+          this.myLabel.string = '00:00:00:00';
+        };
+        _proto.init = /*#__PURE__*/function () {
+          var _init = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(dateString, duration) {
+            var startDate, DurationMs;
+            return _regeneratorRuntime().wrap(function _callee$(_context) {
+              while (1) switch (_context.prev = _context.next) {
+                case 0:
+                  if (UserDataManager.instance.isInited) {
+                    _context.next = 5;
+                    break;
+                  }
+                  _context.next = 3;
+                  return new Promise(function (resolve) {
+                    return setTimeout(resolve, 100);
+                  });
+                case 3:
+                  _context.next = 0;
+                  break;
+                case 5:
+                  startDate = new Date(dateString.replace(/-/g, "/"));
+                  DurationMs = duration * 60 * 60 * 1000;
+                  this.timeDifference = UserDataManager.instance.getTimeDifference();
+                  if (this.timeDifference) {
+                    _context.next = 11;
+                    break;
+                  }
+                  console.error("cant get sync time from userDataManager");
+                  return _context.abrupt("return");
+                case 11:
+                  this.endDate = new Date(startDate.getTime() + DurationMs);
+                  this.isTimerActive = true;
+                  this.updateLabel();
+                case 14:
+                case "end":
+                  return _context.stop();
+              }
+            }, _callee, this);
+          }));
+          function init(_x, _x2) {
+            return _init.apply(this, arguments);
+          }
+          return init;
+        }();
+        _proto.update = function update(dt) {
+          if (this.isTimerActive && this.endDate) {
+            this.updateLabel();
+          }
+        };
+        _proto.updateLabel = function updateLabel() {
+          var currentTime = new Date(new Date().getTime() + this.timeDifference);
+          var timeLeft = this.endDate.getTime() - currentTime.getTime();
+          if (timeLeft <= 0) {
+            this.myLabel.string = "00:00:00:00";
+            this.isTimerActive = false;
+          } else {
+            this.myLabel.string = this.formatTimeLeft(timeLeft);
+          }
+        };
+        _proto.formatTimeLeft = function formatTimeLeft(timeLeft) {
+          var seconds = Math.floor(timeLeft / 1000 % 60);
+          var minutes = Math.floor(timeLeft / (1000 * 60) % 60);
+          var hours = Math.floor(timeLeft / (1000 * 60 * 60) % 24);
+          var days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+          function padZero(num) {
+            return (num < 10 ? '0' : '') + num;
+          }
+          return padZero(days) + ':' + padZero(hours) + ':' + padZero(minutes) + ':' + padZero(seconds);
+        };
+        return TimerLabel;
+      }(Component), _descriptor = _applyDecoratedDescriptor(_class2.prototype, "myLabel", [_dec2], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _class2)) || _class));
+      cclegacy._RF.pop();
+    }
+  };
+});
+
+System.register("chunks:///_virtual/UserDataManager.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc', './ServerCommunicator.ts', './telegram-web.ts'], function (exports) {
+  var _inheritsLoose, _createClass, _asyncToGenerator, _regeneratorRuntime, cclegacy, _decorator, Component, ServerCommunicator, TelegramWebApp;
+  return {
+    setters: [function (module) {
+      _inheritsLoose = module.inheritsLoose;
+      _createClass = module.createClass;
+      _asyncToGenerator = module.asyncToGenerator;
+      _regeneratorRuntime = module.regeneratorRuntime;
+    }, function (module) {
+      cclegacy = module.cclegacy;
+      _decorator = module._decorator;
+      Component = module.Component;
+    }, function (module) {
+      ServerCommunicator = module.ServerCommunicator;
+    }, function (module) {
+      TelegramWebApp = module.TelegramWebApp;
+    }],
+    execute: function () {
+      var _dec, _class, _class2;
+      cclegacy._RF.push({}, "c0f31uhSI5LEIE63jTEDd3D", "UserDataManager", undefined);
+      var ccclass = _decorator.ccclass,
+        property = _decorator.property;
+      var UserDataManager = exports('UserDataManager', (_dec = ccclass('UserDataManager'), _dec(_class = (_class2 = /*#__PURE__*/function (_Component) {
+        _inheritsLoose(UserDataManager, _Component);
+        function UserDataManager() {
+          var _this;
+          for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+          }
+          _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+          _this.currentUserInfo = null;
+          _this.speedInfos = [];
+          _this.durationInfos = [];
+          _this.isTimeSyncWithServer = false;
+          _this.timeDifference = null;
+          return _this;
+        }
+        var _proto = UserDataManager.prototype;
+        _proto.onLoad = function onLoad() {
+          if (UserDataManager._instance) {
+            console.warn("UserDataManager instance already exists!");
+            this.destroy();
+            return;
+          }
+          UserDataManager._instance = this;
+          this.syncTimeWithServer();
+          this.forceUpdateUserInfo();
+        };
+        _proto.getUserId = function getUserId() {
+          if (this.currentUserInfo) {
+            return this.currentUserInfo.id;
+          } else {
+            console.error("Error: user information is missing");
+            return null;
+          }
+        };
+        _proto.getUserName = function getUserName() {
+          if (!this.currentUserInfo) {
+            console.error("Error: user information is missing");
+            return null;
+          }
+          return this.currentUserInfo.name;
+        };
+        _proto.getUserPhotoUrl = function getUserPhotoUrl() {
+          if (!this.currentUserInfo) {
+            console.error("Error: user information is missing");
+            return null;
+          }
+          return this.currentUserInfo.photoUrl;
+        };
+        _proto.getUserBalance = function getUserBalance() {
+          if (!this.currentUserInfo) {
+            console.error("Error: user information is missing");
+            return null;
+          }
+          return this.currentUserInfo.balance;
+        };
+        _proto.getUserMiningStartDate = function getUserMiningStartDate() {
+          if (!this.currentUserInfo) {
+            console.error("Error: user information is missing");
+            return null;
+          }
+          return this.currentUserInfo.dateStartMining;
+        };
+        _proto.getUserSpeedId = function getUserSpeedId() {
+          if (!this.currentUserInfo) {
+            console.error("Error: user information is missing");
+            return null;
+          }
+          return this.currentUserInfo.speedId;
+        };
+        _proto.getUserDurationId = function getUserDurationId() {
+          if (!this.currentUserInfo) {
+            console.error("Error: user information is missing");
+            return null;
+          }
+          return this.currentUserInfo.durationId;
+        };
+        _proto.getUserInvitedBy = function getUserInvitedBy() {
+          if (!this.currentUserInfo) {
+            console.error("Error: user information is missing");
+            return null;
+          }
+          return this.currentUserInfo.invitedBy;
+        };
+        _proto.getUserCurrentSpeed = function getUserCurrentSpeed() {
+          var _this2 = this;
+          if (!this.currentUserInfo) {
+            console.error("Error: user information is missing");
+            return null;
+          }
+          var speedInfo = this.speedInfos.find(function (info) {
+            return info.id === _this2.getUserSpeedId();
+          });
+          return speedInfo ? speedInfo.speed : null;
+        };
+        _proto.getSpeedPriceById = function getSpeedPriceById(id) {
+          if (!this.currentUserInfo) {
+            console.error("Error: user information is missing");
+            return null;
+          }
+          var speedInfo = this.speedInfos.find(function (info) {
+            return info.id === id;
+          });
+          return speedInfo ? speedInfo.price : null;
+        };
+        _proto.getSpeedInfosCount = function getSpeedInfosCount() {
+          if (!this.currentUserInfo) {
+            console.error("Error: user information is missing");
+            return null;
+          }
+          return this.speedInfos.length;
+        };
+        _proto.getUserCurrentDuration = function getUserCurrentDuration() {
+          var _this3 = this;
+          if (!this.currentUserInfo) {
+            console.error("Error: user information is missing");
+            return null;
+          }
+          var durationInfo = this.durationInfos.find(function (info) {
+            return info.id === _this3.getUserDurationId();
+          });
+          return durationInfo ? durationInfo.duration : null;
+        };
+        _proto.getDurationPriceById = function getDurationPriceById(id) {
+          if (!this.currentUserInfo) {
+            console.error("Error: user information is missing");
+            return null;
+          }
+          var durationInfo = this.durationInfos.find(function (info) {
+            return info.id === id;
+          });
+          return durationInfo ? durationInfo.price : null;
+        };
+        _proto.getDurationInfosCount = function getDurationInfosCount() {
+          if (!this.currentUserInfo) {
+            console.error("Error: user information is missing");
+            return null;
+          }
+          return this.durationInfos.length;
+        };
+        _proto.syncTimeWithServer = /*#__PURE__*/function () {
+          var _syncTimeWithServer = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+            var response, serverTimeString, serverTime;
+            return _regeneratorRuntime().wrap(function _callee$(_context) {
+              while (1) switch (_context.prev = _context.next) {
+                case 0:
+                  if (!this.isTimeSyncWithServer) {
+                    _context.next = 2;
+                    break;
+                  }
+                  return _context.abrupt("return");
+                case 2:
+                  _context.prev = 2;
+                  _context.next = 5;
+                  return ServerCommunicator.instance.sendGetRequest('get_server_time');
+                case 5:
+                  response = _context.sent;
+                  serverTimeString = response;
+                  serverTime = new Date(serverTimeString.replace(/-/g, "/"));
+                  this.timeDifference = serverTime.getTime() - new Date().getTime();
+                  this.isTimeSyncWithServer = true;
+                  _context.next = 15;
+                  break;
+                case 12:
+                  _context.prev = 12;
+                  _context.t0 = _context["catch"](2);
+                  console.error('Error fetching server time:', _context.t0);
+                case 15:
+                case "end":
+                  return _context.stop();
+              }
+            }, _callee, this, [[2, 12]]);
+          }));
+          function syncTimeWithServer() {
+            return _syncTimeWithServer.apply(this, arguments);
+          }
+          return syncTimeWithServer;
+        }();
+        _proto.getTimeDifference = function getTimeDifference() {
+          if (!this.isTimeSyncWithServer) {
+            return null;
+          }
+          return this.timeDifference;
+        };
+        _proto.forceUpdateUserInfo = function forceUpdateUserInfo() {
+          //
+          this.setUserInfoFromServer();
+          //this.setSpeedInfosFromServer();
+          //this.setDurationInfosFromServer();
+        };
+
+        _proto.setUserInfoFromServer = /*#__PURE__*/function () {
+          var _setUserInfoFromServer = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+            var tgWebApp, user, initData, response;
+            return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+              while (1) switch (_context2.prev = _context2.next) {
+                case 0:
+                  _context2.prev = 0;
+                  tgWebApp = TelegramWebApp.Instance;
+                  _context2.next = 4;
+                  return tgWebApp.init();
+                case 4:
+                  user = tgWebApp.getTelegramUser();
+                  initData = tgWebApp.getTelegramWebAppInitData();
+                  _context2.next = 8;
+                  return ServerCommunicator.instance.sendGetRequest('get_user?id=' + user.id + '&name=' + user.username + '&referal=' + initData.start_param);
+                case 8:
+                  response = _context2.sent;
+                  this.currentUserInfo = {
+                    id: response[0],
+                    name: response[1],
+                    photoUrl: response[2],
+                    balance: response[3],
+                    dateStartMining: response[4],
+                    speedId: response[5],
+                    durationId: response[6],
+                    invitedBy: response[7]
+                  };
+                  _context2.next = 15;
+                  break;
+                case 12:
+                  _context2.prev = 12;
+                  _context2.t0 = _context2["catch"](0);
+                  console.error('Error setting user:', _context2.t0);
+                case 15:
+                case "end":
+                  return _context2.stop();
+              }
+            }, _callee2, this, [[0, 12]]);
+          }));
+          function setUserInfoFromServer() {
+            return _setUserInfoFromServer.apply(this, arguments);
+          }
+          return setUserInfoFromServer;
+        }();
+        _proto.setSpeedInfosFromServer = /*#__PURE__*/function () {
+          var _setSpeedInfosFromServer = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+            var response, allSpeeds;
+            return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+              while (1) switch (_context3.prev = _context3.next) {
+                case 0:
+                  _context3.prev = 0;
+                  _context3.next = 3;
+                  return ServerCommunicator.instance.sendGetRequest('get_all_speeds');
+                case 3:
+                  response = _context3.sent;
+                  allSpeeds = response;
+                  this.speedInfos = [];
+                  this.speedInfos = allSpeeds.map(function (item) {
+                    return {
+                      id: item[0],
+                      speed: item[1],
+                      price: item[2]
+                    };
+                  });
+                  _context3.next = 12;
+                  break;
+                case 9:
+                  _context3.prev = 9;
+                  _context3.t0 = _context3["catch"](0);
+                  console.error('Error fetching speeds:', _context3.t0);
+                case 12:
+                case "end":
+                  return _context3.stop();
+              }
+            }, _callee3, this, [[0, 9]]);
+          }));
+          function setSpeedInfosFromServer() {
+            return _setSpeedInfosFromServer.apply(this, arguments);
+          }
+          return setSpeedInfosFromServer;
+        }();
+        _proto.setDurationInfosFromServer = /*#__PURE__*/function () {
+          var _setDurationInfosFromServer = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+            var response, allDurations;
+            return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+              while (1) switch (_context4.prev = _context4.next) {
+                case 0:
+                  _context4.prev = 0;
+                  _context4.next = 3;
+                  return ServerCommunicator.instance.sendGetRequest('get_all_durations');
+                case 3:
+                  response = _context4.sent;
+                  allDurations = response;
+                  this.durationInfos = [];
+                  this.durationInfos = allDurations.map(function (item) {
+                    return {
+                      id: item[0],
+                      duration: item[1],
+                      price: item[2]
+                    };
+                  });
+                  _context4.next = 12;
+                  break;
+                case 9:
+                  _context4.prev = 9;
+                  _context4.t0 = _context4["catch"](0);
+                  console.error('Error fetching durations:', _context4.t0);
+                case 12:
+                case "end":
+                  return _context4.stop();
+              }
+            }, _callee4, this, [[0, 9]]);
+          }));
+          function setDurationInfosFromServer() {
+            return _setDurationInfosFromServer.apply(this, arguments);
+          }
+          return setDurationInfosFromServer;
+        }();
+        _createClass(UserDataManager, [{
+          key: "isInited",
+          get: function get() {
+            if (this.currentUserInfo && this.speedInfos.length > 0 && this.durationInfos.length > 0 && this.isTimeSyncWithServer) {
+              return true;
+            }
+            return false;
+          }
+        }], [{
+          key: "instance",
+          get: function get() {
+            if (!this._instance) {
+              console.error("UserDataManager instance is not initialized!");
+            }
+            return this._instance;
+          }
+        }]);
+        return UserDataManager;
+      }(Component), _class2._instance = void 0, _class2)) || _class));
       cclegacy._RF.pop();
     }
   };
