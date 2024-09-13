@@ -805,11 +805,15 @@ System.register("chunks:///_virtual/MainMiningLabels.ts", ['./rollupPluginModLoB
         };
         _proto.updateCurrentMinedLabel = function updateCurrentMinedLabel() {
           var startDateStr = UserDataManager.instance.getUserMiningStartDate();
-          if (!startDateStr) {
+          if (!startDateStr || startDateStr == "null") {
             this.currentMinedLabel.string = "00.00";
             return;
           }
           var startDate = new Date(startDateStr.replace(/-/g, "/"));
+          if (!startDate) {
+            this.currentMinedLabel.string = "00.00";
+            return;
+          }
           var DurationMs = UserDataManager.instance.getUserCurrentDuration() * 60 * 60 * 1000;
           this.timeDifference = UserDataManager.instance.getTimeDifference();
           if (!this.timeDifference) {
@@ -819,9 +823,6 @@ System.register("chunks:///_virtual/MainMiningLabels.ts", ['./rollupPluginModLoB
           this.endDate = new Date(startDate.getTime() + DurationMs);
           var currentTime = new Date(new Date().getTime() + this.timeDifference);
           var timeLeft = this.endDate.getTime() - currentTime.getTime();
-
-          //console.log(timeLeft/(1000*60*60)) -- выводит что осталось 10 часов. Но с
-
           if (timeLeft <= 0) {
             this.currentMinedLabel.string = (UserDataManager.instance.getUserCurrentSpeed() * UserDataManager.instance.getUserCurrentDuration()).toFixed(2);
             this.isMiningActive = false;
@@ -943,6 +944,12 @@ System.register("chunks:///_virtual/MiningCollectController.ts", ['./rollupPlugi
           return _this;
         }
         var _proto = MiningCollectController.prototype;
+        _proto.onLoad = function onLoad() {
+          UserDataManager.eventTarget.on('userDataUpdated', this.updateMe, this);
+        };
+        _proto.onDestroy = function onDestroy() {
+          UserDataManager.eventTarget.off('userDataUpdated', this.updateMe, this);
+        };
         _proto.start = function start() {
           this.init();
         };
@@ -974,8 +981,10 @@ System.register("chunks:///_virtual/MiningCollectController.ts", ['./rollupPlugi
                   }
                   if (this.miningTimer) {
                     startDateStr = UserDataManager.instance.getUserMiningStartDate();
-                    duration = UserDataManager.instance.getUserCurrentDuration();
-                    this.miningTimer.init(startDateStr, duration);
+                    if (startDateStr && startDateStr != "null") {
+                      duration = UserDataManager.instance.getUserCurrentDuration();
+                      this.miningTimer.init(startDateStr, duration);
+                    }
                   }
                   if (this.collectMiningNode) {
                     this.collectMiningNode.on(Node.EventType.TOUCH_END, this.onClickCollectMiningNode, this);
@@ -1024,7 +1033,45 @@ System.register("chunks:///_virtual/MiningCollectController.ts", ['./rollupPlugi
           }
           return tryCollectMinedToServer;
         }();
-        _proto.updateMe = function updateMe() {};
+        _proto.updateMe = /*#__PURE__*/function () {
+          var _updateMe = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+            var startDateStr, duration;
+            return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+              while (1) switch (_context3.prev = _context3.next) {
+                case 0:
+                  if (UserDataManager.instance.isInited) {
+                    _context3.next = 5;
+                    break;
+                  }
+                  _context3.next = 3;
+                  return new Promise(function (resolve) {
+                    return setTimeout(resolve, 100);
+                  });
+                case 3:
+                  _context3.next = 0;
+                  break;
+                case 5:
+                  if (this.miningSpeedLabel) {
+                    this.miningSpeedLabel.string = UserDataManager.instance.getUserCurrentSpeed().toString() + this.miningSpeedPostfix;
+                  }
+                  if (this.miningTimer) {
+                    startDateStr = UserDataManager.instance.getUserMiningStartDate();
+                    if (startDateStr && startDateStr != "null") {
+                      duration = UserDataManager.instance.getUserCurrentDuration();
+                      this.miningTimer.init(startDateStr, duration);
+                    }
+                  }
+                case 7:
+                case "end":
+                  return _context3.stop();
+              }
+            }, _callee3, this);
+          }));
+          function updateMe() {
+            return _updateMe.apply(this, arguments);
+          }
+          return updateMe;
+        }();
         _proto.updateCollectNode = function updateCollectNode() {
           if (this.collectMiningNode) {
             if (this.miningTimer.isTimerActive) {
@@ -1848,7 +1895,7 @@ System.register("chunks:///_virtual/SuitcaseItemsController.ts", ['./rollupPlugi
                   return this.getCurrentSuitcaseIndex(withForceUpdate);
                 case 6:
                   currentSuitcaseIndex = _context4.sent;
-                  if (currentSuitcaseIndex) {
+                  if (!(currentSuitcaseIndex === null || currentSuitcaseIndex === undefined || !Number.isInteger(currentSuitcaseIndex))) {
                     _context4.next = 12;
                     break;
                   }
@@ -1896,7 +1943,7 @@ System.register("chunks:///_virtual/SuitcaseItemsController.ts", ['./rollupPlugi
                   return this.getCurrentSuitcaseIndex(withForceUpdate);
                 case 3:
                   currentSuitcaseIndex = _context6.sent;
-                  if (currentSuitcaseIndex) {
+                  if (!(currentSuitcaseIndex === null || currentSuitcaseIndex === undefined || !Number.isInteger(currentSuitcaseIndex))) {
                     _context6.next = 9;
                     break;
                   }
@@ -3348,16 +3395,20 @@ System.register("chunks:///_virtual/TimerLabel.ts", ['./rollupPluginModLoBabelHe
 });
 
 System.register("chunks:///_virtual/UserDataManager.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc', './ServerCommunicator.ts', './telegram-web.ts'], function (exports) {
-  var _inheritsLoose, _createClass, _asyncToGenerator, _regeneratorRuntime, cclegacy, _decorator, Component, ServerCommunicator, TelegramWebApp;
+  var _applyDecoratedDescriptor, _inheritsLoose, _createClass, _initializerDefineProperty, _assertThisInitialized, _asyncToGenerator, _regeneratorRuntime, cclegacy, _decorator, EventTarget, Component, ServerCommunicator, TelegramWebApp;
   return {
     setters: [function (module) {
+      _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
       _inheritsLoose = module.inheritsLoose;
       _createClass = module.createClass;
+      _initializerDefineProperty = module.initializerDefineProperty;
+      _assertThisInitialized = module.assertThisInitialized;
       _asyncToGenerator = module.asyncToGenerator;
       _regeneratorRuntime = module.regeneratorRuntime;
     }, function (module) {
       cclegacy = module.cclegacy;
       _decorator = module._decorator;
+      EventTarget = module.EventTarget;
       Component = module.Component;
     }, function (module) {
       ServerCommunicator = module.ServerCommunicator;
@@ -3365,11 +3416,11 @@ System.register("chunks:///_virtual/UserDataManager.ts", ['./rollupPluginModLoBa
       TelegramWebApp = module.TelegramWebApp;
     }],
     execute: function () {
-      var _dec, _class, _class2;
+      var _dec, _class, _class2, _descriptor, _class3;
       cclegacy._RF.push({}, "c0f31uhSI5LEIE63jTEDd3D", "UserDataManager", undefined);
       var ccclass = _decorator.ccclass,
         property = _decorator.property;
-      var UserDataManager = exports('UserDataManager', (_dec = ccclass('UserDataManager'), _dec(_class = (_class2 = /*#__PURE__*/function (_Component) {
+      var UserDataManager = exports('UserDataManager', (_dec = ccclass('UserDataManager'), _dec(_class = (_class2 = (_class3 = /*#__PURE__*/function (_Component) {
         _inheritsLoose(UserDataManager, _Component);
         function UserDataManager() {
           var _this;
@@ -3377,6 +3428,7 @@ System.register("chunks:///_virtual/UserDataManager.ts", ['./rollupPluginModLoBa
             args[_key] = arguments[_key];
           }
           _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+          _initializerDefineProperty(_this, "isDebug", _descriptor, _assertThisInitialized(_this));
           _this.currentUserInfo = null;
           _this.speedInfos = [];
           _this.durationInfos = [];
@@ -3393,6 +3445,8 @@ System.register("chunks:///_virtual/UserDataManager.ts", ['./rollupPluginModLoBa
           }
           UserDataManager._instance = this;
           this.syncTimeWithServer();
+          this.setSpeedInfosFromServer();
+          this.setDurationInfosFromServer();
           this.forceUpdateUserInfo();
         };
         _proto.getUserId = function getUserId() {
@@ -3555,48 +3609,83 @@ System.register("chunks:///_virtual/UserDataManager.ts", ['./rollupPluginModLoBa
         _proto.forceUpdateUserInfo = function forceUpdateUserInfo() {
           //
           this.setUserInfoFromServer();
-          //this.setSpeedInfosFromServer();
-          //this.setDurationInfosFromServer();
         };
-
         _proto.setUserInfoFromServer = /*#__PURE__*/function () {
           var _setUserInfoFromServer = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-            var tgWebApp, user, initData, response;
+            var response, userInfoItems, tgWebApp, user, initData, _response, _userInfoItems;
             return _regeneratorRuntime().wrap(function _callee2$(_context2) {
               while (1) switch (_context2.prev = _context2.next) {
                 case 0:
                   _context2.prev = 0;
-                  tgWebApp = TelegramWebApp.Instance;
+                  if (!this.isDebug) {
+                    _context2.next = 10;
+                    break;
+                  }
                   _context2.next = 4;
-                  return tgWebApp.init();
+                  return ServerCommunicator.instance.sendGetRequest('get_user?id=' + 2 + '&name=anrewka&referal=' + 1);
                 case 4:
+                  response = _context2.sent;
+                  userInfoItems = response;
+                  console.log(userInfoItems);
+                  this.currentUserInfo = {
+                    id: userInfoItems.id,
+                    name: userInfoItems.username,
+                    photoUrl: userInfoItems.photo_url,
+                    balance: userInfoItems.balance,
+                    dateStartMining: userInfoItems.date_start_mining,
+                    speedId: userInfoItems.speed_id,
+                    durationId: userInfoItems.duration_id,
+                    invitedBy: userInfoItems.invited_by
+                  };
+                  _context2.next = 22;
+                  break;
+                case 10:
+                  tgWebApp = TelegramWebApp.Instance;
+                  _context2.next = 13;
+                  return tgWebApp.init();
+                case 13:
                   user = tgWebApp.getTelegramUser();
                   initData = tgWebApp.getTelegramWebAppInitData();
-                  _context2.next = 8;
+                  _context2.next = 17;
                   return ServerCommunicator.instance.sendGetRequest('get_user?id=' + user.id + '&name=' + user.username + '&referal=' + initData.start_param);
-                case 8:
-                  response = _context2.sent;
+                case 17:
+                  _response = _context2.sent;
+                  _userInfoItems = _response;
+                  console.log(_userInfoItems);
                   this.currentUserInfo = {
-                    id: response[0],
-                    name: response[1],
-                    photoUrl: response[2],
-                    balance: response[3],
-                    dateStartMining: response[4],
-                    speedId: response[5],
-                    durationId: response[6],
-                    invitedBy: response[7]
+                    id: _userInfoItems.id,
+                    name: _userInfoItems.username,
+                    photoUrl: _userInfoItems.photo_url,
+                    balance: _userInfoItems.balance,
+                    dateStartMining: _userInfoItems.date_start_mining,
+                    speedId: _userInfoItems.speed_id,
+                    durationId: _userInfoItems.duration_id,
+                    invitedBy: _userInfoItems.invited_by
                   };
-                  _context2.next = 15;
+                  UserDataManager.eventTarget.emit('userDataUpdated');
+                case 22:
+                  if (this.isInited) {
+                    _context2.next = 26;
+                    break;
+                  }
+                  _context2.next = 25;
+                  return new Promise(function (resolve) {
+                    return setTimeout(resolve, 500);
+                  });
+                case 25:
+                  this.forceUpdateUserInfo();
+                case 26:
+                  _context2.next = 31;
                   break;
-                case 12:
-                  _context2.prev = 12;
+                case 28:
+                  _context2.prev = 28;
                   _context2.t0 = _context2["catch"](0);
                   console.error('Error setting user:', _context2.t0);
-                case 15:
+                case 31:
                 case "end":
                   return _context2.stop();
               }
-            }, _callee2, this, [[0, 12]]);
+            }, _callee2, this, [[0, 28]]);
           }));
           function setUserInfoFromServer() {
             return _setUserInfoFromServer.apply(this, arguments);
@@ -3695,7 +3784,14 @@ System.register("chunks:///_virtual/UserDataManager.ts", ['./rollupPluginModLoBa
           }
         }]);
         return UserDataManager;
-      }(Component), _class2._instance = void 0, _class2)) || _class));
+      }(Component), _class3._instance = void 0, _class3.eventTarget = new EventTarget(), _class3), _descriptor = _applyDecoratedDescriptor(_class2.prototype, "isDebug", [property], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return false;
+        }
+      }), _class2)) || _class));
       cclegacy._RF.pop();
     }
   };
