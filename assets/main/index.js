@@ -1,3 +1,566 @@
+System.register("chunks:///_virtual/BalanceLabel.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc', './UserDataManager.ts'], function (exports) {
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _asyncToGenerator, _regeneratorRuntime, cclegacy, _decorator, Label, Component, UserDataManager;
+  return {
+    setters: [function (module) {
+      _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
+      _inheritsLoose = module.inheritsLoose;
+      _initializerDefineProperty = module.initializerDefineProperty;
+      _assertThisInitialized = module.assertThisInitialized;
+      _asyncToGenerator = module.asyncToGenerator;
+      _regeneratorRuntime = module.regeneratorRuntime;
+    }, function (module) {
+      cclegacy = module.cclegacy;
+      _decorator = module._decorator;
+      Label = module.Label;
+      Component = module.Component;
+    }, function (module) {
+      UserDataManager = module.UserDataManager;
+    }],
+    execute: function () {
+      var _dec, _dec2, _class, _class2, _descriptor;
+      cclegacy._RF.push({}, "294ccDOwCJCJos+ct2yd930", "BalanceLabel", undefined);
+      var ccclass = _decorator.ccclass,
+        property = _decorator.property;
+      var BalanceLabel = exports('BalanceLabel', (_dec = ccclass('BalanceLabel'), _dec2 = property(Label), _dec(_class = (_class2 = /*#__PURE__*/function (_Component) {
+        _inheritsLoose(BalanceLabel, _Component);
+        function BalanceLabel() {
+          var _this;
+          for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+          }
+          _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+          _initializerDefineProperty(_this, "myLabel", _descriptor, _assertThisInitialized(_this));
+          return _this;
+        }
+        var _proto = BalanceLabel.prototype;
+        _proto.start = function start() {
+          this.initWithUserData();
+        };
+        _proto.initWithUserData = /*#__PURE__*/function () {
+          var _initWithUserData = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+            return _regeneratorRuntime().wrap(function _callee$(_context) {
+              while (1) switch (_context.prev = _context.next) {
+                case 0:
+                  if (UserDataManager.instance.isInited) {
+                    _context.next = 5;
+                    break;
+                  }
+                  _context.next = 3;
+                  return new Promise(function (resolve) {
+                    return setTimeout(resolve, 100);
+                  });
+                case 3:
+                  _context.next = 0;
+                  break;
+                case 5:
+                  UserDataManager.eventTarget.on('userDataUpdated', this.updateMe, this);
+                  if (this.myLabel) {
+                    this.myLabel.string = UserDataManager.instance.getUserBalance().toFixed(2);
+                  }
+                case 7:
+                case "end":
+                  return _context.stop();
+              }
+            }, _callee, this);
+          }));
+          function initWithUserData() {
+            return _initWithUserData.apply(this, arguments);
+          }
+          return initWithUserData;
+        }();
+        _proto.updateMe = function updateMe() {
+          if (this.myLabel) {
+            this.myLabel.string = UserDataManager.instance.getUserBalance().toFixed(2);
+          }
+        };
+        return BalanceLabel;
+      }(Component), _descriptor = _applyDecoratedDescriptor(_class2.prototype, "myLabel", [_dec2], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _class2)) || _class));
+      cclegacy._RF.pop();
+    }
+  };
+});
+
+System.register("chunks:///_virtual/BoostItem.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc', './LoadingHider.ts', './BoostsController.ts', './BoostType.ts'], function (exports) {
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, Enum, Label, RichText, Color, Node, Sprite, Component, LoadingHider, BoostsController, BoostType;
+  return {
+    setters: [function (module) {
+      _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
+      _inheritsLoose = module.inheritsLoose;
+      _initializerDefineProperty = module.initializerDefineProperty;
+      _assertThisInitialized = module.assertThisInitialized;
+    }, function (module) {
+      cclegacy = module.cclegacy;
+      _decorator = module._decorator;
+      Enum = module.Enum;
+      Label = module.Label;
+      RichText = module.RichText;
+      Color = module.Color;
+      Node = module.Node;
+      Sprite = module.Sprite;
+      Component = module.Component;
+    }, function (module) {
+      LoadingHider = module.LoadingHider;
+    }, function (module) {
+      BoostsController = module.BoostsController;
+    }, function (module) {
+      BoostType = module.BoostType;
+    }],
+    execute: function () {
+      var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _dec10, _dec11, _dec12, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _descriptor13, _descriptor14, _descriptor15;
+      cclegacy._RF.push({}, "83147OQPDdCyZw6uDaBIgJl", "BoostItem", undefined);
+      var ccclass = _decorator.ccclass,
+        property = _decorator.property;
+      var BoostItem = exports('BoostItem', (_dec = ccclass('BoostItem'), _dec2 = property(BoostsController), _dec3 = property({
+        type: Enum(BoostType)
+      }), _dec4 = property(Label), _dec5 = property(RichText), _dec6 = property(Color), _dec7 = property(Color), _dec8 = property(Label), _dec9 = property(Node), _dec10 = property(Color), _dec11 = property(Color), _dec12 = property(LoadingHider), _dec(_class = (_class2 = /*#__PURE__*/function (_Component) {
+        _inheritsLoose(BoostItem, _Component);
+        function BoostItem() {
+          var _this;
+          for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+          }
+          _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+          _initializerDefineProperty(_this, "boostController", _descriptor, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "myBoostType", _descriptor2, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "levelLabel", _descriptor3, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "levelPrefix", _descriptor4, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "valuesRichText", _descriptor5, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "valuesPostfix", _descriptor6, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "currentValueTextColor", _descriptor7, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "nextValueTextColor", _descriptor8, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "priceLabel", _descriptor9, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "pricePrefix", _descriptor10, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "pricePostfix", _descriptor11, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "buyButtonNode", _descriptor12, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "activeButtonColor", _descriptor13, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "unactiveButtonColor", _descriptor14, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "loader", _descriptor15, _assertThisInitialized(_this));
+          _this.isButtonActive = false;
+          return _this;
+        }
+        var _proto = BoostItem.prototype;
+        _proto.onLoad = function onLoad() {
+          if (this.loader) {
+            this.loader.show();
+          }
+          if (this.buyButtonNode) {
+            this.buyButtonNode.on(Node.EventType.TOUCH_END, this.buyButtonPressed, this);
+          }
+        };
+        _proto.colorToHex = function colorToHex(color) {
+          var r = this.componentToHex(color.r);
+          var g = this.componentToHex(color.g);
+          var b = this.componentToHex(color.b);
+          return "" + r + g + b;
+        };
+        _proto.componentToHex = function componentToHex(c) {
+          var hex = c.toString(16);
+          return hex.length == 1 ? '0' + hex : hex;
+        };
+        _proto.updateMe = function updateMe(level, currentValue, nextValue, priceForNext) {
+          this.levelLabel.string = this.levelPrefix + level.toString();
+          var currentColorHex = this.colorToHex(this.currentValueTextColor);
+          var nextColorHex = this.colorToHex(this.nextValueTextColor);
+          this.valuesRichText.string = "<color=#" + currentColorHex + ">" + currentValue + this.valuesPostfix + " > </color><color=#" + nextColorHex + ">" + nextValue + this.valuesPostfix + "</color>";
+          this.priceLabel.string = this.pricePrefix + priceForNext.toString() + this.pricePostfix;
+          this.buyButtonActivity(true);
+          if (this.loader) {
+            this.loader.hide();
+          }
+        };
+        _proto.updateMeLikeFull = function updateMeLikeFull(level, currentValue) {
+          this.levelLabel.string = this.levelPrefix + level.toString();
+          var currentColorHex = this.colorToHex(this.currentValueTextColor);
+          this.valuesRichText.string = "<color=#" + currentColorHex + ">" + currentValue + this.valuesPostfix + "</color>";
+          this.priceLabel.string = "Maximum boost!";
+          this.buyButtonActivity(false);
+          if (this.loader) {
+            this.loader.hide();
+          }
+        };
+        _proto.buyButtonActivity = function buyButtonActivity(actvivty) {
+          if (this.buyButtonNode) {
+            if (actvivty) {
+              this.buyButtonNode.getComponent(Sprite).color = this.activeButtonColor;
+              this.isButtonActive = true;
+            } else {
+              this.buyButtonNode.getComponent(Sprite).color = this.unactiveButtonColor;
+              this.isButtonActive = false;
+            }
+          }
+        };
+        _proto.buyButtonPressed = function buyButtonPressed() {
+          if (this.isButtonActive) {
+            this.buyButtonActivity(false);
+            this.boostController.buyBoostByBoostType(this.myBoostType);
+          }
+        };
+        _proto.tryingPurchase = function tryingPurchase() {
+          if (this.loader) {
+            this.loader.show();
+          }
+        };
+        _proto.purchaseSuccessful = function purchaseSuccessful() {
+          console.log("PURCHASE SUCC!!");
+          //make some grafics?
+        };
+
+        _proto.purchaseUnsuccessful = function purchaseUnsuccessful() {
+          console.log("PURCHASE FAILED!!");
+          //make some grafics?
+        };
+
+        return BoostItem;
+      }(Component), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "boostController", [_dec2], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, "myBoostType", [_dec3], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return BoostType.Duration;
+        }
+      }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, "levelLabel", [_dec4], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, "levelPrefix", [property], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return "Level ";
+        }
+      }), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, "valuesRichText", [_dec5], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, "valuesPostfix", [property], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return "h";
+        }
+      }), _descriptor7 = _applyDecoratedDescriptor(_class2.prototype, "currentValueTextColor", [_dec6], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return new Color(255, 255, 255);
+        }
+      }), _descriptor8 = _applyDecoratedDescriptor(_class2.prototype, "nextValueTextColor", [_dec7], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return new Color(255, 255, 255);
+        }
+      }), _descriptor9 = _applyDecoratedDescriptor(_class2.prototype, "priceLabel", [_dec8], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor10 = _applyDecoratedDescriptor(_class2.prototype, "pricePrefix", [property], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return "Price: ";
+        }
+      }), _descriptor11 = _applyDecoratedDescriptor(_class2.prototype, "pricePostfix", [property], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return " $SEM";
+        }
+      }), _descriptor12 = _applyDecoratedDescriptor(_class2.prototype, "buyButtonNode", [_dec9], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor13 = _applyDecoratedDescriptor(_class2.prototype, "activeButtonColor", [_dec10], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return new Color(255, 255, 255);
+        }
+      }), _descriptor14 = _applyDecoratedDescriptor(_class2.prototype, "unactiveButtonColor", [_dec11], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return new Color(255, 255, 255);
+        }
+      }), _descriptor15 = _applyDecoratedDescriptor(_class2.prototype, "loader", [_dec12], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      })), _class2)) || _class));
+      cclegacy._RF.pop();
+    }
+  };
+});
+
+System.register("chunks:///_virtual/BoostsController.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc', './UserDataManager.ts', './BoostItem.ts', './BoostType.ts', './ServerCommunicator.ts'], function (exports) {
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _asyncToGenerator, _regeneratorRuntime, cclegacy, _decorator, Component, UserDataManager, BoostItem, BoostType, ServerCommunicator;
+  return {
+    setters: [function (module) {
+      _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
+      _inheritsLoose = module.inheritsLoose;
+      _initializerDefineProperty = module.initializerDefineProperty;
+      _assertThisInitialized = module.assertThisInitialized;
+      _asyncToGenerator = module.asyncToGenerator;
+      _regeneratorRuntime = module.regeneratorRuntime;
+    }, function (module) {
+      cclegacy = module.cclegacy;
+      _decorator = module._decorator;
+      Component = module.Component;
+    }, function (module) {
+      UserDataManager = module.UserDataManager;
+    }, function (module) {
+      BoostItem = module.BoostItem;
+    }, function (module) {
+      BoostType = module.BoostType;
+    }, function (module) {
+      ServerCommunicator = module.ServerCommunicator;
+    }],
+    execute: function () {
+      var _dec, _dec2, _dec3, _class, _class2, _descriptor, _descriptor2;
+      cclegacy._RF.push({}, "e4d8d0yweNG0IMdCeUWaI3W", "BoostsController", undefined);
+      var ccclass = _decorator.ccclass,
+        property = _decorator.property;
+      var BoostsController = exports('BoostsController', (_dec = ccclass('BoostsController'), _dec2 = property(BoostItem), _dec3 = property(BoostItem), _dec(_class = (_class2 = /*#__PURE__*/function (_Component) {
+        _inheritsLoose(BoostsController, _Component);
+        function BoostsController() {
+          var _this;
+          for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+          }
+          _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+          _initializerDefineProperty(_this, "durationBoost", _descriptor, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "speedBoost", _descriptor2, _assertThisInitialized(_this));
+          return _this;
+        }
+        var _proto = BoostsController.prototype;
+        _proto.start = function start() {
+          this.loadDataFromUserData();
+          UserDataManager.eventTarget.on('userDataUpdated', this.loadDataFromUserData, this);
+        };
+        _proto.loadDataFromUserData = /*#__PURE__*/function () {
+          var _loadDataFromUserData = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+            return _regeneratorRuntime().wrap(function _callee$(_context) {
+              while (1) switch (_context.prev = _context.next) {
+                case 0:
+                  if (UserDataManager.instance.isInited) {
+                    _context.next = 5;
+                    break;
+                  }
+                  _context.next = 3;
+                  return new Promise(function (resolve) {
+                    return setTimeout(resolve, 100);
+                  });
+                case 3:
+                  _context.next = 0;
+                  break;
+                case 5:
+                  this.setDurationBoostInfo();
+                  this.setSpeedBoostInfo();
+                case 7:
+                case "end":
+                  return _context.stop();
+              }
+            }, _callee, this);
+          }));
+          function loadDataFromUserData() {
+            return _loadDataFromUserData.apply(this, arguments);
+          }
+          return loadDataFromUserData;
+        }();
+        _proto.setSpeedBoostInfo = function setSpeedBoostInfo() {
+          var curMiningSpeedId = UserDataManager.instance.getUserSpeedId();
+          var curMiningSpeed = UserDataManager.instance.getUserCurrentSpeed();
+          var nextMiningSpeedId = curMiningSpeedId + 1;
+          if (nextMiningSpeedId > UserDataManager.instance.getSpeedInfosCount()) {
+            console.log("NO MORE MINING SPEEDS!");
+            this.speedBoost.updateMeLikeFull(curMiningSpeedId, curMiningSpeed);
+            return;
+          }
+          var nextMiningSpeed = UserDataManager.instance.getMiningSpeedById(nextMiningSpeedId);
+          var nextMiningSpeedPrice = UserDataManager.instance.getSpeedPriceById(nextMiningSpeedId);
+          this.speedBoost.updateMe(curMiningSpeedId, curMiningSpeed, nextMiningSpeed, nextMiningSpeedPrice);
+        };
+        _proto.setDurationBoostInfo = function setDurationBoostInfo() {
+          var curMiningDurationId = UserDataManager.instance.getUserDurationId();
+          var curMiningDuration = UserDataManager.instance.getUserCurrentDuration();
+          var nextMiningDurationId = curMiningDurationId + 1;
+          if (nextMiningDurationId > UserDataManager.instance.getDurationInfosCount()) {
+            console.log("NO MORE MINING DURATIONS!");
+            this.durationBoost.updateMeLikeFull(curMiningDurationId, curMiningDuration);
+            return;
+          }
+          var nextMiningDuration = UserDataManager.instance.getMiningDurationById(nextMiningDurationId);
+          var nextMiningDurationPrice = UserDataManager.instance.getDurationPriceById(nextMiningDurationId);
+          this.durationBoost.updateMe(curMiningDurationId, curMiningDuration, nextMiningDuration, nextMiningDurationPrice);
+        };
+        _proto.buyBoostByBoostType = function buyBoostByBoostType(boostType) {
+          if (boostType == BoostType.Duration) {
+            this.tryBuyNextDuration();
+          }
+          if (boostType == BoostType.Speed) {
+            this.tryBuyNextSpeed();
+          }
+        };
+        _proto.tryBuyNextDuration = /*#__PURE__*/function () {
+          var _tryBuyNextDuration = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+            var userId, response, succBuy;
+            return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+              while (1) switch (_context2.prev = _context2.next) {
+                case 0:
+                  if (UserDataManager.instance.isInited) {
+                    _context2.next = 5;
+                    break;
+                  }
+                  _context2.next = 3;
+                  return new Promise(function (resolve) {
+                    return setTimeout(resolve, 100);
+                  });
+                case 3:
+                  _context2.next = 0;
+                  break;
+                case 5:
+                  this.durationBoost.tryingPurchase();
+                  userId = UserDataManager.instance.getUserId();
+                  _context2.next = 9;
+                  return ServerCommunicator.instance.sendGetRequest('boost_duration?user_id=' + userId);
+                case 9:
+                  response = _context2.sent;
+                  succBuy = response[0];
+                  if (succBuy == true) {
+                    this.durationBoost.purchaseSuccessful();
+                  } else {
+                    this.durationBoost.purchaseUnsuccessful();
+                  }
+                  UserDataManager.instance.forceUpdateUserInfo();
+                case 13:
+                case "end":
+                  return _context2.stop();
+              }
+            }, _callee2, this);
+          }));
+          function tryBuyNextDuration() {
+            return _tryBuyNextDuration.apply(this, arguments);
+          }
+          return tryBuyNextDuration;
+        }();
+        _proto.tryBuyNextSpeed = /*#__PURE__*/function () {
+          var _tryBuyNextSpeed = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+            var userId, response, succBuy;
+            return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+              while (1) switch (_context3.prev = _context3.next) {
+                case 0:
+                  if (UserDataManager.instance.isInited) {
+                    _context3.next = 5;
+                    break;
+                  }
+                  _context3.next = 3;
+                  return new Promise(function (resolve) {
+                    return setTimeout(resolve, 100);
+                  });
+                case 3:
+                  _context3.next = 0;
+                  break;
+                case 5:
+                  this.speedBoost.tryingPurchase();
+                  userId = UserDataManager.instance.getUserId();
+                  _context3.next = 9;
+                  return ServerCommunicator.instance.sendGetRequest('boost_speed?user_id=' + userId);
+                case 9:
+                  response = _context3.sent;
+                  succBuy = response[0];
+                  if (succBuy == true) {
+                    this.speedBoost.purchaseSuccessful();
+                  } else {
+                    this.speedBoost.purchaseUnsuccessful();
+                  }
+                  UserDataManager.instance.forceUpdateUserInfo();
+                case 13:
+                case "end":
+                  return _context3.stop();
+              }
+            }, _callee3, this);
+          }));
+          function tryBuyNextSpeed() {
+            return _tryBuyNextSpeed.apply(this, arguments);
+          }
+          return tryBuyNextSpeed;
+        }();
+        return BoostsController;
+      }(Component), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "durationBoost", [_dec2], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, "speedBoost", [_dec3], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      })), _class2)) || _class));
+      cclegacy._RF.pop();
+    }
+  };
+});
+
+System.register("chunks:///_virtual/BoostType.ts", ['cc'], function (exports) {
+  var cclegacy;
+  return {
+    setters: [function (module) {
+      cclegacy = module.cclegacy;
+    }],
+    execute: function () {
+      cclegacy._RF.push({}, "50d5eBKex5ATK2PHZzeoUuO", "BoostType", undefined);
+      var BoostType = exports('BoostType', /*#__PURE__*/function (BoostType) {
+        BoostType[BoostType["Duration"] = 0] = "Duration";
+        BoostType[BoostType["Speed"] = 1] = "Speed";
+        return BoostType;
+      }({}));
+      cclegacy._RF.pop();
+    }
+  };
+});
+
 System.register("chunks:///_virtual/ButtonFeedbacks.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc'], function (exports) {
   var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, CCFloat, Node, tween, Vec3, Component;
   return {
@@ -542,14 +1105,16 @@ System.register("chunks:///_virtual/FriendItem.ts", ['./rollupPluginModLoBabelHe
   };
 });
 
-System.register("chunks:///_virtual/FriendsScrollViewer.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc', './FriendItem.ts'], function (exports) {
-  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, Prefab, Node, instantiate, Component, FriendItem;
+System.register("chunks:///_virtual/FriendsScrollViewer.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc', './FriendItem.ts', './UserDataManager.ts', './ServerCommunicator.ts'], function (exports) {
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _asyncToGenerator, _regeneratorRuntime, cclegacy, _decorator, Prefab, Node, instantiate, Component, FriendItem, UserDataManager, ServerCommunicator;
   return {
     setters: [function (module) {
       _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
       _inheritsLoose = module.inheritsLoose;
       _initializerDefineProperty = module.initializerDefineProperty;
       _assertThisInitialized = module.assertThisInitialized;
+      _asyncToGenerator = module.asyncToGenerator;
+      _regeneratorRuntime = module.regeneratorRuntime;
     }, function (module) {
       cclegacy = module.cclegacy;
       _decorator = module._decorator;
@@ -559,9 +1124,13 @@ System.register("chunks:///_virtual/FriendsScrollViewer.ts", ['./rollupPluginMod
       Component = module.Component;
     }, function (module) {
       FriendItem = module.FriendItem;
+    }, function (module) {
+      UserDataManager = module.UserDataManager;
+    }, function (module) {
+      ServerCommunicator = module.ServerCommunicator;
     }],
     execute: function () {
-      var _dec, _dec2, _dec3, _class, _class2, _descriptor, _descriptor2, _descriptor3;
+      var _dec, _dec2, _dec3, _class, _class2, _descriptor, _descriptor2;
       cclegacy._RF.push({}, "a5f41y+2rdCbbTmgHQq3rA+", "FriendsScrollViewer", undefined);
       var ccclass = _decorator.ccclass,
         property = _decorator.property;
@@ -573,42 +1142,93 @@ System.register("chunks:///_virtual/FriendsScrollViewer.ts", ['./rollupPluginMod
             args[_key] = arguments[_key];
           }
           _this = _Component.call.apply(_Component, [this].concat(args)) || this;
-          _initializerDefineProperty(_this, "numberOfFriends", _descriptor, _assertThisInitialized(_this));
-          _initializerDefineProperty(_this, "friendItemPrefab", _descriptor2, _assertThisInitialized(_this));
-          _initializerDefineProperty(_this, "contentNode", _descriptor3, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "friendItemPrefab", _descriptor, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "contentNode", _descriptor2, _assertThisInitialized(_this));
           return _this;
         }
         var _proto = FriendsScrollViewer.prototype;
         _proto.start = function start() {
-          //get all friends and init
           this.init();
         };
-        _proto.init = function init( /*/initing data/*/
-        ) {
+        _proto.init = /*#__PURE__*/function () {
+          var _init = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+            var userId, response, referralNames;
+            return _regeneratorRuntime().wrap(function _callee$(_context) {
+              while (1) switch (_context.prev = _context.next) {
+                case 0:
+                  if (UserDataManager.instance.isInited) {
+                    _context.next = 5;
+                    break;
+                  }
+                  _context.next = 3;
+                  return new Promise(function (resolve) {
+                    return setTimeout(resolve, 100);
+                  });
+                case 3:
+                  _context.next = 0;
+                  break;
+                case 5:
+                  userId = UserDataManager.instance.getUserId();
+                  _context.prev = 6;
+                  _context.next = 9;
+                  return ServerCommunicator.instance.sendGetRequest('get_referrals_names?user_id=' + userId);
+                case 9:
+                  response = _context.sent;
+                  referralNames = response;
+                  if (Array.isArray(referralNames) && referralNames.every(function (name) {
+                    return typeof name === 'string';
+                  })) {
+                    if (referralNames.length > 0) {
+                      this.updateReferralList(referralNames);
+                    } else {
+                      this.showNoReferralsMessage();
+                    }
+                  } else {
+                    console.error('ERROR IN GETTING FRIENDS FORMAT.');
+                  }
+                  _context.next = 17;
+                  break;
+                case 14:
+                  _context.prev = 14;
+                  _context.t0 = _context["catch"](6);
+                  console.error('ERROR IN GETTING FRIENDS:', _context.t0);
+                case 17:
+                case "end":
+                  return _context.stop();
+              }
+            }, _callee, this, [[6, 14]]);
+          }));
+          function init() {
+            return _init.apply(this, arguments);
+          }
+          return init;
+        }();
+        _proto.updateReferralList = function updateReferralList(referralNames) {
+          if (this.contentNode.children.length < referralNames.length) {
+            if (this.contentNode.children.length > 0) {
+              this.contentNode.removeAllChildren();
+            }
+          }
           if (this.friendItemPrefab && this.contentNode) {
-            for (var i = 0; i < this.numberOfFriends; i++) {
+            for (var i = 0; i < referralNames.length; i++) {
               var newFriendItemPrefab = instantiate(this.friendItemPrefab);
               this.contentNode.addChild(newFriendItemPrefab);
-              newFriendItemPrefab.getComponent(FriendItem).init("friend num " + i.toString());
+              newFriendItemPrefab.getComponent(FriendItem).init(referralNames[i]);
             }
           }
         };
+        _proto.showNoReferralsMessage = function showNoReferralsMessage() {
+          console.log('NO FRIENDS :C');
+        };
         return FriendsScrollViewer;
-      }(Component), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "numberOfFriends", [property], {
-        configurable: true,
-        enumerable: true,
-        writable: true,
-        initializer: function initializer() {
-          return 5;
-        }
-      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, "friendItemPrefab", [_dec2], {
+      }(Component), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "friendItemPrefab", [_dec2], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return null;
         }
-      }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, "contentNode", [_dec3], {
+      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, "contentNode", [_dec3], {
         configurable: true,
         enumerable: true,
         writable: true,
@@ -748,9 +1368,9 @@ System.register("chunks:///_virtual/LoadingHider.ts", ['./rollupPluginModLoBabel
   };
 });
 
-System.register("chunks:///_virtual/main", ['./debug-view-runtime-control.ts', './ButtonFeedbacks.ts', './CopyInviteLink.ts', './FriendItem.ts', './FriendsScrollViewer.ts', './LoadingHider.ts', './MainMiningLabels.ts', './MiningCollectController.ts', './PopupManager.ts', './RotatableUITransform.ts', './ServerCommunicator.ts', './ShareInviteLink.ts', './SlidePopup.ts', './SuitcaseItemsController.ts', './TaskItem.ts', './TasksScrollViewer.ts', './TestGetLabel.ts', './TimerLabel.ts', './UserDataManager.ts', './UserInfoDisplay.ts', './telegram-web.ts'], function () {
+System.register("chunks:///_virtual/main", ['./debug-view-runtime-control.ts', './BalanceLabel.ts', './BoostItem.ts', './BoostType.ts', './BoostsController.ts', './ButtonFeedbacks.ts', './CopyInviteLink.ts', './FriendItem.ts', './FriendsScrollViewer.ts', './LoadingHider.ts', './MainMiningLabels.ts', './MiningCollectController.ts', './PopupManager.ts', './RotatableUITransform.ts', './ServerCommunicator.ts', './ShareInviteLink.ts', './SlidePopup.ts', './SuitcaseCounter.ts', './SuitcaseItemsController.ts', './SuitcasesDataManager.ts', './TaskItem.ts', './TasksDataManager.ts', './TasksScrollViewer.ts', './TestGetLabel.ts', './TimerLabel.ts', './UserDataManager.ts', './UserInfoDisplay.ts', './telegram-web.ts'], function () {
   return {
-    setters: [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+    setters: [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
     execute: function () {}
   };
 });
@@ -797,11 +1417,15 @@ System.register("chunks:///_virtual/MainMiningLabels.ts", ['./rollupPluginModLoB
         var _proto = MainMiningLabels.prototype;
         _proto.start = function start() {
           this.updateBalanceLabel();
+          UserDataManager.eventTarget.on('userDataUpdated', this.updateBalanceLabel, this);
         };
         _proto.update = function update(dt) {
           if (UserDataManager.instance.isInited) {
             this.updateCurrentMinedLabel();
           }
+        };
+        _proto.onDestroy = function onDestroy() {
+          UserDataManager.eventTarget.off('userDataUpdated', this.updateBalanceLabel, this);
         };
         _proto.updateCurrentMinedLabel = function updateCurrentMinedLabel() {
           var startDateStr = UserDataManager.instance.getUserMiningStartDate();
@@ -824,13 +1448,13 @@ System.register("chunks:///_virtual/MainMiningLabels.ts", ['./rollupPluginModLoB
           var currentTime = new Date(new Date().getTime() + this.timeDifference);
           var timeLeft = this.endDate.getTime() - currentTime.getTime();
           if (timeLeft <= 0) {
-            this.currentMinedLabel.string = (UserDataManager.instance.getUserCurrentSpeed() * UserDataManager.instance.getUserCurrentDuration()).toFixed(2);
+            this.currentMinedLabel.string = (UserDataManager.instance.getUserCurrentSpeed() * UserDataManager.instance.getUserCurrentDuration()).toFixed(4);
             this.isMiningActive = false;
           } else {
             var timePassedMs = currentTime.getTime() - startDate.getTime();
             var timePassedHours = timePassedMs / (1000 * 60 * 60);
             var minedAmount = timePassedHours * UserDataManager.instance.getUserCurrentSpeed();
-            this.currentMinedLabel.string = minedAmount.toFixed(2);
+            this.currentMinedLabel.string = minedAmount.toFixed(4);
             this.isMiningActive = true;
           }
         };
@@ -944,13 +1568,11 @@ System.register("chunks:///_virtual/MiningCollectController.ts", ['./rollupPlugi
           return _this;
         }
         var _proto = MiningCollectController.prototype;
-        _proto.onLoad = function onLoad() {
-          UserDataManager.eventTarget.on('userDataUpdated', this.updateMe, this);
-        };
         _proto.onDestroy = function onDestroy() {
           UserDataManager.eventTarget.off('userDataUpdated', this.updateMe, this);
         };
         _proto.start = function start() {
+          UserDataManager.eventTarget.on('userDataUpdated', this.updateMe, this);
           this.init();
         };
         _proto.update = function update(dt) {
@@ -1039,18 +1661,20 @@ System.register("chunks:///_virtual/MiningCollectController.ts", ['./rollupPlugi
             return _regeneratorRuntime().wrap(function _callee3$(_context3) {
               while (1) switch (_context3.prev = _context3.next) {
                 case 0:
+                  console.log("TRYING UPDATE ME!");
+                case 1:
                   if (UserDataManager.instance.isInited) {
-                    _context3.next = 5;
+                    _context3.next = 6;
                     break;
                   }
-                  _context3.next = 3;
+                  _context3.next = 4;
                   return new Promise(function (resolve) {
                     return setTimeout(resolve, 100);
                   });
-                case 3:
-                  _context3.next = 0;
+                case 4:
+                  _context3.next = 1;
                   break;
-                case 5:
+                case 6:
                   if (this.miningSpeedLabel) {
                     this.miningSpeedLabel.string = UserDataManager.instance.getUserCurrentSpeed().toString() + this.miningSpeedPostfix;
                   }
@@ -1061,7 +1685,7 @@ System.register("chunks:///_virtual/MiningCollectController.ts", ['./rollupPlugi
                       this.miningTimer.init(startDateStr, duration);
                     }
                   }
-                case 7:
+                case 8:
                 case "end":
                   return _context3.stop();
               }
@@ -1651,8 +2275,123 @@ System.register("chunks:///_virtual/SlidePopup.ts", ['./rollupPluginModLoBabelHe
   };
 });
 
-System.register("chunks:///_virtual/SuitcaseItemsController.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc', './TimerLabel.ts', './ServerCommunicator.ts', './LoadingHider.ts', './UserDataManager.ts'], function (exports) {
-  var _applyDecoratedDescriptor, _initializerDefineProperty, _inheritsLoose, _assertThisInitialized, _asyncToGenerator, _regeneratorRuntime, _createForOfIteratorHelperLoose, cclegacy, _decorator, Sprite, Node, Color, UITransform, Component, TimerLabel, ServerCommunicator, LoadingHider, UserDataManager;
+System.register("chunks:///_virtual/SuitcaseCounter.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc', './SuitcasesDataManager.ts'], function (exports) {
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _asyncToGenerator, _regeneratorRuntime, cclegacy, _decorator, Label, Component, SuitcasesDataManager;
+  return {
+    setters: [function (module) {
+      _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
+      _inheritsLoose = module.inheritsLoose;
+      _initializerDefineProperty = module.initializerDefineProperty;
+      _assertThisInitialized = module.assertThisInitialized;
+      _asyncToGenerator = module.asyncToGenerator;
+      _regeneratorRuntime = module.regeneratorRuntime;
+    }, function (module) {
+      cclegacy = module.cclegacy;
+      _decorator = module._decorator;
+      Label = module.Label;
+      Component = module.Component;
+    }, function (module) {
+      SuitcasesDataManager = module.SuitcasesDataManager;
+    }],
+    execute: function () {
+      var _dec, _dec2, _class, _class2, _descriptor;
+      cclegacy._RF.push({}, "481d9Y5NMZHtIXBWN8qKw51", "SuitcaseCounter", undefined);
+      var ccclass = _decorator.ccclass,
+        property = _decorator.property;
+      var SuitcaseCounter = exports('SuitcaseCounter', (_dec = ccclass('SuitcaseCounter'), _dec2 = property(Label), _dec(_class = (_class2 = /*#__PURE__*/function (_Component) {
+        _inheritsLoose(SuitcaseCounter, _Component);
+        function SuitcaseCounter() {
+          var _this;
+          for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+          }
+          _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+          _initializerDefineProperty(_this, "myLabel", _descriptor, _assertThisInitialized(_this));
+          return _this;
+        }
+        var _proto = SuitcaseCounter.prototype;
+        _proto.start = function start() {
+          this.initWithSuitcaseCount();
+        };
+        _proto.initWithSuitcaseCount = /*#__PURE__*/function () {
+          var _initWithSuitcaseCount = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+            return _regeneratorRuntime().wrap(function _callee$(_context) {
+              while (1) switch (_context.prev = _context.next) {
+                case 0:
+                  if (SuitcasesDataManager.instance.isInited) {
+                    _context.next = 5;
+                    break;
+                  }
+                  _context.next = 3;
+                  return new Promise(function (resolve) {
+                    return setTimeout(resolve, 100);
+                  });
+                case 3:
+                  _context.next = 0;
+                  break;
+                case 5:
+                  SuitcasesDataManager.eventTarget.on('currentSuitcasesUpdated', this.updateMe, this);
+                  if (!this.myLabel) {
+                    _context.next = 11;
+                    break;
+                  }
+                  _context.next = 9;
+                  return SuitcasesDataManager.instance.getCurrentSuitcaseFilledCount();
+                case 9:
+                  _context.t0 = _context.sent.toString();
+                  this.myLabel.string = "x" + _context.t0;
+                case 11:
+                case "end":
+                  return _context.stop();
+              }
+            }, _callee, this);
+          }));
+          function initWithSuitcaseCount() {
+            return _initWithSuitcaseCount.apply(this, arguments);
+          }
+          return initWithSuitcaseCount;
+        }();
+        _proto.updateMe = /*#__PURE__*/function () {
+          var _updateMe = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+            return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+              while (1) switch (_context2.prev = _context2.next) {
+                case 0:
+                  if (!this.myLabel) {
+                    _context2.next = 5;
+                    break;
+                  }
+                  _context2.next = 3;
+                  return SuitcasesDataManager.instance.getCurrentSuitcaseFilledCount();
+                case 3:
+                  _context2.t0 = _context2.sent.toString();
+                  this.myLabel.string = "x" + _context2.t0;
+                case 5:
+                case "end":
+                  return _context2.stop();
+              }
+            }, _callee2, this);
+          }));
+          function updateMe() {
+            return _updateMe.apply(this, arguments);
+          }
+          return updateMe;
+        }();
+        return SuitcaseCounter;
+      }(Component), _descriptor = _applyDecoratedDescriptor(_class2.prototype, "myLabel", [_dec2], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _class2)) || _class));
+      cclegacy._RF.pop();
+    }
+  };
+});
+
+System.register("chunks:///_virtual/SuitcaseItemsController.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc', './TimerLabel.ts', './LoadingHider.ts', './UserDataManager.ts', './SuitcasesDataManager.ts'], function (exports) {
+  var _applyDecoratedDescriptor, _initializerDefineProperty, _inheritsLoose, _assertThisInitialized, _asyncToGenerator, _regeneratorRuntime, _createForOfIteratorHelperLoose, cclegacy, _decorator, Sprite, Node, Color, UITransform, EventTarget, Component, TimerLabel, LoadingHider, UserDataManager, SuitcasesDataManager;
   return {
     setters: [function (module) {
       _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
@@ -1669,15 +2408,16 @@ System.register("chunks:///_virtual/SuitcaseItemsController.ts", ['./rollupPlugi
       Node = module.Node;
       Color = module.Color;
       UITransform = module.UITransform;
+      EventTarget = module.EventTarget;
       Component = module.Component;
     }, function (module) {
       TimerLabel = module.TimerLabel;
     }, function (module) {
-      ServerCommunicator = module.ServerCommunicator;
-    }, function (module) {
       LoadingHider = module.LoadingHider;
     }, function (module) {
       UserDataManager = module.UserDataManager;
+    }, function (module) {
+      SuitcasesDataManager = module.SuitcasesDataManager;
     }],
     execute: function () {
       var _dec, _dec2, _class, _class2, _descriptor, _descriptor2, _dec3, _dec4, _class4, _class5, _descriptor3, _dec5, _dec6, _dec7, _class7, _class8, _descriptor4, _descriptor5, _descriptor6, _dec8, _dec9, _class10, _class11, _descriptor7, _dec10, _dec11, _dec12, _dec13, _dec14, _dec15, _dec16, _dec17, _dec18, _class13, _class14, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _descriptor13, _descriptor14, _descriptor15;
@@ -1768,12 +2508,9 @@ System.register("chunks:///_virtual/SuitcaseItemsController.ts", ['./rollupPlugi
           _initializerDefineProperty(_this, "loadingHiderSuitcase", _descriptor13, _assertThisInitialized(_this));
           _initializerDefineProperty(_this, "loadingHiderCurrentItem", _descriptor14, _assertThisInitialized(_this));
           _initializerDefineProperty(_this, "allSuitcasesPackedNode", _descriptor15, _assertThisInitialized(_this));
-          _this.currentAllItems = [];
-          _this.currentMiningItems = [];
-          _this.currentItems = [];
-          _this.currentSuitcases = [];
           _this._currentMiningItem = void 0;
           _this._currentUserMiningSuitcaseItemInfo = void 0;
+          _this.eventTarget = new EventTarget();
           return _this;
         }
         var _proto = SuitcaseItemsController.prototype;
@@ -1797,14 +2534,26 @@ System.register("chunks:///_virtual/SuitcaseItemsController.ts", ['./rollupPlugi
                   _context.next = 0;
                   break;
                 case 5:
-                  _context.next = 7;
-                  return this.setCurrentSuitcase();
-                case 7:
-                  _context.next = 9;
-                  return this.setItemsColors();
-                case 9:
-                  this.currentMiningItemSprite.node.on(Node.EventType.TOUCH_END, this.onClickCurrentMiningItemSprite, this);
+                  if (SuitcasesDataManager.instance.isInited) {
+                    _context.next = 10;
+                    break;
+                  }
+                  _context.next = 8;
+                  return new Promise(function (resolve) {
+                    return setTimeout(resolve, 100);
+                  });
+                case 8:
+                  _context.next = 5;
+                  break;
                 case 10:
+                  _context.next = 12;
+                  return this.setCurrentSuitcase();
+                case 12:
+                  _context.next = 14;
+                  return this.setItemsColors();
+                case 14:
+                  this.currentMiningItemSprite.node.on(Node.EventType.TOUCH_END, this.onClickCurrentMiningItemSprite, this);
+                case 15:
                 case "end":
                   return _context.stop();
               }
@@ -1847,7 +2596,7 @@ System.register("chunks:///_virtual/SuitcaseItemsController.ts", ['./rollupPlugi
               while (1) switch (_context3.prev = _context3.next) {
                 case 0:
                   _context3.next = 2;
-                  return this.collectMinedItem();
+                  return SuitcasesDataManager.instance.collectMinedItem();
                 case 2:
                   _context3.next = 4;
                   return this.setCurrentSuitcase(true);
@@ -1892,7 +2641,7 @@ System.register("chunks:///_virtual/SuitcaseItemsController.ts", ['./rollupPlugi
                     console.error("Array suitcasesDatas empty.");
                   }
                   _context4.next = 6;
-                  return this.getCurrentSuitcaseIndex(withForceUpdate);
+                  return SuitcasesDataManager.instance.getCurrentSuitcaseIndex(withForceUpdate);
                 case 6:
                   currentSuitcaseIndex = _context4.sent;
                   if (!(currentSuitcaseIndex === null || currentSuitcaseIndex === undefined || !Number.isInteger(currentSuitcaseIndex))) {
@@ -1940,7 +2689,7 @@ System.register("chunks:///_virtual/SuitcaseItemsController.ts", ['./rollupPlugi
                     withForceUpdate = false;
                   }
                   _context6.next = 3;
-                  return this.getCurrentSuitcaseIndex(withForceUpdate);
+                  return SuitcasesDataManager.instance.getCurrentSuitcaseIndex(withForceUpdate);
                 case 3:
                   currentSuitcaseIndex = _context6.sent;
                   if (!(currentSuitcaseIndex === null || currentSuitcaseIndex === undefined || !Number.isInteger(currentSuitcaseIndex))) {
@@ -1968,15 +2717,15 @@ System.register("chunks:///_virtual/SuitcaseItemsController.ts", ['./rollupPlugi
                     console.log("Not founded");
                   }
                   _context6.next = 12;
-                  return this.getAllItems(withForceUpdate);
+                  return SuitcasesDataManager.instance.getAllItems(withForceUpdate);
                 case 12:
                   allItems = _context6.sent;
                   _context6.next = 15;
-                  return this.getCurrentUserSuitcaseItems(withForceUpdate);
+                  return SuitcasesDataManager.instance.getCurrentUserSuitcaseItems(withForceUpdate);
                 case 15:
                   currentUserSuitcaseItems = _context6.sent;
                   _context6.next = 18;
-                  return this.getCurrentMiningUserSuitcaseItems(withForceUpdate);
+                  return SuitcasesDataManager.instance.getCurrentMiningUserSuitcaseItems(withForceUpdate);
                 case 18:
                   currentMiningUserItems = _context6.sent;
                   _loop = /*#__PURE__*/_regeneratorRuntime().mark(function _loop() {
@@ -2130,241 +2879,6 @@ System.register("chunks:///_virtual/SuitcaseItemsController.ts", ['./rollupPlugi
             this.loadingHiderCurrentItem.hide();
           }
         };
-        _proto.getAllItems = /*#__PURE__*/function () {
-          var _getAllItems = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6(forceUpdate) {
-            var response, allItems;
-            return _regeneratorRuntime().wrap(function _callee6$(_context7) {
-              while (1) switch (_context7.prev = _context7.next) {
-                case 0:
-                  if (forceUpdate === void 0) {
-                    forceUpdate = false;
-                  }
-                  if (!(this.currentAllItems.length <= 0 || forceUpdate)) {
-                    _context7.next = 14;
-                    break;
-                  }
-                  _context7.prev = 2;
-                  _context7.next = 5;
-                  return ServerCommunicator.instance.sendGetRequest('get_all_items');
-                case 5:
-                  response = _context7.sent;
-                  allItems = response;
-                  this.currentAllItems = [];
-                  this.currentAllItems = allItems.map(function (item) {
-                    return {
-                      id: item[0],
-                      name: item[1],
-                      collectionDuration: item[2],
-                      price: item[3],
-                      chance: item[4],
-                      suitcaseTypeId: item[5]
-                    };
-                  });
-                  _context7.next = 14;
-                  break;
-                case 11:
-                  _context7.prev = 11;
-                  _context7.t0 = _context7["catch"](2);
-                  console.error('Error fetching items:', _context7.t0);
-                case 14:
-                  return _context7.abrupt("return", this.currentAllItems);
-                case 15:
-                case "end":
-                  return _context7.stop();
-              }
-            }, _callee6, this, [[2, 11]]);
-          }));
-          function getAllItems(_x3) {
-            return _getAllItems.apply(this, arguments);
-          }
-          return getAllItems;
-        }();
-        _proto.getCurrentUserSuitcaseItems = /*#__PURE__*/function () {
-          var _getCurrentUserSuitcaseItems = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7(forceUpdate) {
-            var userId, response, items;
-            return _regeneratorRuntime().wrap(function _callee7$(_context8) {
-              while (1) switch (_context8.prev = _context8.next) {
-                case 0:
-                  if (forceUpdate === void 0) {
-                    forceUpdate = false;
-                  }
-                  if (!(this.currentItems.length <= 0 || forceUpdate)) {
-                    _context8.next = 15;
-                    break;
-                  }
-                  _context8.prev = 2;
-                  userId = UserDataManager.instance.getUserId();
-                  _context8.next = 6;
-                  return ServerCommunicator.instance.sendGetRequest('get_user_suitcase_items?user_id=' + userId);
-                case 6:
-                  response = _context8.sent;
-                  items = response;
-                  this.currentItems = [];
-                  this.currentItems = items.map(function (item) {
-                    return {
-                      id: item[0],
-                      userId: item[1],
-                      suitcaseId: item[2],
-                      itemId: item[3],
-                      status: item[4]
-                    };
-                  });
-                  _context8.next = 15;
-                  break;
-                case 12:
-                  _context8.prev = 12;
-                  _context8.t0 = _context8["catch"](2);
-                  console.error('Error fetching items:', _context8.t0);
-                case 15:
-                  return _context8.abrupt("return", this.currentItems);
-                case 16:
-                case "end":
-                  return _context8.stop();
-              }
-            }, _callee7, this, [[2, 12]]);
-          }));
-          function getCurrentUserSuitcaseItems(_x4) {
-            return _getCurrentUserSuitcaseItems.apply(this, arguments);
-          }
-          return getCurrentUserSuitcaseItems;
-        }();
-        _proto.getCurrentMiningUserSuitcaseItems = /*#__PURE__*/function () {
-          var _getCurrentMiningUserSuitcaseItems = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee8(forceUpdate) {
-            var userId, response, miningItemsRawArrays, miningItems;
-            return _regeneratorRuntime().wrap(function _callee8$(_context9) {
-              while (1) switch (_context9.prev = _context9.next) {
-                case 0:
-                  if (forceUpdate === void 0) {
-                    forceUpdate = false;
-                  }
-                  if (!(this.currentMiningItems.length <= 0 || forceUpdate)) {
-                    _context9.next = 19;
-                    break;
-                  }
-                  _context9.prev = 2;
-                  userId = UserDataManager.instance.getUserId();
-                  _context9.next = 6;
-                  return ServerCommunicator.instance.sendGetRequest('get_all_user_mining_items?user_id=' + userId);
-                case 6:
-                  response = _context9.sent;
-                  miningItemsRawArrays = response;
-                  if (!(miningItemsRawArrays.length <= 0)) {
-                    _context9.next = 11;
-                    break;
-                  }
-                  console.log('ALL ITEMS COLLECTED!');
-                  return _context9.abrupt("return");
-                case 11:
-                  miningItems = response;
-                  this.currentMiningItems = [];
-                  this.currentMiningItems = miningItems.map(function (item) {
-                    return {
-                      id: item[0],
-                      dataStartMiningItem: item[1],
-                      userId: item[2],
-                      itemId: item[3],
-                      isFinished: item[4]
-                    };
-                  });
-                  _context9.next = 19;
-                  break;
-                case 16:
-                  _context9.prev = 16;
-                  _context9.t0 = _context9["catch"](2);
-                  console.error('Error fetching items:', _context9.t0);
-                case 19:
-                  return _context9.abrupt("return", this.currentMiningItems);
-                case 20:
-                case "end":
-                  return _context9.stop();
-              }
-            }, _callee8, this, [[2, 16]]);
-          }));
-          function getCurrentMiningUserSuitcaseItems(_x5) {
-            return _getCurrentMiningUserSuitcaseItems.apply(this, arguments);
-          }
-          return getCurrentMiningUserSuitcaseItems;
-        }();
-        _proto.getCurrentSuitcaseIndex = /*#__PURE__*/function () {
-          var _getCurrentSuitcaseIndex = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee9(forceUpdate) {
-            var userId, response, userSuitcases, incompleteSuitcase;
-            return _regeneratorRuntime().wrap(function _callee9$(_context10) {
-              while (1) switch (_context10.prev = _context10.next) {
-                case 0:
-                  if (forceUpdate === void 0) {
-                    forceUpdate = false;
-                  }
-                  if (!(this.currentSuitcases.length <= 0 || forceUpdate)) {
-                    _context10.next = 16;
-                    break;
-                  }
-                  _context10.prev = 2;
-                  userId = UserDataManager.instance.getUserId();
-                  _context10.next = 6;
-                  return ServerCommunicator.instance.sendGetRequest('get_all_user_suitcases?user_id=' + userId);
-                case 6:
-                  response = _context10.sent;
-                  userSuitcases = response;
-                  this.currentSuitcases = [];
-                  this.currentSuitcases = userSuitcases.map(function (item) {
-                    return {
-                      id: item[0],
-                      userId: item[1],
-                      suitcaseTypeId: item[2],
-                      isComplete: item[3]
-                    };
-                  });
-                  _context10.next = 16;
-                  break;
-                case 12:
-                  _context10.prev = 12;
-                  _context10.t0 = _context10["catch"](2);
-                  console.error('Error fetching items:', _context10.t0);
-                  return _context10.abrupt("return", null);
-                case 16:
-                  incompleteSuitcase = this.currentSuitcases.find(function (suitcase) {
-                    return suitcase.isComplete === 0;
-                  });
-                  return _context10.abrupt("return", incompleteSuitcase ? incompleteSuitcase.suitcaseTypeId - 1 : null);
-                case 18:
-                case "end":
-                  return _context10.stop();
-              }
-            }, _callee9, this, [[2, 12]]);
-          }));
-          function getCurrentSuitcaseIndex(_x6) {
-            return _getCurrentSuitcaseIndex.apply(this, arguments);
-          }
-          return getCurrentSuitcaseIndex;
-        }();
-        _proto.collectMinedItem = /*#__PURE__*/function () {
-          var _collectMinedItem = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee10() {
-            var userId;
-            return _regeneratorRuntime().wrap(function _callee10$(_context11) {
-              while (1) switch (_context11.prev = _context11.next) {
-                case 0:
-                  _context11.prev = 0;
-                  userId = UserDataManager.instance.getUserId();
-                  _context11.next = 4;
-                  return ServerCommunicator.instance.sendGetRequest('collect_mined_item?user_id=' + userId);
-                case 4:
-                  return _context11.abrupt("return", true);
-                case 7:
-                  _context11.prev = 7;
-                  _context11.t0 = _context11["catch"](0);
-                  console.error('Error  collecting items:', _context11.t0);
-                  return _context11.abrupt("return", null);
-                case 11:
-                case "end":
-                  return _context11.stop();
-              }
-            }, _callee10, null, [[0, 7]]);
-          }));
-          function collectMinedItem() {
-            return _collectMinedItem.apply(this, arguments);
-          }
-          return collectMinedItem;
-        }();
         return SuitcaseItemsController;
       }(Component), (_descriptor8 = _applyDecoratedDescriptor(_class14.prototype, "suitcases", [_dec11], {
         configurable: true,
@@ -2428,8 +2942,443 @@ System.register("chunks:///_virtual/SuitcaseItemsController.ts", ['./rollupPlugi
   };
 });
 
-System.register("chunks:///_virtual/TaskItem.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc', './telegram-web.ts', './ButtonFeedbacks.ts', './PopupManager.ts'], function (exports) {
-  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _asyncToGenerator, _regeneratorRuntime, cclegacy, _decorator, Label, Button, Sprite, SpriteFrame, Component, TelegramWebApp, ButtonFeedbacks, PopupManager;
+System.register("chunks:///_virtual/SuitcasesDataManager.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc', './ServerCommunicator.ts', './UserDataManager.ts'], function (exports) {
+  var _inheritsLoose, _createClass, _asyncToGenerator, _regeneratorRuntime, cclegacy, _decorator, EventTarget, Component, ServerCommunicator, UserDataManager;
+  return {
+    setters: [function (module) {
+      _inheritsLoose = module.inheritsLoose;
+      _createClass = module.createClass;
+      _asyncToGenerator = module.asyncToGenerator;
+      _regeneratorRuntime = module.regeneratorRuntime;
+    }, function (module) {
+      cclegacy = module.cclegacy;
+      _decorator = module._decorator;
+      EventTarget = module.EventTarget;
+      Component = module.Component;
+    }, function (module) {
+      ServerCommunicator = module.ServerCommunicator;
+    }, function (module) {
+      UserDataManager = module.UserDataManager;
+    }],
+    execute: function () {
+      var _dec, _class, _class2;
+      cclegacy._RF.push({}, "f1abcroKCxPOq6YLUSuGxvD", "SuitcasesDataManager", undefined);
+      var ccclass = _decorator.ccclass;
+      var SuitcasesDataManager = exports('SuitcasesDataManager', (_dec = ccclass('SuitcasesDataManager'), _dec(_class = (_class2 = /*#__PURE__*/function (_Component) {
+        _inheritsLoose(SuitcasesDataManager, _Component);
+        function SuitcasesDataManager() {
+          var _this;
+          for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+          }
+          _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+          _this.currentAllItems = [];
+          _this.currentItems = [];
+          _this.currentMiningItems = [];
+          _this.currentSuitcases = [];
+          return _this;
+        }
+        var _proto = SuitcasesDataManager.prototype;
+        _proto.onLoad = function onLoad() {
+          if (SuitcasesDataManager._instance) {
+            console.warn("SuitcasesDataManager instance already exists!");
+            this.destroy();
+            return;
+          }
+          SuitcasesDataManager._instance = this;
+          this.forceUpdateData();
+        };
+        _proto.forceUpdateData = /*#__PURE__*/function () {
+          var _forceUpdateData = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+            return _regeneratorRuntime().wrap(function _callee$(_context) {
+              while (1) switch (_context.prev = _context.next) {
+                case 0:
+                  if (UserDataManager.instance.isInited) {
+                    _context.next = 5;
+                    break;
+                  }
+                  _context.next = 3;
+                  return new Promise(function (resolve) {
+                    return setTimeout(resolve, 100);
+                  });
+                case 3:
+                  _context.next = 0;
+                  break;
+                case 5:
+                  this.setAllItemsFromServer();
+                  this.setCurrentUserSuitcaseItemsFromServer();
+                  this.setCurrentMiningUserSuitcaseItemsFromServer();
+                  this.setCurrentSuitcasesFromServer();
+                case 9:
+                case "end":
+                  return _context.stop();
+              }
+            }, _callee, this);
+          }));
+          function forceUpdateData() {
+            return _forceUpdateData.apply(this, arguments);
+          }
+          return forceUpdateData;
+        }();
+        _proto.setAllItemsFromServer = /*#__PURE__*/function () {
+          var _setAllItemsFromServer = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+            var response, allItems;
+            return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+              while (1) switch (_context2.prev = _context2.next) {
+                case 0:
+                  _context2.prev = 0;
+                  _context2.next = 3;
+                  return ServerCommunicator.instance.sendGetRequest('get_all_items');
+                case 3:
+                  response = _context2.sent;
+                  allItems = response;
+                  this.currentAllItems = allItems.map(function (item) {
+                    return {
+                      id: item[0],
+                      name: item[1],
+                      collectionDuration: item[2],
+                      price: item[3],
+                      chance: item[4],
+                      suitcaseTypeId: item[5]
+                    };
+                  });
+                  SuitcasesDataManager.eventTarget.emit('allItemsUpdated');
+                  _context2.next = 12;
+                  break;
+                case 9:
+                  _context2.prev = 9;
+                  _context2.t0 = _context2["catch"](0);
+                  console.error('Error fetching items:', _context2.t0);
+                case 12:
+                case "end":
+                  return _context2.stop();
+              }
+            }, _callee2, this, [[0, 9]]);
+          }));
+          function setAllItemsFromServer() {
+            return _setAllItemsFromServer.apply(this, arguments);
+          }
+          return setAllItemsFromServer;
+        }();
+        _proto.setCurrentUserSuitcaseItemsFromServer = /*#__PURE__*/function () {
+          var _setCurrentUserSuitcaseItemsFromServer = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+            var userId, response, items;
+            return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+              while (1) switch (_context3.prev = _context3.next) {
+                case 0:
+                  _context3.prev = 0;
+                  userId = UserDataManager.instance.getUserId();
+                  _context3.next = 4;
+                  return ServerCommunicator.instance.sendGetRequest('get_user_suitcase_items?user_id=' + userId);
+                case 4:
+                  response = _context3.sent;
+                  items = response;
+                  if (Array.isArray(items)) {
+                    _context3.next = 8;
+                    break;
+                  }
+                  return _context3.abrupt("return");
+                case 8:
+                  this.currentItems = items.map(function (item) {
+                    return {
+                      id: item[0],
+                      userId: item[1],
+                      suitcaseId: item[2],
+                      itemId: item[3],
+                      status: item[4]
+                    };
+                  });
+                  SuitcasesDataManager.eventTarget.emit('currentUserSuitcaseItemsUpdated');
+                  _context3.next = 15;
+                  break;
+                case 12:
+                  _context3.prev = 12;
+                  _context3.t0 = _context3["catch"](0);
+                  console.error('Error fetching user suitcase items:', _context3.t0);
+                case 15:
+                case "end":
+                  return _context3.stop();
+              }
+            }, _callee3, this, [[0, 12]]);
+          }));
+          function setCurrentUserSuitcaseItemsFromServer() {
+            return _setCurrentUserSuitcaseItemsFromServer.apply(this, arguments);
+          }
+          return setCurrentUserSuitcaseItemsFromServer;
+        }();
+        _proto.setCurrentMiningUserSuitcaseItemsFromServer = /*#__PURE__*/function () {
+          var _setCurrentMiningUserSuitcaseItemsFromServer = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+            var userId, response, miningItems;
+            return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+              while (1) switch (_context4.prev = _context4.next) {
+                case 0:
+                  _context4.prev = 0;
+                  userId = UserDataManager.instance.getUserId();
+                  _context4.next = 4;
+                  return ServerCommunicator.instance.sendGetRequest('get_all_user_mining_items?user_id=' + userId);
+                case 4:
+                  response = _context4.sent;
+                  miningItems = response;
+                  this.currentMiningItems = miningItems.map(function (item) {
+                    return {
+                      id: item[0],
+                      dataStartMiningItem: item[1],
+                      userId: item[2],
+                      itemId: item[3],
+                      isFinished: item[4]
+                    };
+                  });
+                  SuitcasesDataManager.eventTarget.emit('currentMiningUserSuitcaseItemsUpdated');
+                  _context4.next = 13;
+                  break;
+                case 10:
+                  _context4.prev = 10;
+                  _context4.t0 = _context4["catch"](0);
+                  console.error('Error fetching mining items:', _context4.t0);
+                case 13:
+                case "end":
+                  return _context4.stop();
+              }
+            }, _callee4, this, [[0, 10]]);
+          }));
+          function setCurrentMiningUserSuitcaseItemsFromServer() {
+            return _setCurrentMiningUserSuitcaseItemsFromServer.apply(this, arguments);
+          }
+          return setCurrentMiningUserSuitcaseItemsFromServer;
+        }();
+        _proto.setCurrentSuitcasesFromServer = /*#__PURE__*/function () {
+          var _setCurrentSuitcasesFromServer = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
+            var userId, response, userSuitcases;
+            return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+              while (1) switch (_context5.prev = _context5.next) {
+                case 0:
+                  _context5.prev = 0;
+                  userId = UserDataManager.instance.getUserId();
+                  _context5.next = 4;
+                  return ServerCommunicator.instance.sendGetRequest('get_all_user_suitcases?user_id=' + userId);
+                case 4:
+                  response = _context5.sent;
+                  userSuitcases = response;
+                  this.currentSuitcases = userSuitcases.map(function (item) {
+                    return {
+                      id: item[0],
+                      userId: item[1],
+                      suitcaseTypeId: item[2],
+                      isComplete: item[3]
+                    };
+                  });
+                  SuitcasesDataManager.eventTarget.emit('currentSuitcasesUpdated');
+                  _context5.next = 13;
+                  break;
+                case 10:
+                  _context5.prev = 10;
+                  _context5.t0 = _context5["catch"](0);
+                  console.error('Error fetching user suitcases:', _context5.t0);
+                case 13:
+                case "end":
+                  return _context5.stop();
+              }
+            }, _callee5, this, [[0, 10]]);
+          }));
+          function setCurrentSuitcasesFromServer() {
+            return _setCurrentSuitcasesFromServer.apply(this, arguments);
+          }
+          return setCurrentSuitcasesFromServer;
+        }();
+        _proto.getAllItems = /*#__PURE__*/function () {
+          var _getAllItems = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6(forceUpdate) {
+            return _regeneratorRuntime().wrap(function _callee6$(_context6) {
+              while (1) switch (_context6.prev = _context6.next) {
+                case 0:
+                  if (forceUpdate === void 0) {
+                    forceUpdate = false;
+                  }
+                  if (!(this.currentAllItems.length <= 0 || forceUpdate)) {
+                    _context6.next = 4;
+                    break;
+                  }
+                  _context6.next = 4;
+                  return this.setAllItemsFromServer();
+                case 4:
+                  return _context6.abrupt("return", this.currentAllItems);
+                case 5:
+                case "end":
+                  return _context6.stop();
+              }
+            }, _callee6, this);
+          }));
+          function getAllItems(_x) {
+            return _getAllItems.apply(this, arguments);
+          }
+          return getAllItems;
+        }();
+        _proto.getCurrentUserSuitcaseItems = /*#__PURE__*/function () {
+          var _getCurrentUserSuitcaseItems = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7(forceUpdate) {
+            return _regeneratorRuntime().wrap(function _callee7$(_context7) {
+              while (1) switch (_context7.prev = _context7.next) {
+                case 0:
+                  if (forceUpdate === void 0) {
+                    forceUpdate = false;
+                  }
+                  if (!(this.currentItems.length <= 0 || forceUpdate)) {
+                    _context7.next = 4;
+                    break;
+                  }
+                  _context7.next = 4;
+                  return this.setCurrentUserSuitcaseItemsFromServer();
+                case 4:
+                  return _context7.abrupt("return", this.currentItems);
+                case 5:
+                case "end":
+                  return _context7.stop();
+              }
+            }, _callee7, this);
+          }));
+          function getCurrentUserSuitcaseItems(_x2) {
+            return _getCurrentUserSuitcaseItems.apply(this, arguments);
+          }
+          return getCurrentUserSuitcaseItems;
+        }();
+        _proto.getCurrentMiningUserSuitcaseItems = /*#__PURE__*/function () {
+          var _getCurrentMiningUserSuitcaseItems = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee8(forceUpdate) {
+            return _regeneratorRuntime().wrap(function _callee8$(_context8) {
+              while (1) switch (_context8.prev = _context8.next) {
+                case 0:
+                  if (forceUpdate === void 0) {
+                    forceUpdate = false;
+                  }
+                  if (!(this.currentMiningItems.length <= 0 || forceUpdate)) {
+                    _context8.next = 4;
+                    break;
+                  }
+                  _context8.next = 4;
+                  return this.setCurrentMiningUserSuitcaseItemsFromServer();
+                case 4:
+                  return _context8.abrupt("return", this.currentMiningItems);
+                case 5:
+                case "end":
+                  return _context8.stop();
+              }
+            }, _callee8, this);
+          }));
+          function getCurrentMiningUserSuitcaseItems(_x3) {
+            return _getCurrentMiningUserSuitcaseItems.apply(this, arguments);
+          }
+          return getCurrentMiningUserSuitcaseItems;
+        }();
+        _proto.getCurrentSuitcaseIndex = /*#__PURE__*/function () {
+          var _getCurrentSuitcaseIndex = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee9(forceUpdate) {
+            var incompleteSuitcase;
+            return _regeneratorRuntime().wrap(function _callee9$(_context9) {
+              while (1) switch (_context9.prev = _context9.next) {
+                case 0:
+                  if (forceUpdate === void 0) {
+                    forceUpdate = false;
+                  }
+                  if (!(this.currentSuitcases.length <= 0 || forceUpdate)) {
+                    _context9.next = 4;
+                    break;
+                  }
+                  _context9.next = 4;
+                  return this.setCurrentSuitcasesFromServer();
+                case 4:
+                  incompleteSuitcase = this.currentSuitcases.find(function (suitcase) {
+                    return suitcase.isComplete === 0;
+                  });
+                  return _context9.abrupt("return", incompleteSuitcase ? incompleteSuitcase.suitcaseTypeId - 1 : null);
+                case 6:
+                case "end":
+                  return _context9.stop();
+              }
+            }, _callee9, this);
+          }));
+          function getCurrentSuitcaseIndex(_x4) {
+            return _getCurrentSuitcaseIndex.apply(this, arguments);
+          }
+          return getCurrentSuitcaseIndex;
+        }();
+        _proto.getCurrentSuitcaseFilledCount = /*#__PURE__*/function () {
+          var _getCurrentSuitcaseFilledCount = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee10(forceUpdate) {
+            var filledSuitcases;
+            return _regeneratorRuntime().wrap(function _callee10$(_context10) {
+              while (1) switch (_context10.prev = _context10.next) {
+                case 0:
+                  if (forceUpdate === void 0) {
+                    forceUpdate = false;
+                  }
+                  if (!(this.currentSuitcases.length <= 0 || forceUpdate)) {
+                    _context10.next = 4;
+                    break;
+                  }
+                  _context10.next = 4;
+                  return this.setCurrentSuitcasesFromServer();
+                case 4:
+                  filledSuitcases = this.currentSuitcases.filter(function (suitcase) {
+                    return suitcase.isComplete === 1;
+                  });
+                  return _context10.abrupt("return", filledSuitcases.length);
+                case 6:
+                case "end":
+                  return _context10.stop();
+              }
+            }, _callee10, this);
+          }));
+          function getCurrentSuitcaseFilledCount(_x5) {
+            return _getCurrentSuitcaseFilledCount.apply(this, arguments);
+          }
+          return getCurrentSuitcaseFilledCount;
+        }();
+        _proto.collectMinedItem = /*#__PURE__*/function () {
+          var _collectMinedItem = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee11() {
+            var userId;
+            return _regeneratorRuntime().wrap(function _callee11$(_context11) {
+              while (1) switch (_context11.prev = _context11.next) {
+                case 0:
+                  _context11.prev = 0;
+                  userId = UserDataManager.instance.getUserId();
+                  _context11.next = 4;
+                  return ServerCommunicator.instance.sendGetRequest('collect_mined_item?user_id=' + userId);
+                case 4:
+                  return _context11.abrupt("return", true);
+                case 7:
+                  _context11.prev = 7;
+                  _context11.t0 = _context11["catch"](0);
+                  console.error('Error collecting mined item:', _context11.t0);
+                  return _context11.abrupt("return", false);
+                case 11:
+                case "end":
+                  return _context11.stop();
+              }
+            }, _callee11, null, [[0, 7]]);
+          }));
+          function collectMinedItem() {
+            return _collectMinedItem.apply(this, arguments);
+          }
+          return collectMinedItem;
+        }();
+        _createClass(SuitcasesDataManager, [{
+          key: "isInited",
+          get: function get() {
+            return this.currentAllItems.length > 0 && this.currentMiningItems.length > 0 && this.currentSuitcases.length > 0;
+          }
+        }], [{
+          key: "instance",
+          get: function get() {
+            if (!this._instance) {
+              console.error("SuitcasesDataManager instance is not initialized!");
+            }
+            return this._instance;
+          }
+        }]);
+        return SuitcasesDataManager;
+      }(Component), _class2._instance = void 0, _class2.eventTarget = new EventTarget(), _class2)) || _class));
+      cclegacy._RF.pop();
+    }
+  };
+});
+
+System.register("chunks:///_virtual/TaskItem.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc', './telegram-web.ts', './ButtonFeedbacks.ts', './PopupManager.ts', './TasksDataManager.ts'], function (exports) {
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _asyncToGenerator, _regeneratorRuntime, cclegacy, _decorator, Label, Button, Sprite, SpriteFrame, Component, TelegramWebApp, ButtonFeedbacks, PopupManager, TaskType, TasksDataManager;
   return {
     setters: [function (module) {
       _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
@@ -2452,20 +3401,15 @@ System.register("chunks:///_virtual/TaskItem.ts", ['./rollupPluginModLoBabelHelp
       ButtonFeedbacks = module.ButtonFeedbacks;
     }, function (module) {
       PopupManager = module.PopupManager;
+    }, function (module) {
+      TaskType = module.TaskType;
+      TasksDataManager = module.TasksDataManager;
     }],
     execute: function () {
       var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _dec10, _dec11, _dec12, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11;
       cclegacy._RF.push({}, "16834gY+L5A5rZb5lxvMF3Q", "TaskItem", undefined);
       var ccclass = _decorator.ccclass,
         property = _decorator.property;
-      var TaskType = exports('TaskType', /*#__PURE__*/function (TaskType) {
-        TaskType["Other"] = "Other";
-        TaskType["GoTo"] = "GoTo";
-        TaskType["Subscribe"] = "Subscribe";
-        TaskType["MoneyCount"] = "MoneyCount";
-        TaskType["FriendsCount"] = "FriendsCount";
-        return TaskType;
-      }({}));
       var TaskItem = exports('TaskItem', (_dec = ccclass('TaskItem'), _dec2 = property(Label), _dec3 = property(Label), _dec4 = property(Button), _dec5 = property(Sprite), _dec6 = property(SpriteFrame), _dec7 = property(SpriteFrame), _dec8 = property(Sprite), _dec9 = property(SpriteFrame), _dec10 = property(SpriteFrame), _dec11 = property(SpriteFrame), _dec12 = property(SpriteFrame), _dec(_class = (_class2 = /*#__PURE__*/function (_Component) {
         _inheritsLoose(TaskItem, _Component);
         function TaskItem() {
@@ -2493,19 +3437,15 @@ System.register("chunks:///_virtual/TaskItem.ts", ['./rollupPluginModLoBabelHelp
           this.myTaskData = task;
           this.updateMe();
         };
-        _proto.updateTaskData = function updateTaskData(newTaskData) {
-          this.myTaskData = newTaskData;
-          this.updateMe();
-        };
         _proto.updateMe = function updateMe() {
           if (this.nameLabel) {
-            this.nameLabel.string = this.myTaskData.taskName;
+            this.nameLabel.string = this.myTaskData.taskInfo.name;
           }
           if (this.rewardLabel) {
-            this.rewardLabel.string = "+" + this.myTaskData.reward.toString();
+            this.rewardLabel.string = "+" + this.myTaskData.taskInfo.reward.toString();
           }
           if (this.iconSprite && this.otherIcon && this.subscribeIcon && this.moneyIcon && this.friendsIcon) {
-            switch (this.myTaskData.taskType) {
+            switch (this.myTaskData.taskInfo.taskType) {
               case TaskType.GoTo:
               case TaskType.Other:
                 this.iconSprite.spriteFrame = this.otherIcon;
@@ -2525,7 +3465,7 @@ System.register("chunks:///_virtual/TaskItem.ts", ['./rollupPluginModLoBabelHelp
             }
           }
           if (this.goButton && this.buttonIconSprite) {
-            if (this.myTaskData.isCompleted) {
+            if (this.myTaskData.userTaskInfo.status === "completed") {
               if (this.isCompletedIcon) {
                 this.buttonIconSprite.spriteFrame = this.isCompletedIcon;
               }
@@ -2552,7 +3492,7 @@ System.register("chunks:///_virtual/TaskItem.ts", ['./rollupPluginModLoBabelHelp
             return _regeneratorRuntime().wrap(function _callee$(_context) {
               while (1) switch (_context.prev = _context.next) {
                 case 0:
-                  if (!this.myTaskData.isCompleted) {
+                  if (!(this.myTaskData.userTaskInfo.status === "completed")) {
                     _context.next = 2;
                     break;
                   }
@@ -2563,8 +3503,7 @@ System.register("chunks:///_virtual/TaskItem.ts", ['./rollupPluginModLoBabelHelp
                 case 4:
                   isNowCompleted = _context.sent;
                   if (isNowCompleted) {
-                    this.myTaskData.isCompleted = true;
-                    this.updateTaskData(this.myTaskData);
+                    TasksDataManager.instance.forceUpdateData();
                   } else {
                     this.goToCompleteTask();
                   }
@@ -2581,44 +3520,14 @@ System.register("chunks:///_virtual/TaskItem.ts", ['./rollupPluginModLoBabelHelp
         }();
         _proto.checkTaskIsComplitedNow = /*#__PURE__*/function () {
           var _checkTaskIsComplitedNow = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-            var isNowCompleted;
             return _regeneratorRuntime().wrap(function _callee2$(_context2) {
               while (1) switch (_context2.prev = _context2.next) {
                 case 0:
-                  isNowCompleted = false;
-                  _context2.t0 = this.myTaskData.taskType;
-                  _context2.next = _context2.t0 === TaskType.GoTo ? 4 : _context2.t0 === TaskType.Other ? 4 : _context2.t0 === TaskType.Subscribe ? 8 : _context2.t0 === TaskType.MoneyCount ? 12 : _context2.t0 === TaskType.FriendsCount ? 16 : 20;
-                  break;
-                case 4:
-                  _context2.next = 6;
-                  return this.checkOtherIsComplited();
-                case 6:
-                  isNowCompleted = _context2.sent;
-                  return _context2.abrupt("break", 22);
-                case 8:
-                  _context2.next = 10;
-                  return this.checkSubscribeIsComplited();
-                case 10:
-                  isNowCompleted = _context2.sent;
-                  return _context2.abrupt("break", 22);
-                case 12:
-                  _context2.next = 14;
-                  return this.checkMoneyIsComplited();
-                case 14:
-                  isNowCompleted = _context2.sent;
-                  return _context2.abrupt("break", 22);
-                case 16:
-                  _context2.next = 18;
-                  return this.checkFriendsIsComplited();
-                case 18:
-                  isNowCompleted = _context2.sent;
-                  return _context2.abrupt("break", 22);
-                case 20:
-                  console.log("Unknown task type");
-                  return _context2.abrupt("break", 22);
-                case 22:
-                  return _context2.abrupt("return", isNowCompleted);
-                case 23:
+                  _context2.next = 2;
+                  return TasksDataManager.instance.checkTaskCompleted(this.myTaskData.userTaskInfo.taskId);
+                case 2:
+                  return _context2.abrupt("return", _context2.sent);
+                case 3:
                 case "end":
                   return _context2.stop();
               }
@@ -2634,7 +3543,7 @@ System.register("chunks:///_virtual/TaskItem.ts", ['./rollupPluginModLoBabelHelp
             return _regeneratorRuntime().wrap(function _callee3$(_context3) {
               while (1) switch (_context3.prev = _context3.next) {
                 case 0:
-                  _context3.t0 = this.myTaskData.taskType;
+                  _context3.t0 = this.myTaskData.taskInfo.taskType;
                   _context3.next = _context3.t0 === TaskType.GoTo ? 3 : _context3.t0 === TaskType.Other ? 3 : _context3.t0 === TaskType.Subscribe ? 6 : _context3.t0 === TaskType.MoneyCount ? 9 : _context3.t0 === TaskType.FriendsCount ? 11 : 13;
                   break;
                 case 3:
@@ -2666,125 +3575,23 @@ System.register("chunks:///_virtual/TaskItem.ts", ['./rollupPluginModLoBabelHelp
             return _goToCompleteTask.apply(this, arguments);
           }
           return goToCompleteTask;
-        }() //for test only
-        ;
-
-        _proto.delay = /*#__PURE__*/
-        function () {
-          var _delay = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(ms) {
+        }();
+        _proto.goOtherComplete = /*#__PURE__*/function () {
+          var _goOtherComplete = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+            var tgWebApp;
             return _regeneratorRuntime().wrap(function _callee4$(_context4) {
               while (1) switch (_context4.prev = _context4.next) {
                 case 0:
-                  return _context4.abrupt("return", new Promise(function (resolve) {
-                    return setTimeout(resolve, ms);
-                  }));
-                case 1:
+                  tgWebApp = TelegramWebApp.Instance;
+                  _context4.next = 3;
+                  return tgWebApp.init();
+                case 3:
+                  tgWebApp.openLink(this.myTaskData.taskInfo.details);
+                case 4:
                 case "end":
                   return _context4.stop();
               }
-            }, _callee4);
-          }));
-          function delay(_x) {
-            return _delay.apply(this, arguments);
-          }
-          return delay;
-        }();
-        _proto.checkOtherIsComplited = /*#__PURE__*/function () {
-          var _checkOtherIsComplited = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
-            return _regeneratorRuntime().wrap(function _callee5$(_context5) {
-              while (1) switch (_context5.prev = _context5.next) {
-                case 0:
-                  _context5.next = 2;
-                  return this.delay(200);
-                case 2:
-                  return _context5.abrupt("return", false);
-                case 3:
-                case "end":
-                  return _context5.stop();
-              }
-            }, _callee5, this);
-          }));
-          function checkOtherIsComplited() {
-            return _checkOtherIsComplited.apply(this, arguments);
-          }
-          return checkOtherIsComplited;
-        }();
-        _proto.checkSubscribeIsComplited = /*#__PURE__*/function () {
-          var _checkSubscribeIsComplited = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
-            return _regeneratorRuntime().wrap(function _callee6$(_context6) {
-              while (1) switch (_context6.prev = _context6.next) {
-                case 0:
-                  _context6.next = 2;
-                  return this.delay(200);
-                case 2:
-                  return _context6.abrupt("return", false);
-                case 3:
-                case "end":
-                  return _context6.stop();
-              }
-            }, _callee6, this);
-          }));
-          function checkSubscribeIsComplited() {
-            return _checkSubscribeIsComplited.apply(this, arguments);
-          }
-          return checkSubscribeIsComplited;
-        }();
-        _proto.checkMoneyIsComplited = /*#__PURE__*/function () {
-          var _checkMoneyIsComplited = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
-            return _regeneratorRuntime().wrap(function _callee7$(_context7) {
-              while (1) switch (_context7.prev = _context7.next) {
-                case 0:
-                  _context7.next = 2;
-                  return this.delay(200);
-                case 2:
-                  return _context7.abrupt("return", false);
-                case 3:
-                case "end":
-                  return _context7.stop();
-              }
-            }, _callee7, this);
-          }));
-          function checkMoneyIsComplited() {
-            return _checkMoneyIsComplited.apply(this, arguments);
-          }
-          return checkMoneyIsComplited;
-        }();
-        _proto.checkFriendsIsComplited = /*#__PURE__*/function () {
-          var _checkFriendsIsComplited = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee8() {
-            return _regeneratorRuntime().wrap(function _callee8$(_context8) {
-              while (1) switch (_context8.prev = _context8.next) {
-                case 0:
-                  _context8.next = 2;
-                  return this.delay(200);
-                case 2:
-                  return _context8.abrupt("return", false);
-                case 3:
-                case "end":
-                  return _context8.stop();
-              }
-            }, _callee8, this);
-          }));
-          function checkFriendsIsComplited() {
-            return _checkFriendsIsComplited.apply(this, arguments);
-          }
-          return checkFriendsIsComplited;
-        }();
-        _proto.goOtherComplete = /*#__PURE__*/function () {
-          var _goOtherComplete = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee9() {
-            var tgWebApp;
-            return _regeneratorRuntime().wrap(function _callee9$(_context9) {
-              while (1) switch (_context9.prev = _context9.next) {
-                case 0:
-                  tgWebApp = TelegramWebApp.Instance;
-                  _context9.next = 3;
-                  return tgWebApp.init();
-                case 3:
-                  tgWebApp.openLink(this.myTaskData.channelLink);
-                case 4:
-                case "end":
-                  return _context9.stop();
-              }
-            }, _callee9, this);
+            }, _callee4, this);
           }));
           function goOtherComplete() {
             return _goOtherComplete.apply(this, arguments);
@@ -2792,21 +3599,21 @@ System.register("chunks:///_virtual/TaskItem.ts", ['./rollupPluginModLoBabelHelp
           return goOtherComplete;
         }();
         _proto.goSubscribeComplete = /*#__PURE__*/function () {
-          var _goSubscribeComplete = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee10() {
+          var _goSubscribeComplete = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
             var tgWebApp;
-            return _regeneratorRuntime().wrap(function _callee10$(_context10) {
-              while (1) switch (_context10.prev = _context10.next) {
+            return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+              while (1) switch (_context5.prev = _context5.next) {
                 case 0:
                   tgWebApp = TelegramWebApp.Instance;
-                  _context10.next = 3;
+                  _context5.next = 3;
                   return tgWebApp.init();
                 case 3:
-                  tgWebApp.openTelegramLink(this.myTaskData.channelLink);
+                  tgWebApp.openTelegramLink(this.myTaskData.taskInfo.details);
                 case 4:
                 case "end":
-                  return _context10.stop();
+                  return _context5.stop();
               }
-            }, _callee10, this);
+            }, _callee5, this);
           }));
           function goSubscribeComplete() {
             return _goSubscribeComplete.apply(this, arguments);
@@ -2903,14 +3710,312 @@ System.register("chunks:///_virtual/TaskItem.ts", ['./rollupPluginModLoBabelHelp
   };
 });
 
-System.register("chunks:///_virtual/TasksScrollViewer.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc', './TaskItem.ts'], function (exports) {
-  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, cclegacy, _decorator, Prefab, Node, instantiate, Component, TaskType, TaskItem;
+System.register("chunks:///_virtual/TasksDataManager.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc', './ServerCommunicator.ts', './UserDataManager.ts'], function (exports) {
+  var _inheritsLoose, _createClass, _asyncToGenerator, _regeneratorRuntime, cclegacy, _decorator, EventTarget, Component, ServerCommunicator, UserDataManager;
+  return {
+    setters: [function (module) {
+      _inheritsLoose = module.inheritsLoose;
+      _createClass = module.createClass;
+      _asyncToGenerator = module.asyncToGenerator;
+      _regeneratorRuntime = module.regeneratorRuntime;
+    }, function (module) {
+      cclegacy = module.cclegacy;
+      _decorator = module._decorator;
+      EventTarget = module.EventTarget;
+      Component = module.Component;
+    }, function (module) {
+      ServerCommunicator = module.ServerCommunicator;
+    }, function (module) {
+      UserDataManager = module.UserDataManager;
+    }],
+    execute: function () {
+      var _dec, _class, _class2;
+      cclegacy._RF.push({}, "385967+RUlB+5nwHddYGK5Q", "TasksDataManager", undefined);
+      var ccclass = _decorator.ccclass;
+      var TaskType = exports('TaskType', /*#__PURE__*/function (TaskType) {
+        TaskType["Other"] = "Other";
+        TaskType["GoTo"] = "GoTo";
+        TaskType["Subscribe"] = "Subscribe";
+        TaskType["MoneyCount"] = "MoneyCount";
+        TaskType["FriendsCount"] = "FriendsCount";
+        return TaskType;
+      }({}));
+      var TasksDataManager = exports('TasksDataManager', (_dec = ccclass('TasksDataManager'), _dec(_class = (_class2 = /*#__PURE__*/function (_Component) {
+        _inheritsLoose(TasksDataManager, _Component);
+        function TasksDataManager() {
+          var _this;
+          for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+          }
+          _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+          _this.currentTasks = [];
+          _this.currentUserTasks = [];
+          return _this;
+        }
+        var _proto = TasksDataManager.prototype;
+        _proto.onLoad = function onLoad() {
+          if (TasksDataManager._instance) {
+            console.warn("TasksDataManager instance already exists!");
+            this.destroy();
+            return;
+          }
+          TasksDataManager._instance = this;
+          this.forceUpdateData();
+        };
+        _proto.forceUpdateData = /*#__PURE__*/function () {
+          var _forceUpdateData = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+            return _regeneratorRuntime().wrap(function _callee$(_context) {
+              while (1) switch (_context.prev = _context.next) {
+                case 0:
+                  if (UserDataManager.instance.isInited) {
+                    _context.next = 5;
+                    break;
+                  }
+                  _context.next = 3;
+                  return new Promise(function (resolve) {
+                    return setTimeout(resolve, 100);
+                  });
+                case 3:
+                  _context.next = 0;
+                  break;
+                case 5:
+                  _context.next = 7;
+                  return this.setAllTasksFromServer();
+                case 7:
+                  _context.next = 9;
+                  return this.setCurrentUserTasksFromServer();
+                case 9:
+                case "end":
+                  return _context.stop();
+              }
+            }, _callee, this);
+          }));
+          function forceUpdateData() {
+            return _forceUpdateData.apply(this, arguments);
+          }
+          return forceUpdateData;
+        }();
+        _proto.setAllTasksFromServer = /*#__PURE__*/function () {
+          var _setAllTasksFromServer = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+            var _this2 = this;
+            var response, allTasks;
+            return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+              while (1) switch (_context2.prev = _context2.next) {
+                case 0:
+                  _context2.prev = 0;
+                  _context2.next = 3;
+                  return ServerCommunicator.instance.sendGetRequest('get_all_tasks');
+                case 3:
+                  response = _context2.sent;
+                  allTasks = response;
+                  this.currentTasks = allTasks.map(function (item) {
+                    return {
+                      id: item[0],
+                      name: item[1],
+                      reward: item[2],
+                      taskType: _this2.mapTaskType(item[3]),
+                      details: item[4]
+                    };
+                  });
+                  TasksDataManager.eventTarget.emit('allTasksUpdated');
+                  _context2.next = 12;
+                  break;
+                case 9:
+                  _context2.prev = 9;
+                  _context2.t0 = _context2["catch"](0);
+                  console.error('Error fetching tasks:', _context2.t0);
+                case 12:
+                case "end":
+                  return _context2.stop();
+              }
+            }, _callee2, this, [[0, 9]]);
+          }));
+          function setAllTasksFromServer() {
+            return _setAllTasksFromServer.apply(this, arguments);
+          }
+          return setAllTasksFromServer;
+        }();
+        _proto.setCurrentUserTasksFromServer = /*#__PURE__*/function () {
+          var _setCurrentUserTasksFromServer = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+            var userId, response, userTasks;
+            return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+              while (1) switch (_context3.prev = _context3.next) {
+                case 0:
+                  _context3.prev = 0;
+                  userId = UserDataManager.instance.getUserId();
+                  _context3.next = 4;
+                  return ServerCommunicator.instance.sendGetRequest('get_user_tasks?user_id=' + userId);
+                case 4:
+                  response = _context3.sent;
+                  userTasks = response;
+                  if (Array.isArray(userTasks)) {
+                    _context3.next = 8;
+                    break;
+                  }
+                  return _context3.abrupt("return");
+                case 8:
+                  this.currentUserTasks = userTasks.map(function (item) {
+                    return {
+                      id: item[0],
+                      userId: item[1],
+                      taskId: item[2],
+                      status: item[3]
+                    };
+                  });
+                  TasksDataManager.eventTarget.emit('currentUserTasksUpdated');
+                  _context3.next = 15;
+                  break;
+                case 12:
+                  _context3.prev = 12;
+                  _context3.t0 = _context3["catch"](0);
+                  console.error('Error fetching user tasks:', _context3.t0);
+                case 15:
+                case "end":
+                  return _context3.stop();
+              }
+            }, _callee3, this, [[0, 12]]);
+          }));
+          function setCurrentUserTasksFromServer() {
+            return _setCurrentUserTasksFromServer.apply(this, arguments);
+          }
+          return setCurrentUserTasksFromServer;
+        }();
+        _proto.checkTaskCompleted = /*#__PURE__*/function () {
+          var _checkTaskCompleted = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(taskId) {
+            var userId, response, taskCompleted;
+            return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+              while (1) switch (_context4.prev = _context4.next) {
+                case 0:
+                  if (UserDataManager.instance.isInited) {
+                    _context4.next = 5;
+                    break;
+                  }
+                  _context4.next = 3;
+                  return new Promise(function (resolve) {
+                    return setTimeout(resolve, 100);
+                  });
+                case 3:
+                  _context4.next = 0;
+                  break;
+                case 5:
+                  userId = UserDataManager.instance.getUserId();
+                  _context4.next = 8;
+                  return ServerCommunicator.instance.sendGetRequest('check_task?user_id=' + userId + "&task_id=" + taskId);
+                case 8:
+                  response = _context4.sent;
+                  taskCompleted = response[0];
+                  return _context4.abrupt("return", taskCompleted);
+                case 11:
+                case "end":
+                  return _context4.stop();
+              }
+            }, _callee4);
+          }));
+          function checkTaskCompleted(_x) {
+            return _checkTaskCompleted.apply(this, arguments);
+          }
+          return checkTaskCompleted;
+        }();
+        _proto.getAllTasks = /*#__PURE__*/function () {
+          var _getAllTasks = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5(forceUpdate) {
+            return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+              while (1) switch (_context5.prev = _context5.next) {
+                case 0:
+                  if (forceUpdate === void 0) {
+                    forceUpdate = false;
+                  }
+                  if (!(this.currentTasks.length <= 0 || forceUpdate)) {
+                    _context5.next = 4;
+                    break;
+                  }
+                  _context5.next = 4;
+                  return this.setAllTasksFromServer();
+                case 4:
+                  return _context5.abrupt("return", this.currentTasks);
+                case 5:
+                case "end":
+                  return _context5.stop();
+              }
+            }, _callee5, this);
+          }));
+          function getAllTasks(_x2) {
+            return _getAllTasks.apply(this, arguments);
+          }
+          return getAllTasks;
+        }();
+        _proto.getUserTasks = /*#__PURE__*/function () {
+          var _getUserTasks = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6(forceUpdate) {
+            return _regeneratorRuntime().wrap(function _callee6$(_context6) {
+              while (1) switch (_context6.prev = _context6.next) {
+                case 0:
+                  if (forceUpdate === void 0) {
+                    forceUpdate = false;
+                  }
+                  if (!(this.currentUserTasks.length <= 0 || forceUpdate)) {
+                    _context6.next = 4;
+                    break;
+                  }
+                  _context6.next = 4;
+                  return this.setCurrentUserTasksFromServer();
+                case 4:
+                  return _context6.abrupt("return", this.currentUserTasks);
+                case 5:
+                case "end":
+                  return _context6.stop();
+              }
+            }, _callee6, this);
+          }));
+          function getUserTasks(_x3) {
+            return _getUserTasks.apply(this, arguments);
+          }
+          return getUserTasks;
+        }();
+        _proto.mapTaskType = function mapTaskType(taskTypeString) {
+          switch (taskTypeString) {
+            case "GoTo":
+              return TaskType.GoTo;
+            case "Subscribe":
+              return TaskType.Subscribe;
+            case "MoneyCount":
+              return TaskType.MoneyCount;
+            case "FriendsCount":
+              return TaskType.FriendsCount;
+            case "Other":
+            default:
+              return TaskType.Other;
+          }
+        };
+        _createClass(TasksDataManager, [{
+          key: "isInited",
+          get: function get() {
+            return this.currentTasks.length > 0 && this.currentUserTasks.length > 0;
+          }
+        }], [{
+          key: "instance",
+          get: function get() {
+            if (!this._instance) {
+              console.error("TasksDataManager instance is not initialized!");
+            }
+            return this._instance;
+          }
+        }]);
+        return TasksDataManager;
+      }(Component), _class2._instance = void 0, _class2.eventTarget = new EventTarget(), _class2)) || _class));
+      cclegacy._RF.pop();
+    }
+  };
+});
+
+System.register("chunks:///_virtual/TasksScrollViewer.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc', './UserDataManager.ts', './TasksDataManager.ts', './TaskItem.ts'], function (exports) {
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _asyncToGenerator, _regeneratorRuntime, cclegacy, _decorator, Prefab, Node, instantiate, Component, UserDataManager, TasksDataManager, TaskItem;
   return {
     setters: [function (module) {
       _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
       _inheritsLoose = module.inheritsLoose;
       _initializerDefineProperty = module.initializerDefineProperty;
       _assertThisInitialized = module.assertThisInitialized;
+      _asyncToGenerator = module.asyncToGenerator;
+      _regeneratorRuntime = module.regeneratorRuntime;
     }, function (module) {
       cclegacy = module.cclegacy;
       _decorator = module._decorator;
@@ -2919,7 +4024,10 @@ System.register("chunks:///_virtual/TasksScrollViewer.ts", ['./rollupPluginModLo
       instantiate = module.instantiate;
       Component = module.Component;
     }, function (module) {
-      TaskType = module.TaskType;
+      UserDataManager = module.UserDataManager;
+    }, function (module) {
+      TasksDataManager = module.TasksDataManager;
+    }, function (module) {
       TaskItem = module.TaskItem;
     }],
     execute: function () {
@@ -2937,49 +4045,113 @@ System.register("chunks:///_virtual/TasksScrollViewer.ts", ['./rollupPluginModLo
           _this = _Component.call.apply(_Component, [this].concat(args)) || this;
           _initializerDefineProperty(_this, "taskItemPrefab", _descriptor, _assertThisInitialized(_this));
           _initializerDefineProperty(_this, "contentNode", _descriptor2, _assertThisInitialized(_this));
-          _this.testTasks = [];
           return _this;
         }
         var _proto = TasksScrollViewer.prototype;
         _proto.start = function start() {
-          //only for test
-          this.testTasks = [{
-            taskType: TaskType.Other,
-            isCompleted: false,
-            taskId: "task_001",
-            taskName: "Watch the video",
-            reward: 100,
-            channelLink: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-          }, {
-            taskType: TaskType.Subscribe,
-            isCompleted: false,
-            taskId: "task_002",
-            taskName: "Subscribe to channel",
-            reward: 200,
-            channelLink: "https://t.me/hamster_hotel"
-          }, {
-            taskType: TaskType.MoneyCount,
-            isCompleted: false,
-            taskId: "task_003",
-            taskName: "Collect 5000 $SEM",
-            reward: 500,
-            moneyCount: 5000
-          }, {
-            taskType: TaskType.FriendsCount,
-            isCompleted: false,
-            taskId: "task_004",
-            taskName: "Invite 5 friends",
-            reward: 500,
-            friendsCount: 5
-          }];
-          this.init(this.testTasks);
+          this.init();
         };
-        _proto.init = function init(tasks) {
+        _proto.init = /*#__PURE__*/function () {
+          var _init = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+            return _regeneratorRuntime().wrap(function _callee$(_context) {
+              while (1) switch (_context.prev = _context.next) {
+                case 0:
+                  if (UserDataManager.instance.isInited) {
+                    _context.next = 5;
+                    break;
+                  }
+                  _context.next = 3;
+                  return new Promise(function (resolve) {
+                    return setTimeout(resolve, 100);
+                  });
+                case 3:
+                  _context.next = 0;
+                  break;
+                case 5:
+                  if (TasksDataManager.instance.isInited) {
+                    _context.next = 10;
+                    break;
+                  }
+                  _context.next = 8;
+                  return new Promise(function (resolve) {
+                    return setTimeout(resolve, 100);
+                  });
+                case 8:
+                  _context.next = 5;
+                  break;
+                case 10:
+                  TasksDataManager.eventTarget.on('currentUserTasksUpdated', this.updateMe, this);
+                  this.updateMe();
+                case 12:
+                case "end":
+                  return _context.stop();
+              }
+            }, _callee, this);
+          }));
+          function init() {
+            return _init.apply(this, arguments);
+          }
+          return init;
+        }();
+        _proto.updateMe = /*#__PURE__*/function () {
+          var _updateMe = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+            var userTasksInfos, allTasksInfos, taskInfoMap, taskDataArray;
+            return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+              while (1) switch (_context2.prev = _context2.next) {
+                case 0:
+                  if (TasksDataManager.instance.isInited) {
+                    _context2.next = 5;
+                    break;
+                  }
+                  _context2.next = 3;
+                  return new Promise(function (resolve) {
+                    return setTimeout(resolve, 100);
+                  });
+                case 3:
+                  _context2.next = 0;
+                  break;
+                case 5:
+                  _context2.next = 7;
+                  return TasksDataManager.instance.getUserTasks();
+                case 7:
+                  userTasksInfos = _context2.sent;
+                  _context2.next = 10;
+                  return TasksDataManager.instance.getAllTasks();
+                case 10:
+                  allTasksInfos = _context2.sent;
+                  taskInfoMap = new Map();
+                  allTasksInfos.forEach(function (taskInfo) {
+                    taskInfoMap.set(taskInfo.id, taskInfo);
+                  });
+                  taskDataArray = userTasksInfos.map(function (userTaskInfo) {
+                    var taskInfo = taskInfoMap.get(userTaskInfo.taskId);
+                    return {
+                      taskInfo: taskInfo,
+                      userTaskInfo: userTaskInfo
+                    };
+                  });
+                  this.updateTasksList(taskDataArray);
+                  console.log("TASK DATA ARRAY:" + taskDataArray);
+                case 16:
+                case "end":
+                  return _context2.stop();
+              }
+            }, _callee2, this);
+          }));
+          function updateMe() {
+            return _updateMe.apply(this, arguments);
+          }
+          return updateMe;
+        }();
+        _proto.updateTasksList = function updateTasksList(tasks) {
+          if (this.contentNode.children.length > 0) {
+            this.contentNode.removeAllChildren();
+          }
           if (this.taskItemPrefab && this.contentNode) {
             for (var i = 0; i < tasks.length; i++) {
-              var newTaskItemPrefab = instantiate(this.taskItemPrefab);
-              this.contentNode.addChild(newTaskItemPrefab);
-              newTaskItemPrefab.getComponent(TaskItem).init(tasks[i]);
+              var newFriendItemPrefab = instantiate(this.taskItemPrefab);
+              this.contentNode.addChild(newFriendItemPrefab);
+              newFriendItemPrefab.getComponent(TaskItem).init(tasks[i]);
             }
           }
         };
@@ -3527,6 +4699,16 @@ System.register("chunks:///_virtual/UserDataManager.ts", ['./rollupPluginModLoBa
           });
           return speedInfo ? speedInfo.price : null;
         };
+        _proto.getMiningSpeedById = function getMiningSpeedById(id) {
+          if (!this.currentUserInfo) {
+            console.error("Error: user information is missing");
+            return null;
+          }
+          var speedInfo = this.speedInfos.find(function (info) {
+            return info.id === id;
+          });
+          return speedInfo ? speedInfo.speed : null;
+        };
         _proto.getSpeedInfosCount = function getSpeedInfosCount() {
           if (!this.currentUserInfo) {
             console.error("Error: user information is missing");
@@ -3554,6 +4736,16 @@ System.register("chunks:///_virtual/UserDataManager.ts", ['./rollupPluginModLoBa
             return info.id === id;
           });
           return durationInfo ? durationInfo.price : null;
+        };
+        _proto.getMiningDurationById = function getMiningDurationById(id) {
+          if (!this.currentUserInfo) {
+            console.error("Error: user information is missing");
+            return null;
+          }
+          var durationInfo = this.durationInfos.find(function (info) {
+            return info.id === id;
+          });
+          return durationInfo ? durationInfo.duration : null;
         };
         _proto.getDurationInfosCount = function getDurationInfosCount() {
           if (!this.currentUserInfo) {
@@ -3618,11 +4810,11 @@ System.register("chunks:///_virtual/UserDataManager.ts", ['./rollupPluginModLoBa
                 case 0:
                   _context2.prev = 0;
                   if (!this.isDebug) {
-                    _context2.next = 10;
+                    _context2.next = 11;
                     break;
                   }
                   _context2.next = 4;
-                  return ServerCommunicator.instance.sendGetRequest('get_user?id=' + 2 + '&name=anrewka&referal=' + 1);
+                  return ServerCommunicator.instance.sendGetRequest('get_user?id=' + 2 + '&name=anrddewka&referal=' + 1);
                 case 4:
                   response = _context2.sent;
                   userInfoItems = response;
@@ -3637,18 +4829,19 @@ System.register("chunks:///_virtual/UserDataManager.ts", ['./rollupPluginModLoBa
                     durationId: userInfoItems.duration_id,
                     invitedBy: userInfoItems.invited_by
                   };
-                  _context2.next = 22;
+                  UserDataManager.eventTarget.emit('userDataUpdated');
+                  _context2.next = 23;
                   break;
-                case 10:
+                case 11:
                   tgWebApp = TelegramWebApp.Instance;
-                  _context2.next = 13;
+                  _context2.next = 14;
                   return tgWebApp.init();
-                case 13:
+                case 14:
                   user = tgWebApp.getTelegramUser();
                   initData = tgWebApp.getTelegramWebAppInitData();
-                  _context2.next = 17;
+                  _context2.next = 18;
                   return ServerCommunicator.instance.sendGetRequest('get_user?id=' + user.id + '&name=' + user.username + '&referal=' + initData.start_param);
-                case 17:
+                case 18:
                   _response = _context2.sent;
                   _userInfoItems = _response;
                   console.log(_userInfoItems);
@@ -3663,29 +4856,29 @@ System.register("chunks:///_virtual/UserDataManager.ts", ['./rollupPluginModLoBa
                     invitedBy: _userInfoItems.invited_by
                   };
                   UserDataManager.eventTarget.emit('userDataUpdated');
-                case 22:
+                case 23:
                   if (this.isInited) {
-                    _context2.next = 26;
+                    _context2.next = 27;
                     break;
                   }
-                  _context2.next = 25;
+                  _context2.next = 26;
                   return new Promise(function (resolve) {
                     return setTimeout(resolve, 500);
                   });
-                case 25:
-                  this.forceUpdateUserInfo();
                 case 26:
-                  _context2.next = 31;
+                  this.forceUpdateUserInfo();
+                case 27:
+                  _context2.next = 32;
                   break;
-                case 28:
-                  _context2.prev = 28;
+                case 29:
+                  _context2.prev = 29;
                   _context2.t0 = _context2["catch"](0);
                   console.error('Error setting user:', _context2.t0);
-                case 31:
+                case 32:
                 case "end":
                   return _context2.stop();
               }
-            }, _callee2, this, [[0, 28]]);
+            }, _callee2, this, [[0, 29]]);
           }));
           function setUserInfoFromServer() {
             return _setUserInfoFromServer.apply(this, arguments);
