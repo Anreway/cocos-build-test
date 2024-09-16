@@ -1368,9 +1368,9 @@ System.register("chunks:///_virtual/LoadingHider.ts", ['./rollupPluginModLoBabel
   };
 });
 
-System.register("chunks:///_virtual/main", ['./debug-view-runtime-control.ts', './BalanceLabel.ts', './BoostItem.ts', './BoostType.ts', './BoostsController.ts', './ButtonFeedbacks.ts', './CopyInviteLink.ts', './FriendItem.ts', './FriendsScrollViewer.ts', './LoadingHider.ts', './MainMiningLabels.ts', './MiningCollectController.ts', './PopupManager.ts', './RotatableUITransform.ts', './ServerCommunicator.ts', './ShareInviteLink.ts', './SlidePopup.ts', './SuitcaseCounter.ts', './SuitcaseItemsController.ts', './SuitcasesDataManager.ts', './TaskItem.ts', './TasksDataManager.ts', './TasksScrollViewer.ts', './TestGetLabel.ts', './TimerLabel.ts', './UserDataManager.ts', './UserInfoDisplay.ts', './telegram-web.ts'], function () {
+System.register("chunks:///_virtual/main", ['./debug-view-runtime-control.ts', './BalanceLabel.ts', './BoostItem.ts', './BoostType.ts', './BoostsController.ts', './ButtonFeedbacks.ts', './CopyInviteLink.ts', './FriendItem.ts', './FriendsScrollViewer.ts', './LoadingHider.ts', './MainMiningLabels.ts', './MiningCollectController.ts', './PopupManager.ts', './RotatableUITransform.ts', './ServerCommunicator.ts', './ShareInviteLink.ts', './SlidePopup.ts', './SuitcaseCounter.ts', './SuitcaseItemsController.ts', './SuitcasesDataManager.ts', './TaskItem.ts', './TasksDataManager.ts', './TasksScrollViewer.ts', './TestGetLabel.ts', './TimerLabel.ts', './UserDataManager.ts', './UserInfoDisplay.ts', './UsernameLabel.ts', './telegram-web.ts'], function () {
   return {
-    setters: [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+    setters: [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
     execute: function () {}
   };
 });
@@ -3600,7 +3600,7 @@ System.register("chunks:///_virtual/TaskItem.ts", ['./rollupPluginModLoBabelHelp
         }();
         _proto.goSubscribeComplete = /*#__PURE__*/function () {
           var _goSubscribeComplete = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
-            var tgWebApp;
+            var tgWebApp, forUrlSliced, link;
             return _regeneratorRuntime().wrap(function _callee5$(_context5) {
               while (1) switch (_context5.prev = _context5.next) {
                 case 0:
@@ -3608,8 +3608,10 @@ System.register("chunks:///_virtual/TaskItem.ts", ['./rollupPluginModLoBabelHelp
                   _context5.next = 3;
                   return tgWebApp.init();
                 case 3:
-                  tgWebApp.openTelegramLink(this.myTaskData.taskInfo.details);
-                case 4:
+                  forUrlSliced = this.myTaskData.taskInfo.details.slice(1);
+                  link = "https://t.me/" + forUrlSliced;
+                  tgWebApp.openTelegramLink(link);
+                case 6:
                 case "end":
                   return _context5.stop();
               }
@@ -3900,7 +3902,7 @@ System.register("chunks:///_virtual/TasksDataManager.ts", ['./rollupPluginModLoB
                 case 5:
                   userId = UserDataManager.instance.getUserId();
                   _context4.next = 8;
-                  return ServerCommunicator.instance.sendGetRequest('check_task?user_id=' + userId + "&task_id=" + taskId);
+                  return ServerCommunicator.instance.sendGetRequest('check_task_completion?user_id=' + userId + "&task_id=" + taskId);
                 case 8:
                   response = _context4.sent;
                   taskCompleted = response[0];
@@ -4606,6 +4608,9 @@ System.register("chunks:///_virtual/UserDataManager.ts", ['./rollupPluginModLoBa
           _this.durationInfos = [];
           _this.isTimeSyncWithServer = false;
           _this.timeDifference = null;
+          _this.firstname = "undefined";
+          _this.username = "undefined";
+          _this.defaultName = "Anonymous";
           return _this;
         }
         var _proto = UserDataManager.prototype;
@@ -4798,8 +4803,16 @@ System.register("chunks:///_virtual/UserDataManager.ts", ['./rollupPluginModLoBa
           }
           return this.timeDifference;
         };
+        _proto.getGoodUserName = function getGoodUserName() {
+          if (this.firstname === "undefined") {
+            if (this.username === "undefined") {
+              return this.defaultName;
+            }
+            return this.username;
+          }
+          return this.firstname;
+        };
         _proto.forceUpdateUserInfo = function forceUpdateUserInfo() {
-          //
           this.setUserInfoFromServer();
         };
         _proto.setUserInfoFromServer = /*#__PURE__*/function () {
@@ -4830,7 +4843,7 @@ System.register("chunks:///_virtual/UserDataManager.ts", ['./rollupPluginModLoBa
                     invitedBy: userInfoItems.invited_by
                   };
                   UserDataManager.eventTarget.emit('userDataUpdated');
-                  _context2.next = 23;
+                  _context2.next = 25;
                   break;
                 case 11:
                   tgWebApp = TelegramWebApp.Instance;
@@ -4839,9 +4852,11 @@ System.register("chunks:///_virtual/UserDataManager.ts", ['./rollupPluginModLoBa
                 case 14:
                   user = tgWebApp.getTelegramUser();
                   initData = tgWebApp.getTelegramWebAppInitData();
-                  _context2.next = 18;
+                  this.firstname = user.first_name;
+                  this.username = user.username;
+                  _context2.next = 20;
                   return ServerCommunicator.instance.sendGetRequest('get_user?id=' + user.id + '&name=' + user.username + '&referal=' + initData.start_param);
-                case 18:
+                case 20:
                   _response = _context2.sent;
                   _userInfoItems = _response;
                   console.log(_userInfoItems);
@@ -4856,29 +4871,29 @@ System.register("chunks:///_virtual/UserDataManager.ts", ['./rollupPluginModLoBa
                     invitedBy: _userInfoItems.invited_by
                   };
                   UserDataManager.eventTarget.emit('userDataUpdated');
-                case 23:
+                case 25:
                   if (this.isInited) {
-                    _context2.next = 27;
+                    _context2.next = 29;
                     break;
                   }
-                  _context2.next = 26;
+                  _context2.next = 28;
                   return new Promise(function (resolve) {
                     return setTimeout(resolve, 500);
                   });
-                case 26:
+                case 28:
                   this.forceUpdateUserInfo();
-                case 27:
-                  _context2.next = 32;
-                  break;
                 case 29:
-                  _context2.prev = 29;
+                  _context2.next = 34;
+                  break;
+                case 31:
+                  _context2.prev = 31;
                   _context2.t0 = _context2["catch"](0);
                   console.error('Error setting user:', _context2.t0);
-                case 32:
+                case 34:
                 case "end":
                   return _context2.stop();
               }
-            }, _callee2, this, [[0, 29]]);
+            }, _callee2, this, [[0, 31]]);
           }));
           function setUserInfoFromServer() {
             return _setUserInfoFromServer.apply(this, arguments);
@@ -5114,6 +5129,95 @@ System.register("chunks:///_virtual/UserInfoDisplay.ts", ['./rollupPluginModLoBa
           return null;
         }
       })), _class2)) || _class));
+      cclegacy._RF.pop();
+    }
+  };
+});
+
+System.register("chunks:///_virtual/UsernameLabel.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc', './UserDataManager.ts'], function (exports) {
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _asyncToGenerator, _regeneratorRuntime, cclegacy, _decorator, Label, Component, UserDataManager;
+  return {
+    setters: [function (module) {
+      _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
+      _inheritsLoose = module.inheritsLoose;
+      _initializerDefineProperty = module.initializerDefineProperty;
+      _assertThisInitialized = module.assertThisInitialized;
+      _asyncToGenerator = module.asyncToGenerator;
+      _regeneratorRuntime = module.regeneratorRuntime;
+    }, function (module) {
+      cclegacy = module.cclegacy;
+      _decorator = module._decorator;
+      Label = module.Label;
+      Component = module.Component;
+    }, function (module) {
+      UserDataManager = module.UserDataManager;
+    }],
+    execute: function () {
+      var _dec, _dec2, _class, _class2, _descriptor;
+      cclegacy._RF.push({}, "25594+nJ6xFq6zve7Du05Ed", "UsernameLabel", undefined);
+      var ccclass = _decorator.ccclass,
+        property = _decorator.property;
+      var UsernameLabel = exports('UsernameLabel', (_dec = ccclass('UsernameLabel'), _dec2 = property(Label), _dec(_class = (_class2 = /*#__PURE__*/function (_Component) {
+        _inheritsLoose(UsernameLabel, _Component);
+        function UsernameLabel() {
+          var _this;
+          for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+          }
+          _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+          _initializerDefineProperty(_this, "myLabel", _descriptor, _assertThisInitialized(_this));
+          return _this;
+        }
+        var _proto = UsernameLabel.prototype;
+        _proto.start = function start() {
+          this.initWithUserData();
+        };
+        _proto.initWithUserData = /*#__PURE__*/function () {
+          var _initWithUserData = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+            return _regeneratorRuntime().wrap(function _callee$(_context) {
+              while (1) switch (_context.prev = _context.next) {
+                case 0:
+                  if (UserDataManager.instance.isInited) {
+                    _context.next = 5;
+                    break;
+                  }
+                  _context.next = 3;
+                  return new Promise(function (resolve) {
+                    return setTimeout(resolve, 100);
+                  });
+                case 3:
+                  _context.next = 0;
+                  break;
+                case 5:
+                  UserDataManager.eventTarget.on('userDataUpdated', this.updateMe, this);
+                  if (this.myLabel) {
+                    this.myLabel.string = UserDataManager.instance.getGoodUserName();
+                  }
+                case 7:
+                case "end":
+                  return _context.stop();
+              }
+            }, _callee, this);
+          }));
+          function initWithUserData() {
+            return _initWithUserData.apply(this, arguments);
+          }
+          return initWithUserData;
+        }();
+        _proto.updateMe = function updateMe() {
+          if (this.myLabel) {
+            this.myLabel.string = UserDataManager.instance.getGoodUserName();
+          }
+        };
+        return UsernameLabel;
+      }(Component), _descriptor = _applyDecoratedDescriptor(_class2.prototype, "myLabel", [_dec2], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      }), _class2)) || _class));
       cclegacy._RF.pop();
     }
   };
