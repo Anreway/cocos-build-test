@@ -3377,8 +3377,8 @@ System.register("chunks:///_virtual/SuitcasesDataManager.ts", ['./rollupPluginMo
   };
 });
 
-System.register("chunks:///_virtual/TaskItem.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc', './telegram-web.ts', './ButtonFeedbacks.ts', './PopupManager.ts', './TasksDataManager.ts'], function (exports) {
-  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _asyncToGenerator, _regeneratorRuntime, cclegacy, _decorator, Label, Button, Sprite, SpriteFrame, Component, TelegramWebApp, ButtonFeedbacks, PopupManager, TaskType, TasksDataManager;
+System.register("chunks:///_virtual/TaskItem.ts", ['./rollupPluginModLoBabelHelpers.js', 'cc', './telegram-web.ts', './ButtonFeedbacks.ts', './PopupManager.ts', './TasksDataManager.ts', './UserDataManager.ts'], function (exports) {
+  var _applyDecoratedDescriptor, _inheritsLoose, _initializerDefineProperty, _assertThisInitialized, _asyncToGenerator, _regeneratorRuntime, cclegacy, _decorator, Label, Button, Sprite, SpriteFrame, Component, TelegramWebApp, ButtonFeedbacks, PopupManager, TaskType, TasksDataManager, UserDataManager;
   return {
     setters: [function (module) {
       _applyDecoratedDescriptor = module.applyDecoratedDescriptor;
@@ -3404,6 +3404,8 @@ System.register("chunks:///_virtual/TaskItem.ts", ['./rollupPluginModLoBabelHelp
     }, function (module) {
       TaskType = module.TaskType;
       TasksDataManager = module.TasksDataManager;
+    }, function (module) {
+      UserDataManager = module.UserDataManager;
     }],
     execute: function () {
       var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _dec10, _dec11, _dec12, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11;
@@ -3464,6 +3466,7 @@ System.register("chunks:///_virtual/TaskItem.ts", ['./rollupPluginModLoBabelHelp
                 break;
             }
           }
+          console.log("UPDATED TASK WITH TYPE: " + this.myTaskData.taskInfo.taskType);
           if (this.goButton && this.buttonIconSprite) {
             if (this.myTaskData.userTaskInfo.status === "completed") {
               if (this.isCompletedIcon) {
@@ -3499,15 +3502,17 @@ System.register("chunks:///_virtual/TaskItem.ts", ['./rollupPluginModLoBabelHelp
                   return _context.abrupt("return");
                 case 2:
                   _context.next = 4;
-                  return this.checkTaskIsComplitedNow();
+                  return TasksDataManager.instance.checkTaskCompleted(this.myTaskData.userTaskInfo.taskId);
                 case 4:
                   isNowCompleted = _context.sent;
+                  console.log("Clicked task status: " + isNowCompleted);
                   if (isNowCompleted) {
                     TasksDataManager.instance.forceUpdateData();
+                    UserDataManager.instance.forceUpdateUserInfo();
                   } else {
                     this.goToCompleteTask();
                   }
-                case 6:
+                case 7:
                 case "end":
                   return _context.stop();
               }
@@ -3518,58 +3523,38 @@ System.register("chunks:///_virtual/TaskItem.ts", ['./rollupPluginModLoBabelHelp
           }
           return onTaskButtonClicked;
         }();
-        _proto.checkTaskIsComplitedNow = /*#__PURE__*/function () {
-          var _checkTaskIsComplitedNow = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+        _proto.goToCompleteTask = /*#__PURE__*/function () {
+          var _goToCompleteTask = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
             return _regeneratorRuntime().wrap(function _callee2$(_context2) {
               while (1) switch (_context2.prev = _context2.next) {
                 case 0:
-                  _context2.next = 2;
-                  return TasksDataManager.instance.checkTaskCompleted(this.myTaskData.userTaskInfo.taskId);
-                case 2:
-                  return _context2.abrupt("return", _context2.sent);
+                  _context2.t0 = this.myTaskData.taskInfo.taskType;
+                  _context2.next = _context2.t0 === TaskType.GoTo ? 3 : _context2.t0 === TaskType.Other ? 3 : _context2.t0 === TaskType.Subscribe ? 6 : _context2.t0 === TaskType.MoneyCount ? 9 : _context2.t0 === TaskType.FriendsCount ? 11 : 13;
+                  break;
                 case 3:
+                  _context2.next = 5;
+                  return this.goOtherComplete();
+                case 5:
+                  return _context2.abrupt("break", 15);
+                case 6:
+                  _context2.next = 8;
+                  return this.goSubscribeComplete();
+                case 8:
+                  return _context2.abrupt("break", 15);
+                case 9:
+                  this.goMoneyComplete();
+                  return _context2.abrupt("break", 15);
+                case 11:
+                  this.goFriendsComplete();
+                  return _context2.abrupt("break", 15);
+                case 13:
+                  console.log("Unknown task type");
+                  return _context2.abrupt("break", 15);
+                case 15:
                 case "end":
                   return _context2.stop();
               }
             }, _callee2, this);
-          }));
-          function checkTaskIsComplitedNow() {
-            return _checkTaskIsComplitedNow.apply(this, arguments);
-          }
-          return checkTaskIsComplitedNow;
-        }();
-        _proto.goToCompleteTask = /*#__PURE__*/function () {
-          var _goToCompleteTask = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
-            return _regeneratorRuntime().wrap(function _callee3$(_context3) {
-              while (1) switch (_context3.prev = _context3.next) {
-                case 0:
-                  _context3.t0 = this.myTaskData.taskInfo.taskType;
-                  _context3.next = _context3.t0 === TaskType.GoTo ? 3 : _context3.t0 === TaskType.Other ? 3 : _context3.t0 === TaskType.Subscribe ? 6 : _context3.t0 === TaskType.MoneyCount ? 9 : _context3.t0 === TaskType.FriendsCount ? 11 : 13;
-                  break;
-                case 3:
-                  _context3.next = 5;
-                  return this.goOtherComplete();
-                case 5:
-                  return _context3.abrupt("break", 15);
-                case 6:
-                  _context3.next = 8;
-                  return this.goSubscribeComplete();
-                case 8:
-                  return _context3.abrupt("break", 15);
-                case 9:
-                  this.goMoneyComplete();
-                  return _context3.abrupt("break", 15);
-                case 11:
-                  this.goFriendsComplete();
-                  return _context3.abrupt("break", 15);
-                case 13:
-                  console.log("Unknown task type");
-                  return _context3.abrupt("break", 15);
-                case 15:
-                case "end":
-                  return _context3.stop();
-              }
-            }, _callee3, this);
           }));
           function goToCompleteTask() {
             return _goToCompleteTask.apply(this, arguments);
@@ -3577,21 +3562,14 @@ System.register("chunks:///_virtual/TaskItem.ts", ['./rollupPluginModLoBabelHelp
           return goToCompleteTask;
         }();
         _proto.goOtherComplete = /*#__PURE__*/function () {
-          var _goOtherComplete = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
-            var tgWebApp;
-            return _regeneratorRuntime().wrap(function _callee4$(_context4) {
-              while (1) switch (_context4.prev = _context4.next) {
+          var _goOtherComplete = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+            return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+              while (1) switch (_context3.prev = _context3.next) {
                 case 0:
-                  tgWebApp = TelegramWebApp.Instance;
-                  _context4.next = 3;
-                  return tgWebApp.init();
-                case 3:
-                  tgWebApp.openLink(this.myTaskData.taskInfo.details);
-                case 4:
                 case "end":
-                  return _context4.stop();
+                  return _context3.stop();
               }
-            }, _callee4, this);
+            }, _callee3);
           }));
           function goOtherComplete() {
             return _goOtherComplete.apply(this, arguments);
@@ -3599,13 +3577,13 @@ System.register("chunks:///_virtual/TaskItem.ts", ['./rollupPluginModLoBabelHelp
           return goOtherComplete;
         }();
         _proto.goSubscribeComplete = /*#__PURE__*/function () {
-          var _goSubscribeComplete = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
+          var _goSubscribeComplete = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
             var tgWebApp, forUrlSliced, link;
-            return _regeneratorRuntime().wrap(function _callee5$(_context5) {
-              while (1) switch (_context5.prev = _context5.next) {
+            return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+              while (1) switch (_context4.prev = _context4.next) {
                 case 0:
                   tgWebApp = TelegramWebApp.Instance;
-                  _context5.next = 3;
+                  _context4.next = 3;
                   return tgWebApp.init();
                 case 3:
                   forUrlSliced = this.myTaskData.taskInfo.details.slice(1);
@@ -3613,9 +3591,9 @@ System.register("chunks:///_virtual/TaskItem.ts", ['./rollupPluginModLoBabelHelp
                   tgWebApp.openTelegramLink(link);
                 case 6:
                 case "end":
-                  return _context5.stop();
+                  return _context4.stop();
               }
-            }, _callee5, this);
+            }, _callee4, this);
           }));
           function goSubscribeComplete() {
             return _goSubscribeComplete.apply(this, arguments);
@@ -4590,7 +4568,7 @@ System.register("chunks:///_virtual/UserDataManager.ts", ['./rollupPluginModLoBa
       TelegramWebApp = module.TelegramWebApp;
     }],
     execute: function () {
-      var _dec, _class, _class2, _descriptor, _class3;
+      var _dec, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _class3;
       cclegacy._RF.push({}, "c0f31uhSI5LEIE63jTEDd3D", "UserDataManager", undefined);
       var ccclass = _decorator.ccclass,
         property = _decorator.property;
@@ -4603,6 +4581,9 @@ System.register("chunks:///_virtual/UserDataManager.ts", ['./rollupPluginModLoBa
           }
           _this = _Component.call.apply(_Component, [this].concat(args)) || this;
           _initializerDefineProperty(_this, "isDebug", _descriptor, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "debugId", _descriptor2, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "debugName", _descriptor3, _assertThisInitialized(_this));
+          _initializerDefineProperty(_this, "debugStartParams", _descriptor4, _assertThisInitialized(_this));
           _this.currentUserInfo = null;
           _this.speedInfos = [];
           _this.durationInfos = [];
@@ -4804,6 +4785,9 @@ System.register("chunks:///_virtual/UserDataManager.ts", ['./rollupPluginModLoBa
           return this.timeDifference;
         };
         _proto.getGoodUserName = function getGoodUserName() {
+          if (this.isDebug) {
+            return "Debug A";
+          }
           if (this.firstname === "undefined") {
             if (this.username === "undefined") {
               return this.defaultName;
@@ -4827,7 +4811,7 @@ System.register("chunks:///_virtual/UserDataManager.ts", ['./rollupPluginModLoBa
                     break;
                   }
                   _context2.next = 4;
-                  return ServerCommunicator.instance.sendGetRequest('get_user?id=' + 2 + '&name=anrddewka&referal=' + 1);
+                  return ServerCommunicator.instance.sendGetRequest('get_user?id=' + this.debugId + '&name=' + this.debugName + '&referal=' + this.debugStartParams);
                 case 4:
                   response = _context2.sent;
                   userInfoItems = response;
@@ -4981,14 +4965,35 @@ System.register("chunks:///_virtual/UserDataManager.ts", ['./rollupPluginModLoBa
           }
         }]);
         return UserDataManager;
-      }(Component), _class3._instance = void 0, _class3.eventTarget = new EventTarget(), _class3), _descriptor = _applyDecoratedDescriptor(_class2.prototype, "isDebug", [property], {
+      }(Component), _class3._instance = void 0, _class3.eventTarget = new EventTarget(), _class3), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "isDebug", [property], {
         configurable: true,
         enumerable: true,
         writable: true,
         initializer: function initializer() {
           return false;
         }
-      }), _class2)) || _class));
+      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, "debugId", [property], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return "5793743593";
+        }
+      }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, "debugName", [property], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return "gerb";
+        }
+      }), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, "debugStartParams", [property], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return "";
+        }
+      })), _class2)) || _class));
       cclegacy._RF.pop();
     }
   };
