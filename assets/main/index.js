@@ -4872,28 +4872,17 @@ System.register("chunks:///_virtual/UserDataManager.ts", ['./rollupPluginModLoBa
                   };
                   UserDataManager.eventTarget.emit('userDataUpdated');
                 case 25:
-                  if (this.isInited) {
-                    _context2.next = 29;
-                    break;
-                  }
-                  _context2.next = 28;
-                  return new Promise(function (resolve) {
-                    return setTimeout(resolve, 500);
-                  });
-                case 28:
-                  this.forceUpdateUserInfo();
-                case 29:
-                  _context2.next = 34;
+                  _context2.next = 30;
                   break;
-                case 31:
-                  _context2.prev = 31;
+                case 27:
+                  _context2.prev = 27;
                   _context2.t0 = _context2["catch"](0);
                   console.error('Error setting user:', _context2.t0);
-                case 34:
+                case 30:
                 case "end":
                   return _context2.stop();
               }
-            }, _callee2, this, [[0, 31]]);
+            }, _callee2, this, [[0, 27]]);
           }));
           function setUserInfoFromServer() {
             return _setUserInfoFromServer.apply(this, arguments);
