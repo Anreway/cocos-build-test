@@ -18,4 +18,3 @@ System.register("chunks:///_virtual/internal",[],(function(){return{execute:func
     };
     });
 });
-//# sourceMappingURL=index.js.map
